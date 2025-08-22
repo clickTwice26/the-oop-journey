@@ -329,7 +329,7 @@ Generate {num_questions} questions now:"""
     def _generate_fallback_quiz(self, title, num_questions):
         """Generate a fallback quiz when AI fails"""
         questions = []
-        for i in range(min(num_questions, 5)):  # Max 5 fallback questions
+        for i in range(num_questions):  # Generate requested number of questions
             questions.append({
                 'question': f'Sample question {i+1} about the uploaded content',
                 'options': [
