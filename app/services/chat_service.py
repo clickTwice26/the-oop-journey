@@ -24,17 +24,20 @@ class ChatService:
     def get_or_create_conversation(self, conversation_id=None):
         """Get existing conversation or create new one"""
         try:
-            # Ensure user session exists
-            if 'user_session' not in session:
-                session['user_session'] = str(uuid.uuid4())
+            # Get current user from session
+            from app.auth import get_current_user
+            current_user = get_current_user()
             
-            user_session = session['user_session']
+            if not current_user:
+                raise ValueError("User not authenticated")
+            
+            user_id = current_user.id
             
             if conversation_id:
                 # Try to get existing conversation
                 conversation = Conversation.query.filter_by(
                     id=conversation_id,
-                    user_session=user_session
+                    user_id=user_id
                 ).first()
                 
                 if conversation:
@@ -43,7 +46,7 @@ class ChatService:
             # Create new conversation
             conversation = Conversation(
                 title=f"Chat {datetime.now().strftime('%b %d, %Y %I:%M %p')}",
-                user_session=user_session
+                user_id=user_id
             )
             
             db.session.add(conversation)
@@ -59,12 +62,14 @@ class ChatService:
     def get_user_conversations(self):
         """Get all conversations for current user"""
         try:
-            if 'user_session' not in session:
+            from app.auth import get_current_user
+            current_user = get_current_user()
+            
+            if not current_user:
                 return []
             
-            user_session = session['user_session']
             conversations = Conversation.query.filter_by(
-                user_session=user_session
+                user_id=current_user.id
             ).order_by(Conversation.updated_at.desc()).all()
             
             return conversations

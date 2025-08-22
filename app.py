@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__, template_folder='app/templates', static_folder='app/static')
     
     # Configuration
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key')
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'oop-journey-secret-key-change-in-production-2025')
     
     # Use absolute path for database
     db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance', 'quizpilot.db')
@@ -18,6 +18,10 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER', 'uploads')
     app.config['MAX_CONTENT_LENGTH'] = int(os.environ.get('MAX_CONTENT_LENGTH', 104857600))  # 100MB
+    
+    # Session configuration
+    app.config['SESSION_PERMANENT'] = False
+    app.config['SESSION_TYPE'] = 'filesystem'
     
     # Initialize extensions
     from app.models import db
@@ -28,9 +32,11 @@ def create_app():
     
     # Register blueprints
     from app.routes import main_bp, quiz_bp, api_bp
+    from app.auth_routes import auth_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(quiz_bp, url_prefix='/quiz')
     app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     
     # Create upload directory
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

@@ -2,8 +2,42 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy import Text
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+    full_name = db.Column(db.String(100), nullable=False)
+    student_id = db.Column(db.String(20), unique=True, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_login = db.Column(db.DateTime)
+    is_active = db.Column(db.Boolean, default=True)
+    
+    # Relationships
+    quiz_results = db.relationship('QuizResult', backref='user', lazy=True)
+    conversations = db.relationship('Conversation', backref='user', lazy=True)
+    assessment_results = db.relationship('AssessmentResult', backref='user', lazy=True)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'full_name': self.full_name,
+            'student_id': self.student_id,
+            'created_at': self.created_at.isoformat(),
+            'last_login': self.last_login.isoformat() if self.last_login else None
+        }
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,7 +91,8 @@ class Question(db.Model):
 class QuizResult(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
-    user_session = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_session = db.Column(db.String(100), nullable=True)  # Keep for backward compatibility
     score_percentage = db.Column(db.Integer, nullable=False)
     correct_answers = db.Column(db.Integer, nullable=False)
     total_questions = db.Column(db.Integer, nullable=False)
@@ -83,7 +118,8 @@ class QuizResult(db.Model):
 class Conversation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False, default='New Conversation')
-    user_session = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_session = db.Column(db.String(100), nullable=True)  # Keep for backward compatibility
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -143,7 +179,8 @@ class Assessment(db.Model):
 class AssessmentResult(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     assessment_id = db.Column(db.Integer, db.ForeignKey('assessment.id'), nullable=False)
-    user_session = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_session = db.Column(db.String(100), nullable=True)  # Keep for backward compatibility
     score_percentage = db.Column(db.Float, nullable=False)
     user_answers = db.Column(JSON, nullable=False)  # User's answers
     ai_feedback = db.Column(JSON)  # AI-generated feedback

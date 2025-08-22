@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white shadow-xl rounded-3xl overflow-hidden">
+        <!-- Profile Header -->
+        <div class="bg-gradient-to-r from-primary-600 to-secondary-600 px-8 py-12">
+            <div class="flex items-center space-x-6">
+                <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-white text-3xl"></i>
+                </div>
+                <div class="text-white">
+                    <h1 class="text-3xl font-bold">{{ user.full_name }}</h1>
+                    <p class="text-primary-100 text-lg">@{{ user.username }}</p>
+                    {% if user.student_id %}
+                    <p class="text-primary-100">Student ID: {{ user.student_id }}</p>
+                    {% endif %}
+                    <p class="text-primary-100 text-sm">Member since {{ user.created_at.strftime('%B %Y') }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Content -->
+        <div class="px-8 py-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Account Information -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Account Information</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Email Address</label>
+                            <p class="text-gray-900">{{ user.email }}</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Username</label>
+                            <p class="text-gray-900">{{ user.username }}</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+                            <p class="text-gray-900">{{ user.full_name }}</p>
+                        </div>
+                        {% if user.student_id %}
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Student ID</label>
+                            <p class="text-gray-900">{{ user.student_id }}</p>
+                        </div>
+                        {% endif %}
+                        {% if user.last_login %}
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Last Login</label>
+                            <p class="text-gray-900">{{ user.last_login.strftime('%B %d, %Y at %I:%M %p') }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Learning Statistics -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Learning Progress</h2>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-blue-800">Quizzes Taken</h3>
+                                    <p class="text-2xl font-bold text-blue-600">{{ user.quiz_results | length }}</p>
+                                </div>
+                                <i class="fas fa-brain text-blue-400 text-2xl"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-purple-800">Chat Conversations</h3>
+                                    <p class="text-2xl font-bold text-purple-600">{{ user.conversations | length }}</p>
+                                </div>
+                                <i class="fas fa-comments text-purple-400 text-2xl"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-green-800">Assessments Completed</h3>
+                                    <p class="text-2xl font-bold text-green-600">{{ user.assessment_results | length }}</p>
+                                </div>
+                                <i class="fas fa-chart-line text-green-400 text-2xl"></i>
+                            </div>
+                        </div>
+                        
+                        {% if user.quiz_results %}
+                        {% set avg_score = (user.quiz_results | sum(attribute='score_percentage')) / (user.quiz_results | length) %}
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-yellow-800">Average Quiz Score</h3>
+                                    <p class="text-2xl font-bold text-yellow-600">{{ "%.1f" | format(avg_score) }}%</p>
+                                </div>
+                                <i class="fas fa-trophy text-yellow-400 text-2xl"></i>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Quick Actions</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <a href="{{ url_for('quiz.quiz_generator') }}" 
+                       class="flex items-center justify-center px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-brain mr-2"></i>
+                        Create Quiz
+                    </a>
+                    <a href="{{ url_for('main.chat') }}" 
+                       class="flex items-center justify-center px-6 py-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-comments mr-2"></i>
+                        AI Chat
+                    </a>
+                    <a href="{{ url_for('main.learn') }}" 
+                       class="flex items-center justify-center px-6 py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        <i class="fas fa-book mr-2"></i>
+                        Learn OOP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

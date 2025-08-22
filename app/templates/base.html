@@ -61,6 +61,7 @@
                     <a href="{{ url_for('main.index') }}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">
                         <i class="fas fa-home mr-2"></i>Home
                     </a>
+                    {% if session.user_id %}
                     <a href="{{ url_for('main.learn') }}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">
                         <i class="fas fa-book mr-2"></i>Learn
                     </a>
@@ -70,9 +71,41 @@
                     <a href="{{ url_for('main.chat') }}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">
                         <i class="fas fa-robot mr-2"></i>AI Chat
                     </a>
+                    {% endif %}
                     <a href="{{ url_for('main.upcoming_features') }}" class="text-purple-600 hover:text-purple-700 transition-colors font-medium">
                         <i class="fas fa-rocket mr-2"></i>Coming Soon
                     </a>
+                    {% if session.user_id %}
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">
+                            <i class="fas fa-user-circle mr-1"></i>
+                            <span>{{ session.full_name.split()[0] if session.full_name else session.username }}</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            <a href="{{ url_for('main.dashboard') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-t-lg">
+                                <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                            </a>
+                            <a href="{{ url_for('auth.profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-user mr-2"></i>Profile
+                            </a>
+                            <a href="{{ url_for('quiz.quiz_list') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-list mr-2"></i>My Quizzes
+                            </a>
+                            <hr class="my-1">
+                            <a href="{{ url_for('auth.logout') }}" class="block px-4 py-2 text-red-600 hover:bg-red-50 rounded-b-lg">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
+                    <a href="{{ url_for('auth.register') }}" class="px-4 py-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-lg font-medium hover:from-primary-700 hover:to-secondary-700 transition-all">
+                        Sign Up
+                    </a>
+                    {% endif %}
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary-600 focus:outline-none">
@@ -85,9 +118,18 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-3 space-y-2">
                 <a href="{{ url_for('main.index') }}" class="block text-gray-600 hover:text-primary-600 py-2">Home</a>
+                {% if session.user_id %}
                 <a href="{{ url_for('main.learn') }}" class="block text-gray-600 hover:text-primary-600 py-2">Learn</a>
                 <a href="{{ url_for('quiz.quiz_generator') }}" class="block text-primary-600 font-medium py-2">Quiz Lab</a>
                 <a href="{{ url_for('main.chat') }}" class="block text-gray-600 hover:text-primary-600 py-2">AI Chat</a>
+                <hr class="my-2">
+                <a href="{{ url_for('main.dashboard') }}" class="block text-gray-600 hover:text-primary-600 py-2">Dashboard</a>
+                <a href="{{ url_for('auth.profile') }}" class="block text-gray-600 hover:text-primary-600 py-2">Profile</a>
+                <a href="{{ url_for('auth.logout') }}" class="block text-red-600 hover:text-red-700 py-2">Logout</a>
+                {% else %}
+                <a href="{{ url_for('auth.login') }}" class="block text-gray-600 hover:text-primary-600 py-2">Login</a>
+                <a href="{{ url_for('auth.register') }}" class="block text-primary-600 font-medium py-2">Sign Up</a>
+                {% endif %}
                 <a href="{{ url_for('main.upcoming_features') }}" class="block text-purple-600 hover:text-purple-700 py-2">Coming Soon</a>
             </div>
         </div>
@@ -95,6 +137,48 @@
 
     <!-- Main Content -->
     <main>
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="fixed top-20 right-4 z-50 space-y-2">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} max-w-sm bg-white border-l-4 
+                                    {% if category == 'success' %}border-green-500 bg-green-50{% endif %}
+                                    {% if category == 'danger' or category == 'error' %}border-red-500 bg-red-50{% endif %}
+                                    {% if category == 'warning' %}border-yellow-500 bg-yellow-50{% endif %}
+                                    {% if category == 'info' %}border-blue-500 bg-blue-50{% endif %}
+                                    rounded-lg shadow-lg p-4" role="alert">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    {% if category == 'success' %}
+                                        <i class="fas fa-check-circle text-green-600"></i>
+                                    {% elif category == 'danger' or category == 'error' %}
+                                        <i class="fas fa-exclamation-circle text-red-600"></i>
+                                    {% elif category == 'warning' %}
+                                        <i class="fas fa-exclamation-triangle text-yellow-600"></i>
+                                    {% elif category == 'info' %}
+                                        <i class="fas fa-info-circle text-blue-600"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium 
+                                       {% if category == 'success' %}text-green-800{% endif %}
+                                       {% if category == 'danger' or category == 'error' %}text-red-800{% endif %}
+                                       {% if category == 'warning' %}text-yellow-800{% endif %}
+                                       {% if category == 'info' %}text-blue-800{% endif %}">
+                                        {{ message }}
+                                    </p>
+                                </div>
+                                <button type="button" class="ml-4 text-gray-400 hover:text-gray-600" onclick="this.parentElement.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
         {% block content %}{% endblock %}
     </main>
 

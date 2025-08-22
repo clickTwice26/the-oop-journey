@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify, current_app, session
 from werkzeug.utils import secure_filename
-from app.models import Quiz, Question, QuizResult, Message, Conversation, Assessment, AssessmentResult, db
+from app.models import Quiz, Question, QuizResult, Message, Conversation, Assessment, AssessmentResult, User, db
 from app.services.quiz_generation_service import QuizGenerationService
 from app.services.file_processing_service import FileProcessingService
 from app.services.chat_service import ChatService
 from app.services.assessment_service import AssessmentService
+from app.auth import login_required, get_current_user
 import os
 import uuid
 from datetime import datetime
@@ -25,7 +26,14 @@ def allowed_file(filename):
 def index():
     return render_template('index.html', title='OOP Journey - AI-Powered Learning')
 
+@main_bp.route('/dashboard')
+@login_required
+def dashboard():
+    user = get_current_user()
+    return render_template('dashboard.html', title='Dashboard - OOP Journey', current_user=user)
+
 @main_bp.route('/learn')
+@login_required
 def learn():
     return render_template('learn.html', title='Learn OOP Concepts')
 
@@ -34,22 +42,27 @@ def upcoming_features():
     return render_template('upcoming-features.html', title='Upcoming Features - OOP Journey')
 
 @main_bp.route('/learn/inheritance')
+@login_required
 def learn_inheritance():
     return render_template('learn/inheritance_java.html', title='Master Inheritance - OOP Concepts')
 
 @main_bp.route('/learn/polymorphism')
+@login_required
 def learn_polymorphism():
     return render_template('learn/polymorphism_java.html', title='Master Polymorphism - OOP Concepts')
 
 @main_bp.route('/learn/abstraction')
+@login_required
 def learn_abstraction():
     return render_template('learn/abstraction_java.html', title='Master Abstraction - OOP Concepts')
 
 @main_bp.route('/learn/encapsulation')
+@login_required
 def learn_encapsulation():
     return render_template('learn/encapsulation_java.html', title='Master Encapsulation - OOP Concepts')
 
 @main_bp.route('/learn/encapsulation/assessment')
+@login_required
 def assess_encapsulation():
     return render_template('assessment.html', title='Encapsulation Assessment - OOP Concepts')
 
@@ -66,6 +79,7 @@ def assess_abstraction():
     return render_template('assessment.html', title='Abstraction Assessment - OOP Concepts')
 
 @main_bp.route('/chat')
+@login_required
 def chat():
     chat_service = ChatService()
     conversations = chat_service.get_user_conversations()
@@ -90,20 +104,24 @@ def chat():
 # Quiz routes
 @quiz_bp.route('/')
 @quiz_bp.route('/generator')
+@login_required
 def quiz_generator():
     return render_template('quiz-generator.html', title='Quiz Generator')
 
 @quiz_bp.route('/list')
+@login_required
 def quiz_list():
     quizzes = Quiz.query.order_by(Quiz.created_at.desc()).all()
     return render_template('quiz-list.html', title='My Quizzes', quizzes=quizzes)
 
 @quiz_bp.route('/take/<int:quiz_id>')
+@login_required
 def take_quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
     return render_template('quiz-view.html', title=f'Take Quiz: {quiz.title}', quiz=quiz)
 
 @quiz_bp.route('/review')
+@login_required
 def quiz_review():
     quiz_id = request.args.get('quizId', type=int)
     result_id = request.args.get('resultId', type=int)
@@ -123,6 +141,7 @@ def quiz_review():
 
 # API routes
 @api_bp.route('/quizzes/generate', methods=['POST'])
+@login_required
 def generate_quiz():
     try:
         # Check if file is in request
@@ -205,18 +224,19 @@ def get_quizzes():
     return jsonify([quiz.to_dict() for quiz in quizzes])
 
 @api_bp.route('/quizzes/<int:quiz_id>/submit', methods=['POST'])
+@login_required
 def submit_quiz(quiz_id):
     try:
         data = request.get_json()
         
-        # Generate user session if not exists
-        if 'user_session' not in session:
-            session['user_session'] = str(uuid.uuid4())
+        # Get current user
+        current_user = get_current_user()
         
         # Create quiz result
         result = QuizResult(
             quiz_id=quiz_id,
-            user_session=session['user_session'],
+            user_id=current_user.id,
+            user_session=session.get('user_session'),  # Keep for backward compatibility
             score_percentage=data.get('scorePercentage', 0),
             correct_answers=data.get('correctAnswers', 0),
             total_questions=data.get('totalQuestions', 0),
@@ -258,6 +278,7 @@ def get_quiz_stats(quiz_id):
     })
 
 @api_bp.route('/chat/send', methods=['POST'])
+@login_required
 def send_chat_message():
     try:
         data = request.get_json()
