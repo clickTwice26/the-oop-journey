@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-teal-600 to-cyan-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    🎨 Master Abstraction
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 mb-8">
+                    Hide complexity, show only what matters
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Simplify Complexity</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Focus on Essentials</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Clean Interfaces</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Learning Progress</h2>
+                <div class="flex items-center space-x-4">
+                    <div class="w-64 bg-gray-200 rounded-full h-2">
+                        <div class="bg-teal-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="/learn" class="text-teal-600 hover:text-teal-800">Learn</a>
+                <span class="text-gray-400">→</span>
+                <span class="text-gray-700">Abstraction</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🗺️ Learning Path</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="#basics" class="learning-section p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors cursor-pointer" data-section="basics">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <h4 class="font-semibold text-teal-800">Basics</h4>
+                        <p class="text-sm text-teal-600">What is Abstraction?</p>
+                    </div>
+                </a>
+                <a href="#levels" class="learning-section p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition-colors cursor-pointer" data-section="levels">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <h4 class="font-semibold text-cyan-800">Levels</h4>
+                        <p class="text-sm text-cyan-600">Abstraction layers</p>
+                    </div>
+                </a>
+                <a href="#implementation" class="learning-section p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer" data-section="implementation">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">⚙️</div>
+                        <h4 class="font-semibold text-blue-800">Implementation</h4>
+                        <p class="text-sm text-blue-600">How to abstract</p>
+                    </div>
+                </a>
+                <a href="#practice" class="learning-section p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors cursor-pointer" data-section="practice">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🏆</div>
+                        <h4 class="font-semibold text-indigo-800">Practice</h4>
+                        <p class="text-sm text-indigo-600">Real examples</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section 1: Basics -->
+        <div id="basics" class="learning-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-teal-800 mb-6">🎯 Understanding Abstraction</h3>
+                
+                <!-- Interactive Car Example -->
+                <div class="bg-gradient-to-r from-teal-100 to-cyan-100 rounded-lg p-6 mb-8">
+                    <h4 class="text-2xl font-bold text-teal-800 mb-4">🚗 The Car Analogy</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-gray-700 mb-4">
+                                When you drive a car, you don't need to know how the engine works internally. 
+                                You just use the steering wheel, pedals, and gear stick - the abstracted interface!
+                            </p>
+                            
+                            <div class="car-interface bg-white p-4 rounded-lg border-2 border-teal-300">
+                                <h5 class="font-semibold text-teal-800 mb-3">🎛️ Driver Interface (Abstract)</h5>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button class="car-control bg-red-500 text-white py-2 px-3 rounded text-sm" data-action="brake">🛑 Brake</button>
+                                    <button class="car-control bg-green-500 text-white py-2 px-3 rounded text-sm" data-action="accelerate">⚡ Accelerate</button>
+                                    <button class="car-control bg-blue-500 text-white py-2 px-3 rounded text-sm" data-action="left">⬅️ Turn Left</button>
+                                    <button class="car-control bg-blue-500 text-white py-2 px-3 rounded text-sm" data-action="right">➡️ Turn Right</button>
+                                </div>
+                                <div id="car-status" class="mt-3 p-2 bg-gray-100 rounded text-sm">
+                                    Car Status: Parked
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="car-internals bg-gray-900 text-green-400 p-4 rounded-lg">
+                                <h5 class="font-semibold text-white mb-3">⚙️ Hidden Implementation</h5>
+                                <div id="car-internals" class="text-xs space-y-1">
+                                    <div>Engine: Idle</div>
+                                    <div>Fuel Injection: Standby</div>
+                                    <div>Transmission: Park</div>
+                                    <div>Brake System: Engaged</div>
+                                    <div>Steering: Centered</div>
+                                    <div>ECU Status: Monitoring</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                                <p class="text-sm text-yellow-800">
+                                    <strong>Key Point:</strong> The driver doesn't need to know about fuel injection, 
+                                    transmission mechanics, or ECU operations. The complexity is hidden!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Definition and Benefits -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-teal-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-teal-800 mb-4">📖 Definition</h4>
+                        <p class="text-gray-700 mb-4">
+                            Abstraction is the process of hiding complex implementation details while 
+                            showing only essential features and functionality to the user.
+                        </p>
+                        <div class="formula bg-white p-3 rounded border">
+                            <code class="text-sm">
+                                Abstraction = Essential Features - Implementation Details
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-green-800 mb-4">✨ Benefits</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🎯</span>
+                                <span>Reduces complexity</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🔧</span>
+                                <span>Easier maintenance</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🚀</span>
+                                <span>Improved productivity</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🛡️</span>
+                                <span>Better security</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🔄</span>
+                                <span>Code reusability</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Programming Examples -->
+                <div class="programming-examples">
+                    <h4 class="text-xl font-semibold text-teal-800 mb-4">💻 Programming Examples</h4>
+                    
+                    <div class="examples-grid grid md:grid-cols-2 gap-6">
+                        <div class="example bg-blue-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-blue-800 mb-2">❌ Without Abstraction</h5>
+                            <pre class="bg-gray-900 text-red-400 p-3 rounded text-sm"><code># User has to handle complex file operations
+file_handle = open("data.txt", "r")
+buffer = file_handle.read(1024)
+while buffer:
+    # Process buffer
+    data = buffer.decode('utf-8')
+    lines = data.split('\n')
+    for line in lines:
+        # Complex processing...
+        pass
+    buffer = file_handle.read(1024)
+file_handle.close()</code></pre>
+                        </div>
+                        
+                        <div class="example bg-green-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-green-800 mb-2">✅ With Abstraction</h5>
+                            <pre class="bg-gray-900 text-green-400 p-3 rounded text-sm"><code># Simple, abstracted interface
+with open("data.txt", "r") as file:
+    for line in file:
+        # Focus on business logic only
+        process_line(line)
+
+# Or even simpler:
+content = read_file("data.txt")
+process_content(content)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button class="next-section bg-teal-600 text-white px-8 py-3 rounded-lg hover:bg-teal-700 transition-colors" data-next="levels">
+                        Explore Levels →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue with more sections... -->
+        <!-- This template is getting long, so I'll create separate sections in the next steps -->
+        
+    </div>
+</div>
+
+<script>
+class AbstractionLearning {
+    constructor() {
+        this.currentSection = 'basics';
+        this.completedSections = new Set();
+        this.progress = 0;
+        this.carState = {
+            speed: 0,
+            direction: 'center',
+            engine: 'idle',
+            gear: 'park'
+        };
+        this.init();
+    }
+
+    init() {
+        this.showSection('basics');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Section navigation
+        document.querySelectorAll('.learning-section').forEach(section => {
+            section.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = section.getAttribute('data-section');
+                this.showSection(targetSection);
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-section').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nextSection = btn.getAttribute('data-next');
+                this.completeSection(this.currentSection);
+                this.showSection(nextSection);
+            });
+        });
+
+        // Car controls
+        document.querySelectorAll('.car-control').forEach(control => {
+            control.addEventListener('click', () => {
+                this.handleCarControl(control.getAttribute('data-action'));
+            });
+        });
+    }
+
+    showSection(sectionName) {
+        // Hide all sections
+        document.querySelectorAll('.learning-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        // Show target section
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            this.currentSection = sectionName;
+            
+            // Update section highlighting
+            document.querySelectorAll('.learning-section').forEach(section => {
+                section.classList.remove('ring-2', 'ring-teal-500');
+                if (section.getAttribute('data-section') === sectionName) {
+                    section.classList.add('ring-2', 'ring-teal-500');
+                }
+            });
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        
+        const sectionElement = document.querySelector(`[data-section="${sectionName}"]`);
+        if (sectionElement) {
+            sectionElement.classList.add('bg-green-100');
+            const icon = sectionElement.querySelector('.text-3xl');
+            if (icon) icon.textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const totalSections = 4;
+        this.progress = (this.completedSections.size / totalSections) * 100;
+        
+        document.querySelector('.progress-bar').style.width = `${this.progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(this.progress)}% Complete`;
+    }
+
+    handleCarControl(action) {
+        const statusEl = document.getElementById('car-status');
+        const internalsEl = document.getElementById('car-internals');
+        
+        switch(action) {
+            case 'accelerate':
+                this.carState.speed = Math.min(60, this.carState.speed + 10);
+                this.carState.engine = 'running';
+                this.carState.gear = 'drive';
+                statusEl.textContent = `Car Status: Moving at ${this.carState.speed} mph`;
+                break;
+            case 'brake':
+                this.carState.speed = Math.max(0, this.carState.speed - 15);
+                if (this.carState.speed === 0) {
+                    this.carState.engine = 'idle';
+                    this.carState.gear = 'park';
+                    statusEl.textContent = 'Car Status: Stopped';
+                } else {
+                    statusEl.textContent = `Car Status: Slowing down to ${this.carState.speed} mph`;
+                }
+                break;
+            case 'left':
+                this.carState.direction = 'left';
+                statusEl.textContent = `Car Status: Turning left at ${this.carState.speed} mph`;
+                break;
+            case 'right':
+                this.carState.direction = 'right';
+                statusEl.textContent = `Car Status: Turning right at ${this.carState.speed} mph`;
+                break;
+        }
+        
+        // Update internals (showing the hidden complexity)
+        internalsEl.innerHTML = `
+            <div>Engine: ${this.carState.engine === 'running' ? 'Running at ' + (2000 + this.carState.speed * 30) + ' RPM' : 'Idle'}</div>
+            <div>Fuel Injection: ${this.carState.engine === 'running' ? 'Active - ' + (5 + this.carState.speed * 0.1).toFixed(1) + ' L/h' : 'Standby'}</div>
+            <div>Transmission: ${this.carState.gear}</div>
+            <div>Brake System: ${this.carState.speed > 0 ? 'Released' : 'Engaged'}</div>
+            <div>Steering: ${this.carState.direction}</div>
+            <div>ECU Status: Monitoring ${this.carState.speed > 0 ? '(Performance Mode)' : '(Eco Mode)'}</div>
+        `;
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    new AbstractionLearning();
+});
+</script>
+{% endblock %}

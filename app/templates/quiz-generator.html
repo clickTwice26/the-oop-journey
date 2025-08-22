@@ -1,0 +1,402 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <div class="text-center mb-12 animate-fade-in">
+        <div class="inline-flex items-center px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-medium mb-6">
+            <i class="fas fa-robot mr-2"></i>
+            AI-Powered Quiz Generation
+        </div>
+        
+        <h1 class="text-5xl md:text-6xl font-black mb-6">
+            <span class="bg-gradient-to-r from-secondary-600 to-primary-600 bg-clip-text text-transparent">
+                Quiz Generator
+            </span>
+        </h1>
+        
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Transform your study materials into interactive quizzes using advanced AI. 
+            Upload PDFs, images, or presentations and get personalized questions instantly.
+        </p>
+    </div>
+
+    <!-- Main Form Container -->
+    <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Quiz Generator Form -->
+        <div class="lg:col-span-2">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-200 shadow-xl">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mr-4">
+                        <i class="fas fa-magic text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Create Your Quiz</h2>
+                        <p class="text-gray-600">Upload your study material and let AI do the rest</p>
+                    </div>
+                </div>
+
+                <form id="quiz-form" class="space-y-8" enctype="multipart/form-data">
+                    <!-- File Upload Section -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">
+                            <i class="fas fa-upload mr-2"></i>Upload Study Material
+                        </label>
+                        <div id="file-drop-zone" class="file-drop-zone bg-gray-50 rounded-2xl p-8 text-center cursor-pointer hover:bg-gray-100 transition-all border-2 border-dashed border-gray-300">
+                            <div id="upload-content">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                <h3 class="text-lg font-semibold text-gray-700 mb-2">Drag & drop your file here</h3>
+                                <p class="text-gray-500 mb-4">or click to browse</p>
+                                <div class="flex justify-center space-x-4 text-sm text-gray-400">
+                                    <span><i class="fas fa-file-pdf mr-1"></i>PDF</span>
+                                    <span><i class="fas fa-image mr-1"></i>Images</span>
+                                    <span><i class="fas fa-file-powerpoint mr-1"></i>PPT</span>
+                                </div>
+                            </div>
+                            <input type="file" id="file-input" name="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png,.ppt,.pptx,.doc,.docx,.txt">
+                        </div>
+                        
+                        <!-- File Preview -->
+                        <div id="file-preview" class="hidden mt-4 p-4 bg-primary-50 rounded-xl border border-primary-200">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i id="file-icon" class="fas fa-file text-primary-600 text-xl mr-3"></i>
+                                    <div>
+                                        <p id="file-name" class="font-medium text-gray-800"></p>
+                                        <p id="file-size" class="text-sm text-gray-600"></p>
+                                    </div>
+                                </div>
+                                <button type="button" id="remove-file" class="text-red-500 hover:text-red-700 transition-colors">
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Configuration -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="quiz-title" class="block text-sm font-semibold text-gray-700 mb-3">
+                                <i class="fas fa-heading mr-2"></i>Quiz Title
+                            </label>
+                            <input type="text" id="quiz-title" name="title" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all" placeholder="Enter quiz title..." required>
+                        </div>
+                        
+                        <div>
+                            <label for="num-questions" class="block text-sm font-semibold text-gray-700 mb-3">
+                                <i class="fas fa-list-ol mr-2"></i>Number of Questions
+                            </label>
+                            <select id="num-questions" name="numQuestions" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all">
+                                <option value="5">5 Questions</option>
+                                <option value="10" selected>10 Questions</option>
+                                <option value="15">15 Questions</option>
+                                <option value="20">20 Questions</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="text-center pt-4">
+                        <button type="submit" id="generate-btn" class="group px-8 py-4 bg-gradient-to-r from-secondary-600 to-primary-600 text-white rounded-2xl font-semibold text-lg hover:scale-105 transform transition-all duration-300 shadow-xl hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span id="btn-text">
+                                <i class="fas fa-magic mr-2 group-hover:rotate-12 transition-transform"></i>
+                                Generate Quiz
+                            </span>
+                            <span id="btn-loading" class="hidden">
+                                <i class="fas fa-spinner animate-spin mr-2"></i>
+                                Generating...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- Tips Card -->
+            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200">
+                <h3 class="font-bold text-gray-800 mb-4">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                    Pro Tips
+                </h3>
+                <ul class="space-y-3 text-sm text-gray-600">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1 text-xs"></i>
+                        Use clear, well-structured documents for better questions
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1 text-xs"></i>
+                        Higher quality content produces more accurate results
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-2 mt-1 text-xs"></i>
+                        Include key concepts and definitions in your material
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Recent Quizzes -->
+            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200">
+                <h3 class="font-bold text-gray-800 mb-4">
+                    <i class="fas fa-history text-primary-500 mr-2"></i>
+                    Recent Quizzes
+                </h3>
+                <div id="recent-quizzes" class="space-y-3">
+                    <div class="text-center text-gray-500 py-4">
+                        <i class="fas fa-clipboard-list text-2xl mb-2"></i>
+                        <p class="text-sm">No quizzes yet</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <a href="{{ url_for('quiz.quiz_list') }}" class="block text-center px-4 py-2 bg-primary-100 text-primary-700 rounded-xl hover:bg-primary-200 transition-colors text-sm font-medium">
+                        View All Quizzes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div id="loading-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-3xl p-8 max-w-md mx-4 text-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-secondary-500 to-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-robot text-white text-2xl animate-pulse"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Generating Your Quiz</h3>
+        <p class="text-gray-600 mb-6">Our AI is analyzing your content and creating personalized questions...</p>
+        <div class="flex justify-center">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-3xl p-8 max-w-md mx-4 text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-check text-green-600 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Quiz Generated Successfully!</h3>
+        <p class="text-gray-600 mb-6">Your quiz is ready. Would you like to take it now or view all your quizzes?</p>
+        <div class="space-y-3">
+            <button id="take-quiz-btn" class="w-full px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all">
+                Take Quiz Now
+            </button>
+            <button id="view-quizzes-btn" class="w-full px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+                View All Quizzes
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div id="error-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-3xl p-8 max-w-md mx-4 text-center">
+        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Generation Failed</h3>
+        <p id="error-message" class="text-gray-600 mb-6">Something went wrong while generating your quiz.</p>
+        <button id="close-error-btn" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all">
+            Try Again
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // File handling variables
+    const fileDropZone = document.getElementById('file-drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const filePreview = document.getElementById('file-preview');
+    const uploadContent = document.getElementById('upload-content');
+    let selectedFile = null;
+
+    // Drag and drop functionality
+    fileDropZone.addEventListener('click', () => fileInput.click());
+    
+    fileDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileDropZone.classList.add('border-primary-500', 'bg-primary-50');
+    });
+    
+    fileDropZone.addEventListener('dragleave', () => {
+        fileDropZone.classList.remove('border-primary-500', 'bg-primary-50');
+    });
+    
+    fileDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileDropZone.classList.remove('border-primary-500', 'bg-primary-50');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFile(files[0]);
+        }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]);
+        }
+    });
+
+    function handleFile(file) {
+        selectedFile = file;
+        
+        // Show file preview
+        document.getElementById('file-name').textContent = file.name;
+        document.getElementById('file-size').textContent = formatFileSize(file.size);
+        
+        // Set appropriate icon
+        const icon = document.getElementById('file-icon');
+        if (file.type.includes('pdf')) {
+            icon.className = 'fas fa-file-pdf text-red-600 text-xl mr-3';
+        } else if (file.type.includes('image')) {
+            icon.className = 'fas fa-image text-green-600 text-xl mr-3';
+        } else {
+            icon.className = 'fas fa-file text-blue-600 text-xl mr-3';
+        }
+        
+        filePreview.classList.remove('hidden');
+        uploadContent.style.display = 'none';
+    }
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // Remove file
+    document.getElementById('remove-file').addEventListener('click', () => {
+        fileInput.value = '';
+        selectedFile = null;
+        filePreview.classList.add('hidden');
+        uploadContent.style.display = 'block';
+    });
+
+    // Form submission
+    document.getElementById('quiz-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        const file = selectedFile || fileInput.files[0];
+        const title = document.getElementById('quiz-title').value;
+        const numQuestions = document.getElementById('num-questions').value;
+        
+        if (!file) {
+            showNotification('Please select a file to upload.', 'error');
+            return;
+        }
+        
+        formData.append('file', file);
+        formData.append('title', title);
+        formData.append('numQuestions', numQuestions);
+        
+        // Show loading state
+        showLoadingModal();
+        
+        try {
+            const response = await fetch('/api/quizzes/generate', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            hideLoadingModal();
+            
+            if (response.ok && result.id) {
+                window.lastGeneratedQuizId = result.id;
+                showSuccessModal();
+                loadRecentQuizzes();
+            } else {
+                showErrorModal(result.error || 'Failed to generate quiz');
+            }
+        } catch (error) {
+            hideLoadingModal();
+            showErrorModal('Network error. Please try again.');
+        }
+    });
+
+    // Modal functions
+    function showLoadingModal() {
+        document.getElementById('loading-modal').classList.remove('hidden');
+        document.getElementById('generate-btn').disabled = true;
+        document.getElementById('btn-text').classList.add('hidden');
+        document.getElementById('btn-loading').classList.remove('hidden');
+    }
+
+    function hideLoadingModal() {
+        document.getElementById('loading-modal').classList.add('hidden');
+        document.getElementById('generate-btn').disabled = false;
+        document.getElementById('btn-text').classList.remove('hidden');
+        document.getElementById('btn-loading').classList.add('hidden');
+    }
+
+    function showSuccessModal() {
+        document.getElementById('success-modal').classList.remove('hidden');
+    }
+
+    function showErrorModal(message) {
+        document.getElementById('error-message').textContent = message;
+        document.getElementById('error-modal').classList.remove('hidden');
+    }
+
+    // Modal event listeners
+    document.getElementById('take-quiz-btn').addEventListener('click', () => {
+        if (window.lastGeneratedQuizId) {
+            window.location.href = `/quiz/take/${window.lastGeneratedQuizId}`;
+        }
+    });
+
+    document.getElementById('view-quizzes-btn').addEventListener('click', () => {
+        window.location.href = '/quiz/list';
+    });
+
+    document.getElementById('close-error-btn').addEventListener('click', () => {
+        document.getElementById('error-modal').classList.add('hidden');
+    });
+
+    // Load recent quizzes
+    async function loadRecentQuizzes() {
+        try {
+            const response = await fetch('/api/quizzes?limit=3');
+            const quizzes = await response.json();
+            
+            const container = document.getElementById('recent-quizzes');
+            
+            if (quizzes && quizzes.length > 0) {
+                container.innerHTML = quizzes.map(quiz => `
+                    <div class="p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer" onclick="window.location.href='/quiz/take/${quiz.id}'">
+                        <h4 class="font-medium text-gray-800 text-sm mb-1">${quiz.title || 'Untitled Quiz'}</h4>
+                        <p class="text-xs text-gray-600">${quiz.questions ? quiz.questions.length : 0} questions</p>
+                    </div>
+                `).join('');
+            }
+        } catch (error) {
+            console.error('Failed to load recent quizzes:', error);
+        }
+    }
+
+    // Load recent quizzes on page load
+    loadRecentQuizzes();
+</script>
+
+<style>
+    .file-drop-zone {
+        transition: all 0.3s ease;
+    }
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}

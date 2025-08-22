@@ -1,0 +1,845 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-red-50">
+    <!-- Professional Hero Section -->
+    <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-700 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Navigation Breadcrumb -->
+                <nav class="flex items-center space-x-2 text-sm mb-8 opacity-90">
+                    <a href="/learn" class="hover:text-purple-200 transition-colors">
+                        <i class="fas fa-home mr-1"></i>Learn
+                    </a>
+                    <span>→</span>
+                    <span class="text-purple-200">Polymorphism</span>
+                </nav>
+
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shapes text-4xl"></i>
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Master Polymorphism
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-purple-100 leading-relaxed max-w-3xl mx-auto">
+                        Discover the power of "one interface, many forms" - where objects can take multiple shapes and behaviors dynamically at runtime.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-8">
+                        <span class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-magic mr-2"></i>Dynamic Behavior
+                        </span>
+                        <span class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-code-branch mr-2"></i>Flexible Code
+                        </span>
+                        <span class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-layer-group mr-2"></i>Same Interface
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-lg py-6">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Learning Progress</h2>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Advanced Concept
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-600">Estimated Time</div>
+                            <div class="font-semibold text-gray-800">40 minutes</div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-64 bg-gray-200 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full progress-bar transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <span class="text-sm text-gray-600 progress-text font-medium">0% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- Enhanced Table of Contents -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Learning Roadmap</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Follow this structured path to master polymorphism and create flexible, dynamic object behaviors
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="learning-section group p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl hover:from-purple-100 hover:to-purple-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="fundamentals">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-brain text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-purple-800 text-lg mb-2">Fundamentals</h4>
+                            <p class="text-sm text-purple-600 mb-4">Core polymorphism concepts</p>
+                            <div class="flex items-center justify-center text-xs text-purple-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>10 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-section group p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl hover:from-pink-100 hover:to-pink-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="types">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-pink-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-layer-group text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-pink-800 text-lg mb-2">Types of Polymorphism</h4>
+                            <p class="text-sm text-pink-600 mb-4">Runtime vs Compile-time</p>
+                            <div class="flex items-center justify-center text-xs text-pink-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>15 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-section group p-6 bg-gradient-to-br from-red-50 to-red-100 rounded-xl hover:from-red-100 hover:to-red-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="overloading">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-red-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-code text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-red-800 text-lg mb-2">Method Overloading</h4>
+                            <p class="text-sm text-red-600 mb-4">Same name, different signatures</p>
+                            <div class="flex items-center justify-center text-xs text-red-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>12 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-section group p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl hover:from-orange-100 hover:to-orange-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="practice">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-rocket text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-orange-800 text-lg mb-2">Practice</h4>
+                            <p class="text-sm text-orange-600 mb-4">Interactive exercises</p>
+                            <div class="flex items-center justify-center text-xs text-orange-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>3 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Fundamentals -->
+            <div id="fundamentals" class="learning-content">
+                <div class="bg-white rounded-2xl shadow-xl p-10 mb-12">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-3xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-purple-800 mb-4">Understanding Polymorphism</h3>
+                        <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                            The magical ability of objects to take many forms while maintaining the same interface
+                        </p>
+                    </div>
+                    
+                    <!-- Definition Section -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 mb-8">
+                        <h4 class="text-2xl font-bold text-purple-800 mb-6">What is Polymorphism?</h4>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                    Polymorphism means "many forms" in Greek. It's the ability of different objects to respond to the same method call in their own unique way, while sharing a common interface.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-magic text-purple-500 text-xl mr-4 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 mb-1">Dynamic Behavior</h5>
+                                            <p class="text-gray-600">Same method, different implementations</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-code-branch text-pink-500 text-xl mr-4 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 mb-1">Flexible Code</h5>
+                                            <p class="text-gray-600">Easy to extend and maintain systems</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-plug text-red-500 text-xl mr-4 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 mb-1">Loose Coupling</h5>
+                                            <p class="text-gray-600">Reduces dependencies between classes</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-lg">
+                                <h5 class="font-bold text-gray-800 mb-4">Shape Drawing Analogy</h5>
+                                <div class="text-center mb-4">
+                                    <div class="text-6xl mb-2">🎨</div>
+                                    <h6 class="font-semibold text-gray-800">Drawing Shapes</h6>
+                                </div>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Interface:</span>
+                                        <span class="font-medium">draw()</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Circle:</span>
+                                        <span class="font-medium text-purple-600">draws circle</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Square:</span>
+                                        <span class="font-medium text-pink-600">draws square</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Triangle:</span>
+                                        <span class="font-medium text-red-600">draws triangle</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Demo -->
+                    <div class="bg-gradient-to-r from-pink-50 to-red-50 rounded-2xl p-8 mb-8">
+                        <h4 class="text-2xl font-bold text-pink-800 mb-6 text-center">Interactive Shape Demo</h4>
+                        <div class="max-w-4xl mx-auto">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-8">
+                                <!-- Circle -->
+                                <div class="polymorphism-demo-card bg-white rounded-xl p-6 shadow-lg border-2 border-purple-200 hover:border-purple-400 transition-all duration-300 cursor-pointer" data-shape="circle">
+                                    <div class="w-20 h-20 bg-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white">
+                                        <i class="fas fa-circle text-2xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-bold text-purple-800 mb-3">Circle</h5>
+                                    <div class="text-left space-y-2 text-sm">
+                                        <div class="bg-purple-50 p-2 rounded">
+                                            <strong>draw() method:</strong><br>
+                                            • Calculate circumference<br>
+                                            • Draw curved lines<br>
+                                            • Fill with color
+                                        </div>
+                                    </div>
+                                    <button class="mt-4 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                                        Call draw()
+                                    </button>
+                                </div>
+
+                                <!-- Square -->
+                                <div class="polymorphism-demo-card bg-white rounded-xl p-6 shadow-lg border-2 border-pink-200 hover:border-pink-400 transition-all duration-300 cursor-pointer" data-shape="square">
+                                    <div class="w-20 h-20 bg-pink-500 mx-auto mb-4 flex items-center justify-center text-white">
+                                        <i class="fas fa-square text-2xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-bold text-pink-800 mb-3">Square</h5>
+                                    <div class="text-left space-y-2 text-sm">
+                                        <div class="bg-pink-50 p-2 rounded">
+                                            <strong>draw() method:</strong><br>
+                                            • Calculate perimeter<br>
+                                            • Draw straight lines<br>
+                                            • Fill with pattern
+                                        </div>
+                                    </div>
+                                    <button class="mt-4 bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors">
+                                        Call draw()
+                                    </button>
+                                </div>
+
+                                <!-- Triangle -->
+                                <div class="polymorphism-demo-card bg-white rounded-xl p-6 shadow-lg border-2 border-red-200 hover:border-red-400 transition-all duration-300 cursor-pointer" data-shape="triangle">
+                                    <div class="w-20 h-20 bg-red-500 mx-auto mb-4 flex items-center justify-center text-white clip-triangle">
+                                        <i class="fas fa-play text-2xl"></i>
+                                    </div>
+                                    <h5 class="text-xl font-bold text-red-800 mb-3">Triangle</h5>
+                                    <div class="text-left space-y-2 text-sm">
+                                        <div class="bg-red-50 p-2 rounded">
+                                            <strong>draw() method:</strong><br>
+                                            • Calculate angles<br>
+                                            • Draw three sides<br>
+                                            • Fill with gradient
+                                        </div>
+                                    </div>
+                                    <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                                        Call draw()
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-6 shadow-lg">
+                                <h5 class="font-bold text-gray-800 mb-4 text-center">Polymorphic Code in Action</h5>
+                                <div class="bg-gray-100 rounded-lg p-4 text-center">
+                                    <code class="text-lg text-gray-800">
+                                        <span class="text-blue-600">shapes</span>.<span class="text-purple-600">forEach</span>(<span class="text-red-600">shape</span> => <span class="text-red-600">shape</span>.<span class="text-green-600">draw()</span>)
+                                    </code>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-3 text-center">
+                                    Same method call, different behaviors for each shape!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-language Code Example -->
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-6 text-center">Interactive Code Examples</h4>
+                        
+                        <!-- Language Tabs -->
+                        <div class="flex flex-wrap justify-center gap-2 mb-6">
+                            <button class="language-tab px-4 py-2 rounded-lg border-2 border-purple-500 text-purple-600 font-semibold bg-purple-50" data-lang="python">
+                                <i class="fab fa-python mr-2"></i>Python
+                            </button>
+                            <button class="language-tab px-4 py-2 rounded-lg border-2 text-gray-600" data-lang="java">
+                                <i class="fab fa-java mr-2"></i>Java
+                            </button>
+                            <button class="language-tab px-4 py-2 rounded-lg border-2 text-gray-600" data-lang="cpp">
+                                <i class="fas fa-code mr-2"></i>C++
+                            </button>
+                            <button class="language-tab px-4 py-2 rounded-lg border-2 text-gray-600" data-lang="csharp">
+                                <i class="fas fa-hashtag mr-2"></i>C#
+                            </button>
+                        </div>
+
+                        <!-- Code Examples -->
+                        <div class="relative">
+                            <!-- Python -->
+                            <div class="language-content" data-lang="python">
+                                <div class="bg-gray-900 rounded-xl p-6 relative">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-green-400 font-bold">Python Polymorphism</span>
+                                        <button class="copy-code-btn bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                            <i class="fas fa-copy mr-1"></i>Copy
+                                        </button>
+                                    </div>
+                                    <pre class="text-gray-300 text-sm leading-relaxed overflow-x-auto"><code># Base class
+class Shape:
+    def draw(self):
+        pass
+    
+    def area(self):
+        pass
+
+# Polymorphic implementations
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def draw(self):
+        return f"Drawing a circle with radius {self.radius}"
+    
+    def area(self):
+        return 3.14159 * self.radius ** 2
+
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+    
+    def draw(self):
+        return f"Drawing a square with side {self.side}"
+    
+    def area(self):
+        return self.side ** 2
+
+class Triangle(Shape):
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+    
+    def draw(self):
+        return f"Drawing a triangle with base {self.base}"
+    
+    def area(self):
+        return 0.5 * self.base * self.height
+
+# Polymorphism in action
+shapes = [Circle(5), Square(4), Triangle(3, 6)]
+
+for shape in shapes:
+    print(shape.draw())  # Different behavior for each!
+    print(f"Area: {shape.area()}")
+    print("---")</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Java -->
+                            <div class="language-content hidden" data-lang="java">
+                                <div class="bg-gray-900 rounded-xl p-6 relative">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-orange-400 font-bold">Java Polymorphism</span>
+                                        <button class="copy-code-btn bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                            <i class="fas fa-copy mr-1"></i>Copy
+                                        </button>
+                                    </div>
+                                    <pre class="text-gray-300 text-sm leading-relaxed overflow-x-auto"><code>// Base class
+abstract class Shape {
+    public abstract String draw();
+    public abstract double area();
+}
+
+// Polymorphic implementations
+class Circle extends Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    
+    @Override
+    public String draw() {
+        return "Drawing a circle with radius " + radius;
+    }
+    
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Square extends Shape {
+    private double side;
+    
+    public Square(double side) {
+        this.side = side;
+    }
+    
+    @Override
+    public String draw() {
+        return "Drawing a square with side " + side;
+    }
+    
+    @Override
+    public double area() {
+        return side * side;
+    }
+}
+
+// Polymorphism in action
+public class PolymorphismDemo {
+    public static void main(String[] args) {
+        Shape[] shapes = {
+            new Circle(5),
+            new Square(4)
+        };
+        
+        for (Shape shape : shapes) {
+            System.out.println(shape.draw()); // Polymorphic behavior
+            System.out.println("Area: " + shape.area());
+            System.out.println("---");
+        }
+    }
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- C++ -->
+                            <div class="language-content hidden" data-lang="cpp">
+                                <div class="bg-gray-900 rounded-xl p-6 relative">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-blue-400 font-bold">C++ Polymorphism</span>
+                                        <button class="copy-code-btn bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                            <i class="fas fa-copy mr-1"></i>Copy
+                                        </button>
+                                    </div>
+                                    <pre class="text-gray-300 text-sm leading-relaxed overflow-x-auto"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;memory&gt;
+#include &lt;string&gt;
+
+// Base class with virtual functions
+class Shape {
+public:
+    virtual ~Shape() = default;
+    virtual std::string draw() = 0;
+    virtual double area() = 0;
+};
+
+// Polymorphic implementations
+class Circle : public Shape {
+private:
+    double radius;
+    
+public:
+    Circle(double r) : radius(r) {}
+    
+    std::string draw() override {
+        return "Drawing a circle with radius " + std::to_string(radius);
+    }
+    
+    double area() override {
+        return 3.14159 * radius * radius;
+    }
+};
+
+class Square : public Shape {
+private:
+    double side;
+    
+public:
+    Square(double s) : side(s) {}
+    
+    std::string draw() override {
+        return "Drawing a square with side " + std::to_string(side);
+    }
+    
+    double area() override {
+        return side * side;
+    }
+};
+
+// Polymorphism in action
+int main() {
+    std::vector&lt;std::unique_ptr&lt;Shape&gt;&gt; shapes;
+    shapes.push_back(std::make_unique&lt;Circle&gt;(5));
+    shapes.push_back(std::make_unique&lt;Square&gt;(4));
+    
+    for (auto& shape : shapes) {
+        std::cout &lt;&lt; shape-&gt;draw() &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Area: " &lt;&lt; shape-&gt;area() &lt;&lt; std::endl;
+        std::cout &lt;&lt; "---" &lt;&lt; std::endl;
+    }
+    
+    return 0;
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- C# -->
+                            <div class="language-content hidden" data-lang="csharp">
+                                <div class="bg-gray-900 rounded-xl p-6 relative">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-purple-400 font-bold">C# Polymorphism</span>
+                                        <button class="copy-code-btn bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm transition-colors">
+                                            <i class="fas fa-copy mr-1"></i>Copy
+                                        </button>
+                                    </div>
+                                    <pre class="text-gray-300 text-sm leading-relaxed overflow-x-auto"><code>using System;
+using System.Collections.Generic;
+
+// Base class
+public abstract class Shape 
+{
+    public abstract string Draw();
+    public abstract double Area();
+}
+
+// Polymorphic implementations
+public class Circle : Shape 
+{
+    private double radius;
+    
+    public Circle(double radius) 
+    {
+        this.radius = radius;
+    }
+    
+    public override string Draw() 
+    {
+        return $"Drawing a circle with radius {radius}";
+    }
+    
+    public override double Area() 
+    {
+        return Math.PI * radius * radius;
+    }
+}
+
+public class Square : Shape 
+{
+    private double side;
+    
+    public Square(double side) 
+    {
+        this.side = side;
+    }
+    
+    public override string Draw() 
+    {
+        return $"Drawing a square with side {side}";
+    }
+    
+    public override double Area() 
+    {
+        return side * side;
+    }
+}
+
+// Polymorphism in action
+class Program 
+{
+    static void Main() 
+    {
+        List&lt;Shape&gt; shapes = new List&lt;Shape&gt; 
+        {
+            new Circle(5),
+            new Square(4)
+        };
+        
+        foreach (Shape shape in shapes) 
+        {
+            Console.WriteLine(shape.Draw()); // Polymorphic behavior
+            Console.WriteLine($"Area: {shape.Area()}");
+            Console.WriteLine("---");
+        }
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Assessment -->
+            <div class="bg-gradient-to-r from-purple-600 to-pink-700 rounded-2xl p-8 text-white text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-3xl font-bold mb-4">Ready to Test Your Knowledge?</h3>
+                    <p class="text-xl text-purple-100 mb-8">
+                        You've mastered the art of polymorphism! Take our interactive quiz to validate your understanding.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/learn/polymorphism/assessment" class="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-brain mr-2"></i>Take Assessment
+                        </a>
+                        <a href="/learn/abstraction" class="bg-purple-500 bg-opacity-50 text-white px-8 py-4 rounded-xl font-semibold hover:bg-opacity-70 transition-all transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-arrow-right mr-2"></i>Next: Abstraction
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class PolymorphismLearning {
+    constructor() {
+        this.progress = 0;
+        this.completedSections = new Set();
+        this.startTime = Date.now();
+        this.timeSpent = 0;
+        
+        this.setupEventListeners();
+        this.loadProgress();
+        this.updateProgress();
+        this.startTimer();
+    }
+
+    setupEventListeners() {
+        // Section navigation
+        document.querySelectorAll('.learning-section').forEach(section => {
+            section.addEventListener('click', (e) => {
+                const sectionId = e.currentTarget.getAttribute('data-section');
+                this.navigateToSection(sectionId);
+            });
+        });
+
+        // Language tabs
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                const lang = e.currentTarget.getAttribute('data-lang');
+                this.switchLanguage(lang);
+            });
+        });
+
+        // Copy code buttons
+        document.querySelectorAll('.copy-code-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => this.copyCode(e));
+        });
+
+        // Shape demo cards
+        document.querySelectorAll('.polymorphism-demo-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const shape = e.currentTarget.getAttribute('data-shape');
+                this.demonstratePolymorphism(shape);
+            });
+        });
+
+        // Progress tracking
+        this.trackSectionViews();
+    }
+
+    demonstratePolymorphism(shapeType) {
+        const messages = {
+            circle: "🟣 Circle.draw() called! Drawing smooth curves and calculating π * r²",
+            square: "🟥 Square.draw() called! Drawing four equal sides and calculating side²", 
+            triangle: "🔺 Triangle.draw() called! Drawing three connected lines and calculating ½ * base * height"
+        };
+        
+        const card = document.querySelector(`[data-shape="${shapeType}"]`);
+        const originalBorder = card.className;
+        
+        // Visual feedback
+        card.classList.add('animate-pulse', 'ring-4', 'ring-yellow-400');
+        
+        // Show message
+        const message = messages[shapeType];
+        this.showNotification(message);
+        
+        // Reset after animation
+        setTimeout(() => {
+            card.classList.remove('animate-pulse', 'ring-4', 'ring-yellow-400');
+        }, 2000);
+    }
+
+    showNotification(message) {
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50 max-w-sm transform translate-x-full transition-transform duration-300';
+        notification.innerHTML = `
+            <div class="flex items-start">
+                <i class="fas fa-magic mr-2 mt-1"></i>
+                <span class="text-sm">${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Slide in
+        setTimeout(() => {
+            notification.classList.remove('translate-x-full');
+        }, 100);
+        
+        // Slide out and remove
+        setTimeout(() => {
+            notification.classList.add('translate-x-full');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    document.body.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    navigateToSection(sectionId) {
+        // Mark section as completed
+        this.completedSections.add(sectionId);
+        
+        // Update progress
+        this.progress = (this.completedSections.size / 4) * 100;
+        this.updateProgress();
+        this.saveProgress();
+        
+        // Scroll to section
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    trackSectionViews() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    if (sectionId) {
+                        this.completedSections.add(sectionId);
+                        this.progress = Math.max(this.progress, (this.completedSections.size / 4) * 100);
+                        this.updateProgress();
+                        this.saveProgress();
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.learning-content').forEach(section => {
+            observer.observe(section);
+        });
+    }
+
+    updateProgress() {
+        const progressBar = document.querySelector('.progress-bar');
+        const progressText = document.querySelector('.progress-text');
+        
+        if (progressBar) {
+            progressBar.style.width = `${this.progress}%`;
+        }
+        
+        if (progressText) {
+            progressText.textContent = `${Math.round(this.progress)}% Complete`;
+        }
+    }
+
+    loadProgress() {
+        const saved = localStorage.getItem('polymorphismProgress');
+        if (saved) {
+            const data = JSON.parse(saved);
+            this.progress = data.progress || 0;
+            this.completedSections = new Set(data.completedSections || []);
+            this.timeSpent = data.timeSpent || 0;
+        }
+    }
+
+    saveProgress() {
+        const progressData = {
+            polymorphism: this.progress,
+            completedSections: Array.from(this.completedSections),
+            timeSpent: this.timeSpent
+        };
+        
+        // Update main learning progress
+        const mainProgress = JSON.parse(localStorage.getItem('oopLearningProgress') || '{}');
+        mainProgress.polymorphism = this.progress;
+        localStorage.setItem('oopLearningProgress', JSON.stringify(mainProgress));
+        
+        // Save polymorphism specific progress
+        localStorage.setItem('polymorphismProgress', JSON.stringify(progressData));
+    }
+
+    switchLanguage(lang) {
+        // Update tab appearance
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.classList.remove('border-purple-500', 'text-purple-600', 'font-semibold', 'bg-purple-50');
+            tab.classList.add('text-gray-600');
+        });
+        
+        const activeTab = document.querySelector(`[data-lang="${lang}"]`);
+        if (activeTab) {
+            activeTab.classList.add('border-purple-500', 'text-purple-600', 'font-semibold', 'bg-purple-50');
+        }
+
+        // Show/hide content
+        document.querySelectorAll('.language-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+        
+        const activeContent = document.querySelector(`.language-content[data-lang="${lang}"]`);
+        if (activeContent) {
+            activeContent.classList.remove('hidden');
+        }
+    }
+
+    copyCode(event) {
+        const btn = event.target.closest('.copy-code-btn');
+        const codeBlock = btn.closest('.bg-gray-900').querySelector('code');
+        
+        navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+            btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+            }, 2000);
+        });
+    }
+
+    startTimer() {
+        setInterval(() => {
+            this.timeSpent = Math.floor((Date.now() - this.startTime) / 1000 / 60); // minutes
+        }, 60000);
+    }
+}
+
+// Quiz function
+// Initialize the learning system
+document.addEventListener('DOMContentLoaded', () => {
+    new PolymorphismLearning();
+});
+</script>
+{% endblock %}

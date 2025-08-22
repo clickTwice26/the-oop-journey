@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="text-center mb-16 animate-fade-in">
+        <div class="inline-flex items-center px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-medium mb-6">
+            <i class="fas fa-rocket mr-2"></i>
+            AI-Powered Learning Platform
+        </div>
+        
+        <h1 class="text-6xl md:text-7xl font-black mb-6">
+            <span class="bg-gradient-to-r from-secondary-600 to-primary-600 bg-clip-text text-transparent">
+                OOP Journey
+            </span>
+        </h1>
+        
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Master Object-Oriented Programming through interactive quizzes, AI-powered learning, 
+            and personalized study materials. Transform your coding skills with cutting-edge technology.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a href="{{ url_for('quiz.quiz_generator') }}" class="px-8 py-4 bg-gradient-to-r from-secondary-600 to-primary-600 text-white rounded-2xl font-semibold text-lg hover:scale-105 transform transition-all duration-300 shadow-xl hover:shadow-2xl">
+                <i class="fas fa-magic mr-2"></i>
+                Create Quiz
+            </a>
+            <a href="{{ url_for('main.learn') }}" class="px-8 py-4 bg-white text-gray-700 rounded-2xl font-semibold text-lg hover:bg-gray-50 transition-all duration-300 border border-gray-200 shadow-lg">
+                <i class="fas fa-book mr-2"></i>
+                Start Learning
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <i class="fas fa-brain text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">AI Quiz Generation</h3>
+            <p class="text-gray-600 mb-6">Upload your study materials and let our AI create personalized quizzes tailored to your learning needs.</p>
+            <a href="{{ url_for('quiz.quiz_generator') }}" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                Try Now <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <i class="fas fa-comments text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">AI Chat Assistant</h3>
+            <p class="text-gray-600 mb-6">Get instant help with programming concepts through our intelligent chat assistant available 24/7.</p>
+            <a href="{{ url_for('main.chat') }}" class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+                Chat Now <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <i class="fas fa-chart-line text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Progress Tracking</h3>
+            <p class="text-gray-600 mb-6">Monitor your learning progress with detailed analytics and performance insights.</p>
+            <a href="{{ url_for('quiz.quiz_list') }}" class="text-green-600 font-semibold hover:text-green-700 transition-colors">
+                View Progress <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4">How It Works</h2>
+        <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            Get started with your personalized learning journey in three simple steps
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">1</div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Upload Material</h3>
+                <p class="text-gray-600">Upload your study documents, PDFs, or images to get started.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">2</div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">AI Generates Quiz</h3>
+                <p class="text-gray-600">Our AI analyzes your content and creates personalized questions.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">3</div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Learn & Improve</h3>
+                <p class="text-gray-600">Take quizzes, review answers, and track your progress.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-gradient-to-r from-secondary-600 to-primary-600 rounded-3xl p-12 text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
+        <p class="text-xl text-secondary-100 mb-8 max-w-2xl mx-auto">
+            Join thousands of learners who are mastering OOP concepts with our AI-powered platform.
+        </p>
+        <a href="{{ url_for('quiz.quiz_generator') }}" class="inline-flex items-center px-8 py-4 bg-white text-primary-600 rounded-2xl font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-xl">
+            <i class="fas fa-rocket mr-2"></i>
+            Get Started Free
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}

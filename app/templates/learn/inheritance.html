@@ -1,0 +1,665 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    🧬 Master Inheritance
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 mb-8">
+                    Build powerful relationships between classes
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Beginner Friendly</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Interactive Examples</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Hands-on Practice</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Learning Progress</h2>
+                <div class="flex items-center space-x-4">
+                    <div class="w-64 bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">📚 Learning Path</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="#basics" class="learning-section p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer" data-section="basics">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <h4 class="font-semibold text-blue-800">Basics</h4>
+                        <p class="text-sm text-blue-600">What is Inheritance?</p>
+                    </div>
+                </a>
+                <a href="#syntax" class="learning-section p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors cursor-pointer" data-section="syntax">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">💻</div>
+                        <h4 class="font-semibold text-green-800">Syntax</h4>
+                        <p class="text-sm text-green-600">How to implement</p>
+                    </div>
+                </a>
+                <a href="#types" class="learning-section p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors cursor-pointer" data-section="types">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🌳</div>
+                        <h4 class="font-semibold text-purple-800">Types</h4>
+                        <p class="text-sm text-purple-600">Different forms</p>
+                    </div>
+                </a>
+                <a href="#practice" class="learning-section p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors cursor-pointer" data-section="practice">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🏃‍♂️</div>
+                        <h4 class="font-semibold text-orange-800">Practice</h4>
+                        <p class="text-sm text-orange-600">Hands-on exercises</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section 1: Basics -->
+        <div id="basics" class="learning-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-blue-800 mb-6">🎯 What is Inheritance?</h3>
+                
+                <div class="prose max-w-none">
+                    <p class="text-lg text-gray-700 mb-6">
+                        Inheritance is like a family tree in programming! Just as children inherit traits from their parents, 
+                        classes can inherit properties and methods from other classes.
+                    </p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+                        <h4 class="text-xl font-semibold text-blue-800 mb-3">🌟 Key Benefits</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Code Reusability</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Saves Development Time</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Easier Maintenance</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Logical Organization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Interactive Analogy -->
+                    <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-6 mb-6">
+                        <h4 class="text-xl font-semibold text-purple-800 mb-4">🏠 Real-World Analogy</h4>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">👴</div>
+                                <h5 class="font-semibold">Grandparent</h5>
+                                <p class="text-sm text-gray-600">Animal Class</p>
+                                <div class="mt-2 p-2 bg-white rounded text-xs">
+                                    name, age, breathe()
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">👨</div>
+                                <h5 class="font-semibold">Parent</h5>
+                                <p class="text-sm text-gray-600">Mammal Class</p>
+                                <div class="mt-2 p-2 bg-white rounded text-xs">
+                                    + fur_color, give_birth()
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🧒</div>
+                                <h5 class="font-semibold">Child</h5>
+                                <p class="text-sm text-gray-600">Dog Class</p>
+                                <div class="mt-2 p-2 bg-white rounded text-xs">
+                                    + breed, bark()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button class="next-section bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors" data-next="syntax">
+                        Continue to Syntax →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Syntax -->
+        <div id="syntax" class="learning-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-green-800 mb-6">💻 Inheritance Syntax</h3>
+                
+                <!-- Language Tabs -->
+                <div class="mb-6">
+                    <div class="flex space-x-2 border-b">
+                        <button class="language-tab px-4 py-2 border-b-2 border-green-500 text-green-600 font-semibold" data-lang="python">Python</button>
+                        <button class="language-tab px-4 py-2 text-gray-600 hover:text-green-600" data-lang="java">Java</button>
+                        <button class="language-tab px-4 py-2 text-gray-600 hover:text-green-600" data-lang="cpp">C++</button>
+                        <button class="language-tab px-4 py-2 text-gray-600 hover:text-green-600" data-lang="csharp">C#</button>
+                    </div>
+                </div>
+
+                <!-- Python Example -->
+                <div class="language-content" data-lang="python">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">Parent Class (Base)</h4>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto"><code>class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def breathe(self):
+        return f"{self.name} is breathing"
+    
+    def sleep(self):
+        return f"{self.name} is sleeping"</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">Child Class (Derived)</h4>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto"><code>class Dog(Animal):  # Inherits from Animal
+    def __init__(self, name, age, breed):
+        super().__init__(name, age)  # Call parent constructor
+        self.breed = breed
+    
+    def bark(self):
+        return f"{self.name} says Woof!"
+    
+    def sleep(self):  # Override parent method
+        return f"{self.name} sleeps in a dog bed"</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Using the Classes</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto"><code># Create instances
+dog = Dog("Buddy", 3, "Golden Retriever")
+
+# Use inherited methods
+print(dog.breathe())  # "Buddy is breathing"
+
+# Use own methods  
+print(dog.bark())     # "Buddy says Woof!"
+
+# Use overridden method
+print(dog.sleep())    # "Buddy sleeps in a dog bed"</code></pre>
+                    </div>
+                </div>
+
+                <!-- Java Example -->
+                <div class="language-content hidden" data-lang="java">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">Parent Class (Base)</h4>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto"><code>public class Animal {
+    protected String name;
+    protected int age;
+    
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public String breathe() {
+        return name + " is breathing";
+    }
+    
+    public String sleep() {
+        return name + " is sleeping";
+    }
+}</code></pre>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3">Child Class (Derived)</h4>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto"><code>public class Dog extends Animal {
+    private String breed;
+    
+    public Dog(String name, int age, String breed) {
+        super(name, age);  // Call parent constructor
+        this.breed = breed;
+    }
+    
+    public String bark() {
+        return name + " says Woof!";
+    }
+    
+    @Override
+    public String sleep() {  // Override parent method
+        return name + " sleeps in a dog bed";
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Code Editor -->
+                <div class="mt-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-800 mb-4">🎮 Try It Yourself!</h4>
+                    <textarea id="code-editor" class="w-full h-64 p-4 border rounded-lg font-mono text-sm" placeholder="Write your inheritance code here...">class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        return f"{self.name} makes a sound"
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+# Test your code
+cat = Cat("Whiskers")
+print(cat.speak())</textarea>
+                    <button id="run-code" class="mt-4 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+                        ▶️ Run Code
+                    </button>
+                    <div id="code-output" class="mt-4 p-4 bg-gray-900 text-green-400 rounded hidden"></div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button class="next-section bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors" data-next="types">
+                        Continue to Types →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Types -->
+        <div id="types" class="learning-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-purple-800 mb-6">🌳 Types of Inheritance</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <!-- Single Inheritance -->
+                    <div class="inheritance-type bg-blue-50 rounded-lg p-6 cursor-pointer" data-type="single">
+                        <h4 class="text-xl font-semibold text-blue-800 mb-3">1️⃣ Single Inheritance</h4>
+                        <p class="text-gray-700 mb-4">One child class inherits from one parent class</p>
+                        <div class="visual-diagram">
+                            <div class="text-center">
+                                <div class="inline-block bg-blue-200 px-4 py-2 rounded mb-2">Parent</div>
+                                <div class="text-2xl">⬇️</div>
+                                <div class="inline-block bg-blue-300 px-4 py-2 rounded">Child</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multiple Inheritance -->
+                    <div class="inheritance-type bg-green-50 rounded-lg p-6 cursor-pointer" data-type="multiple">
+                        <h4 class="text-xl font-semibold text-green-800 mb-3">2️⃣ Multiple Inheritance</h4>
+                        <p class="text-gray-700 mb-4">One child inherits from multiple parents</p>
+                        <div class="visual-diagram">
+                            <div class="text-center">
+                                <div class="flex justify-center space-x-4 mb-2">
+                                    <div class="bg-green-200 px-3 py-1 rounded text-sm">Parent1</div>
+                                    <div class="bg-green-200 px-3 py-1 rounded text-sm">Parent2</div>
+                                </div>
+                                <div class="text-2xl">⬇️</div>
+                                <div class="inline-block bg-green-300 px-4 py-2 rounded">Child</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multilevel Inheritance -->
+                    <div class="inheritance-type bg-purple-50 rounded-lg p-6 cursor-pointer" data-type="multilevel">
+                        <h4 class="text-xl font-semibold text-purple-800 mb-3">3️⃣ Multilevel Inheritance</h4>
+                        <p class="text-gray-700 mb-4">Chain of inheritance (grandparent → parent → child)</p>
+                        <div class="visual-diagram">
+                            <div class="text-center">
+                                <div class="inline-block bg-purple-200 px-4 py-2 rounded mb-2">Grandparent</div>
+                                <div class="text-2xl">⬇️</div>
+                                <div class="inline-block bg-purple-250 px-4 py-2 rounded mb-2">Parent</div>
+                                <div class="text-2xl">⬇️</div>
+                                <div class="inline-block bg-purple-300 px-4 py-2 rounded">Child</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hierarchical Inheritance -->
+                    <div class="inheritance-type bg-orange-50 rounded-lg p-6 cursor-pointer" data-type="hierarchical">
+                        <h4 class="text-xl font-semibold text-orange-800 mb-3">4️⃣ Hierarchical Inheritance</h4>
+                        <p class="text-gray-700 mb-4">Multiple children inherit from one parent</p>
+                        <div class="visual-diagram">
+                            <div class="text-center">
+                                <div class="inline-block bg-orange-200 px-4 py-2 rounded mb-2">Parent</div>
+                                <div class="text-2xl">⬇️</div>
+                                <div class="flex justify-center space-x-4">
+                                    <div class="bg-orange-300 px-3 py-1 rounded text-sm">Child1</div>
+                                    <div class="bg-orange-300 px-3 py-1 rounded text-sm">Child2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Type Information -->
+                <div id="type-details" class="bg-gray-50 rounded-lg p-6 hidden">
+                    <div class="type-detail" data-type="single">
+                        <h5 class="text-lg font-semibold mb-3">Single Inheritance Example</h5>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded"><code>class Vehicle:
+    def start(self):
+        return "Vehicle started"
+
+class Car(Vehicle):  # Single inheritance
+    def drive(self):
+        return "Car is driving"</code></pre>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button class="next-section bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors" data-next="practice">
+                        Continue to Practice →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Practice -->
+        <div id="practice" class="learning-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-orange-800 mb-6">🏃‍♂️ Hands-on Practice</h3>
+                
+                <!-- Challenge 1 -->
+                <div class="challenge mb-8 p-6 bg-orange-50 rounded-lg">
+                    <h4 class="text-xl font-semibold text-orange-800 mb-4">🎯 Challenge 1: Create a Vehicle Hierarchy</h4>
+                    <p class="text-gray-700 mb-4">
+                        Create a vehicle hierarchy with a base Vehicle class and specific vehicle types like Car, Motorcycle, and Truck.
+                    </p>
+                    
+                    <div class="requirements bg-white p-4 rounded mb-4">
+                        <h5 class="font-semibold mb-2">Requirements:</h5>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>Vehicle class with brand, model, year properties</li>
+                            <li>start() and stop() methods in Vehicle</li>
+                            <li>Car class with number_of_doors property</li>
+                            <li>Motorcycle class with has_sidecar property</li>
+                            <li>Override start() method in each child class</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-challenge">
+                        <textarea class="challenge-editor w-full h-48 p-4 border rounded font-mono text-sm" placeholder="Write your solution here..."></textarea>
+                        <div class="mt-4 flex space-x-4">
+                            <button class="check-solution bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700">
+                                ✓ Check Solution
+                            </button>
+                            <button class="show-hint bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">
+                                💡 Show Hint
+                            </button>
+                        </div>
+                        <div class="solution-feedback mt-4 hidden p-4 rounded"></div>
+                    </div>
+                </div>
+
+                <!-- Interactive Quiz -->
+                <div class="quiz-section bg-gradient-to-r from-orange-100 to-red-100 rounded-lg p-6 mb-8">
+                    <h4 class="text-xl font-semibold text-orange-800 mb-4">🧠 Quick Quiz</h4>
+                    <div class="quiz-question">
+                        <p class="text-gray-700 mb-4">Which keyword is used in Python to inherit from a parent class?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="quiz1" value="a" class="mr-2">
+                                <span>extends</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="quiz1" value="b" class="mr-2">
+                                <span>inherits</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="quiz1" value="c" class="mr-2">
+                                <span>parentheses ()</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="quiz1" value="d" class="mr-2">
+                                <span>super</span>
+                            </label>
+                        </div>
+                        <button class="check-quiz mt-4 bg-orange-600 text-white px-6 py-2 rounded hover:bg-orange-700">
+                            Submit Answer
+                        </button>
+                        <div class="quiz-result mt-4 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Completion -->
+                <div class="completion-section text-center">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h4 class="text-2xl font-bold text-orange-800 mb-4">Congratulations!</h4>
+                    <p class="text-gray-700 mb-6">You've completed the Inheritance module!</p>
+                    <div class="space-x-4">
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700">
+                            Take Quiz
+                        </button>
+                        <a href="/learn/polymorphism" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 inline-block">
+                            Next: Polymorphism →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Learning Management System
+class InheritanceLearning {
+    constructor() {
+        this.currentSection = 'basics';
+        this.completedSections = new Set();
+        this.progress = 0;
+        this.init();
+    }
+
+    init() {
+        this.showSection('basics');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Section navigation
+        document.querySelectorAll('.learning-section').forEach(section => {
+            section.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = section.getAttribute('data-section');
+                this.showSection(targetSection);
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-section').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nextSection = btn.getAttribute('data-next');
+                this.completeSection(this.currentSection);
+                this.showSection(nextSection);
+            });
+        });
+
+        // Language tabs
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                this.switchLanguage(tab.getAttribute('data-lang'));
+            });
+        });
+
+        // Code editor
+        document.getElementById('run-code')?.addEventListener('click', this.runCode);
+
+        // Inheritance types
+        document.querySelectorAll('.inheritance-type').forEach(type => {
+            type.addEventListener('click', () => {
+                this.showTypeDetail(type.getAttribute('data-type'));
+            });
+        });
+
+        // Challenge solution check
+        document.querySelectorAll('.check-solution').forEach(btn => {
+            btn.addEventListener('click', this.checkSolution);
+        });
+
+        // Quiz
+        document.querySelectorAll('.check-quiz').forEach(btn => {
+            btn.addEventListener('click', this.checkQuiz);
+        });
+    }
+
+    showSection(sectionName) {
+        // Hide all sections
+        document.querySelectorAll('.learning-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        // Show target section
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            this.currentSection = sectionName;
+            
+            // Update section highlighting
+            document.querySelectorAll('.learning-section').forEach(section => {
+                section.classList.remove('ring-2', 'ring-blue-500');
+                if (section.getAttribute('data-section') === sectionName) {
+                    section.classList.add('ring-2', 'ring-blue-500');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        
+        // Mark section as completed
+        const sectionElement = document.querySelector(`[data-section="${sectionName}"]`);
+        if (sectionElement) {
+            sectionElement.classList.add('bg-green-100');
+            const icon = sectionElement.querySelector('.text-3xl');
+            if (icon) icon.textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const totalSections = 4;
+        this.progress = (this.completedSections.size / totalSections) * 100;
+        
+        document.querySelector('.progress-bar').style.width = `${this.progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(this.progress)}% Complete`;
+    }
+
+    switchLanguage(lang) {
+        // Update tab appearance
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.classList.remove('border-green-500', 'text-green-600', 'font-semibold');
+            tab.classList.add('text-gray-600');
+        });
+        
+        document.querySelector(`[data-lang="${lang}"]`).classList.add('border-green-500', 'text-green-600', 'font-semibold');
+
+        // Show/hide content
+        document.querySelectorAll('.language-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+        
+        document.querySelector(`.language-content[data-lang="${lang}"]`).classList.remove('hidden');
+    }
+
+    runCode() {
+        const code = document.getElementById('code-editor').value;
+        const output = document.getElementById('code-output');
+        
+        // Simple code execution simulation
+        try {
+            // This is a simplified version - in a real app, you'd use a proper code execution service
+            let result = 'Code executed successfully!\n\n';
+            
+            if (code.includes('Cat') && code.includes('Animal')) {
+                result += 'Output:\nWhiskers says Meow!';
+            } else {
+                result += 'Try creating a Cat class that inherits from Animal!';
+            }
+            
+            output.textContent = result;
+            output.classList.remove('hidden');
+        } catch (error) {
+            output.textContent = `Error: ${error.message}`;
+            output.classList.remove('hidden');
+        }
+    }
+
+    showTypeDetail(type) {
+        const detailsContainer = document.getElementById('type-details');
+        const typeDetail = document.querySelector(`.type-detail[data-type="${type}"]`);
+        
+        if (typeDetail) {
+            // Hide all type details
+            document.querySelectorAll('.type-detail').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected type detail
+            typeDetail.style.display = 'block';
+            detailsContainer.classList.remove('hidden');
+        }
+    }
+
+    checkSolution() {
+        const editor = event.target.closest('.challenge').querySelector('.challenge-editor');
+        const feedback = event.target.closest('.challenge').querySelector('.solution-feedback');
+        const code = editor.value.toLowerCase();
+        
+        let score = 0;
+        let feedbackText = '';
+        
+        // Check requirements
+        if (code.includes('class vehicle') || code.includes('class Vehicle')) score++;
+        if (code.includes('class car') || code.includes('class Car')) score++;
+        if (code.includes('def start') || code.includes('def Start')) score++;
+        
+        if (score >= 2) {
+            feedbackText = '✅ Great job! Your solution includes the main components.';
+            feedback.className = 'solution-feedback mt-4 p-4 rounded bg-green-100 text-green-800';
+        } else {
+            feedbackText = '❌ Try again! Make sure to include Vehicle and Car classes with a start method.';
+            feedback.className = 'solution-feedback mt-4 p-4 rounded bg-red-100 text-red-800';
+        }
+        
+        feedback.textContent = feedbackText;
+        feedback.classList.remove('hidden');
+    }
+
+    checkQuiz() {
+        const selected = document.querySelector('input[name="quiz1"]:checked');
+        const result = document.querySelector('.quiz-result');
+        
+        if (!selected) {
+            result.textContent = 'Please select an answer!';
+            result.className = 'quiz-result mt-4 p-3 rounded bg-yellow-100 text-yellow-800';
+        } else if (selected.value === 'c') {
+            result.textContent = '✅ Correct! In Python, inheritance is done by putting the parent class name in parentheses.';
+            result.className = 'quiz-result mt-4 p-3 rounded bg-green-100 text-green-800';
+        } else {
+            result.textContent = '❌ Incorrect. The correct answer is parentheses (). In Python, you inherit by writing class Child(Parent):';
+            result.className = 'quiz-result mt-4 p-3 rounded bg-red-100 text-red-800';
+        }
+        
+        result.classList.remove('hidden');
+    }
+}
+
+// Initialize the learning system
+document.addEventListener('DOMContentLoaded', () => {
+    new InheritanceLearning();
+});
+</script>
+{% endblock %}

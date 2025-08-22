@@ -1,0 +1,433 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    🔒 Master Encapsulation
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 mb-8">
+                    Bundle data and methods, control access like a fortress
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Data Protection</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Access Control</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Information Hiding</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Learning Progress</h2>
+                <div class="flex items-center space-x-4">
+                    <div class="w-64 bg-gray-200 rounded-full h-2">
+                        <div class="bg-emerald-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="/learn" class="text-emerald-600 hover:text-emerald-800">Learn</a>
+                <span class="text-gray-400">→</span>
+                <span class="text-gray-700">Encapsulation</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🗺️ Learning Journey</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="#concept" class="learning-section p-4 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors cursor-pointer" data-section="concept">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <h4 class="font-semibold text-emerald-800">Concept</h4>
+                        <p class="text-sm text-emerald-600">What is Encapsulation?</p>
+                    </div>
+                </a>
+                <a href="#access" class="learning-section p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors cursor-pointer" data-section="access">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🔐</div>
+                        <h4 class="font-semibold text-green-800">Access Control</h4>
+                        <p class="text-sm text-green-600">Private, Protected, Public</p>
+                    </div>
+                </a>
+                <a href="#properties" class="learning-section p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors cursor-pointer" data-section="properties">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">⚙️</div>
+                        <h4 class="font-semibold text-teal-800">Properties</h4>
+                        <p class="text-sm text-teal-600">Getters & Setters</p>
+                    </div>
+                </a>
+                <a href="#advanced" class="learning-section p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition-colors cursor-pointer" data-section="advanced">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🚀</div>
+                        <h4 class="font-semibold text-cyan-800">Advanced</h4>
+                        <p class="text-sm text-cyan-600">Real-world examples</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section 1: Concept -->
+        <div id="concept" class="learning-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-emerald-800 mb-6">🎯 Understanding Encapsulation</h3>
+                
+                <!-- Bank Account Analogy -->
+                <div class="bg-gradient-to-r from-emerald-100 to-green-100 rounded-lg p-6 mb-8">
+                    <h4 class="text-2xl font-bold text-emerald-800 mb-4">🏦 The Bank Account Analogy</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-gray-700 mb-4">
+                                Think of a bank account: you can't directly access the money in the vault. 
+                                You must use controlled methods like deposit, withdraw, or check balance.
+                            </p>
+                            
+                            <div class="bank-interface bg-white p-4 rounded-lg border-2 border-emerald-300">
+                                <h5 class="font-semibold text-emerald-800 mb-3">💳 ATM Interface (Public Methods)</h5>
+                                
+                                <div class="mb-3">
+                                    <div class="bg-gray-100 p-2 rounded text-center">
+                                        <span class="font-mono text-lg balance-display">Balance: $****</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-2 mb-3">
+                                    <button class="atm-btn bg-blue-500 text-white py-2 px-3 rounded text-sm" data-action="balance">
+                                        📊 Check Balance
+                                    </button>
+                                    <button class="atm-btn bg-green-500 text-white py-2 px-3 rounded text-sm" data-action="deposit">
+                                        💰 Deposit $100
+                                    </button>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button class="atm-btn bg-red-500 text-white py-2 px-3 rounded text-sm" data-action="withdraw">
+                                        💸 Withdraw $50
+                                    </button>
+                                    <button class="atm-btn bg-purple-500 text-white py-2 px-3 rounded text-sm" data-action="transfer">
+                                        🔄 Transfer $25
+                                    </button>
+                                </div>
+                                
+                                <div id="atm-message" class="mt-3 p-2 bg-blue-50 rounded text-sm text-center">
+                                    Welcome! Please select an operation.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="vault-internals bg-gray-900 text-green-400 p-4 rounded-lg">
+                                <h5 class="font-semibold text-white mb-3">🔒 Protected Internal State</h5>
+                                <div id="vault-internals" class="text-xs space-y-1">
+                                    <div>💰 Private Balance: $1000.00</div>
+                                    <div>🆔 Account Number: ****-****-1234</div>
+                                    <div>🔐 Security Level: High</div>
+                                    <div>📊 Transaction History: 47 entries</div>
+                                    <div>⚠️ Daily Limit: $500 remaining</div>
+                                    <div>🕒 Last Access: 2 minutes ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                                <p class="text-sm text-yellow-800">
+                                    <strong>🛡️ Security Note:</strong> You can't directly modify the balance - 
+                                    all changes go through controlled methods that include validation, 
+                                    logging, and security checks!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Definition and Principles -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-emerald-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-emerald-800 mb-4">📖 Definition</h4>
+                        <p class="text-gray-700 mb-4">
+                            Encapsulation is the bundling of data and methods that operate on that data 
+                            within a single unit, while restricting direct access to internal components.
+                        </p>
+                        <div class="pillars bg-white p-3 rounded border">
+                            <strong class="text-emerald-800">Two Key Pillars:</strong>
+                            <ul class="text-sm mt-2 space-y-1">
+                                <li>🎁 <strong>Bundling:</strong> Data + Methods together</li>
+                                <li>🔒 <strong>Hiding:</strong> Restrict direct access</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-green-800 mb-4">🎯 Benefits</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🛡️</span>
+                                <span>Data Protection</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✅</span>
+                                <span>Data Validation</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🔧</span>
+                                <span>Easier Maintenance</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🎛️</span>
+                                <span>Controlled Access</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🐛</span>
+                                <span>Reduced Bugs</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Code Examples -->
+                <div class="code-examples">
+                    <h4 class="text-xl font-semibold text-emerald-800 mb-4">💻 Code Examples</h4>
+                    
+                    <div class="examples-grid grid md:grid-cols-2 gap-6">
+                        <div class="example bg-red-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-red-800 mb-2">❌ Without Encapsulation</h5>
+                            <pre class="bg-gray-900 text-red-400 p-3 rounded text-sm"><code>class BankAccount:
+    def __init__(self):
+        self.balance = 1000  # Direct access!
+        
+# Anyone can modify the balance directly
+account = BankAccount()
+account.balance = -500  # 😱 Negative balance!
+account.balance = 999999  # 😱 Unlimited money!
+
+print(f"Balance: ${account.balance}")  # Chaos!</code></pre>
+                            <div class="mt-2 text-sm text-red-700">
+                                <strong>Problems:</strong> No validation, no security, data corruption possible!
+                            </div>
+                        </div>
+                        
+                        <div class="example bg-green-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-green-800 mb-2">✅ With Encapsulation</h5>
+                            <pre class="bg-gray-900 text-green-400 p-3 rounded text-sm"><code>class BankAccount:
+    def __init__(self):
+        self.__balance = 1000  # Private!
+    
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            return True
+        return False
+    
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            return True
+        return False
+    
+    def get_balance(self):
+        return self.__balance
+
+# Controlled access only
+account = BankAccount()
+account.deposit(100)    # ✅ Validated
+account.withdraw(50)    # ✅ Checked
+print(f"Balance: ${account.get_balance()}")  # Safe!</code></pre>
+                            <div class="mt-2 text-sm text-green-700">
+                                <strong>Benefits:</strong> Validation, security, controlled access!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button class="next-section bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors" data-next="access">
+                        Learn Access Control →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional sections would continue here... -->
+        
+    </div>
+</div>
+
+<script>
+class EncapsulationLearning {
+    constructor() {
+        this.currentSection = 'concept';
+        this.completedSections = new Set();
+        this.progress = 0;
+        this.bankAccount = {
+            balance: 1000,
+            dailyLimit: 500,
+            remainingLimit: 500,
+            transactions: 47
+        };
+        this.init();
+    }
+
+    init() {
+        this.showSection('concept');
+        this.setupEventListeners();
+        this.updateProgress();
+        this.updateVaultDisplay();
+    }
+
+    setupEventListeners() {
+        // Section navigation
+        document.querySelectorAll('.learning-section').forEach(section => {
+            section.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = section.getAttribute('data-section');
+                this.showSection(targetSection);
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-section').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nextSection = btn.getAttribute('data-next');
+                this.completeSection(this.currentSection);
+                this.showSection(nextSection);
+            });
+        });
+
+        // ATM controls
+        document.querySelectorAll('.atm-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.handleATMAction(btn.getAttribute('data-action'));
+            });
+        });
+    }
+
+    showSection(sectionName) {
+        // Hide all sections
+        document.querySelectorAll('.learning-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        // Show target section
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            this.currentSection = sectionName;
+            
+            // Update section highlighting
+            document.querySelectorAll('.learning-section').forEach(section => {
+                section.classList.remove('ring-2', 'ring-emerald-500');
+                if (section.getAttribute('data-section') === sectionName) {
+                    section.classList.add('ring-2', 'ring-emerald-500');
+                }
+            });
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        
+        const sectionElement = document.querySelector(`[data-section="${sectionName}"]`);
+        if (sectionElement) {
+            sectionElement.classList.add('bg-green-100');
+            const icon = sectionElement.querySelector('.text-3xl');
+            if (icon) icon.textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const totalSections = 4;
+        this.progress = (this.completedSections.size / totalSections) * 100;
+        
+        document.querySelector('.progress-bar').style.width = `${this.progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(this.progress)}% Complete`;
+    }
+
+    handleATMAction(action) {
+        const messageEl = document.getElementById('atm-message');
+        const balanceEl = document.querySelector('.balance-display');
+        
+        switch(action) {
+            case 'balance':
+                balanceEl.textContent = `Balance: $${this.bankAccount.balance.toFixed(2)}`;
+                messageEl.textContent = '✅ Balance inquiry successful.';
+                messageEl.className = 'mt-3 p-2 bg-blue-50 rounded text-sm text-center';
+                break;
+                
+            case 'deposit':
+                this.bankAccount.balance += 100;
+                this.bankAccount.transactions++;
+                balanceEl.textContent = `Balance: $${this.bankAccount.balance.toFixed(2)}`;
+                messageEl.textContent = '✅ Successfully deposited $100.00';
+                messageEl.className = 'mt-3 p-2 bg-green-50 rounded text-sm text-center';
+                break;
+                
+            case 'withdraw':
+                if (this.bankAccount.balance >= 50 && this.bankAccount.remainingLimit >= 50) {
+                    this.bankAccount.balance -= 50;
+                    this.bankAccount.remainingLimit -= 50;
+                    this.bankAccount.transactions++;
+                    balanceEl.textContent = `Balance: $${this.bankAccount.balance.toFixed(2)}`;
+                    messageEl.textContent = '✅ Successfully withdrew $50.00';
+                    messageEl.className = 'mt-3 p-2 bg-green-50 rounded text-sm text-center';
+                } else {
+                    messageEl.textContent = '❌ Insufficient funds or daily limit exceeded.';
+                    messageEl.className = 'mt-3 p-2 bg-red-50 rounded text-sm text-center';
+                }
+                break;
+                
+            case 'transfer':
+                if (this.bankAccount.balance >= 25 && this.bankAccount.remainingLimit >= 25) {
+                    this.bankAccount.balance -= 25;
+                    this.bankAccount.remainingLimit -= 25;
+                    this.bankAccount.transactions++;
+                    balanceEl.textContent = `Balance: $${this.bankAccount.balance.toFixed(2)}`;
+                    messageEl.textContent = '✅ Successfully transferred $25.00';
+                    messageEl.className = 'mt-3 p-2 bg-green-50 rounded text-sm text-center';
+                } else {
+                    messageEl.textContent = '❌ Insufficient funds or daily limit exceeded.';
+                    messageEl.className = 'mt-3 p-2 bg-red-50 rounded text-sm text-center';
+                }
+                break;
+        }
+        
+        this.updateVaultDisplay();
+    }
+
+    updateVaultDisplay() {
+        const vaultEl = document.getElementById('vault-internals');
+        vaultEl.innerHTML = `
+            <div>💰 Private Balance: $${this.bankAccount.balance.toFixed(2)}</div>
+            <div>🆔 Account Number: ****-****-1234</div>
+            <div>🔐 Security Level: High</div>
+            <div>📊 Transaction History: ${this.bankAccount.transactions} entries</div>
+            <div>⚠️ Daily Limit: $${this.bankAccount.remainingLimit} remaining</div>
+            <div>🕒 Last Access: ${new Date().toLocaleTimeString()}</div>
+        `;
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    new EncapsulationLearning();
+});
+</script>
+{% endblock %}

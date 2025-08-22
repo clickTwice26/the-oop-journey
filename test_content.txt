@@ -1,0 +1,11 @@
+Object-Oriented Programming Concepts
+
+Inheritance is a fundamental concept in object-oriented programming where a class can inherit attributes and methods from another class. The class that inherits is called the child class or derived class, while the class being inherited from is called the parent class or base class.
+
+For example, if we have a Vehicle class with properties like color and speed, we can create a Car class that inherits from Vehicle. The Car class automatically gets the color and speed properties, but can also have its own unique properties like number of doors.
+
+Polymorphism allows objects of different types to be treated as objects of a common base type. This enables the same interface to be used for different underlying data types. Method overriding is a common example of polymorphism where a derived class provides a specific implementation of a method that is already defined in its parent class.
+
+Encapsulation is the practice of keeping the internal state of an object hidden from the outside world. This is achieved through access modifiers like private, protected, and public. Private members can only be accessed within the same class, while public members can be accessed from anywhere.
+
+Abstraction involves hiding complex implementation details while showing only the essential features of an object. Abstract classes and interfaces are common ways to achieve abstraction in programming.

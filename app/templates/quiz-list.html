@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">My Quizzes</h1>
+        <p class="text-xl text-gray-600 mb-8">Manage and take your AI-generated quizzes</p>
+        
+        <a href="{{ url_for('quiz.quiz_generator') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-secondary-600 to-primary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all">
+            <i class="fas fa-plus mr-2"></i>
+            Create New Quiz
+        </a>
+    </div>
+
+    <!-- Quiz Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="quiz-grid">
+        {% if quizzes %}
+            {% for quiz in quizzes %}
+            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="text-sm text-gray-500">
+                        {{ quiz.created_at.strftime('%B %d, %Y') }}
+                    </span>
+                </div>
+                
+                <h3 class="text-xl font-bold text-gray-800 mb-2">{{ quiz.title }}</h3>
+                <p class="text-gray-600 mb-4">{{ quiz.questions|length }} questions</p>
+                
+                {% if quiz.source_file_name %}
+                <div class="flex items-center text-sm text-gray-500 mb-4">
+                    <i class="fas fa-file mr-2"></i>
+                    <span>{{ quiz.source_file_name }}</span>
+                </div>
+                {% endif %}
+                
+                <div class="flex space-x-2">
+                    <a href="{{ url_for('quiz.take_quiz', quiz_id=quiz.id) }}" class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg text-center hover:bg-primary-700 transition-colors">
+                        <i class="fas fa-play mr-1"></i>
+                        Take Quiz
+                    </a>
+                    <button onclick="deleteQuiz({{ quiz.id }})" class="px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="col-span-full text-center py-12">
+            <div class="text-6xl mb-4">📝</div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">No Quizzes Yet</h3>
+            <p class="text-gray-600 mb-8">Create your first AI-generated quiz to get started!</p>
+            <a href="{{ url_for('quiz.quiz_generator') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-secondary-600 to-primary-600 text-white rounded-xl font-semibold hover:scale-105 transition-all">
+                <i class="fas fa-magic mr-2"></i>
+                Create Your First Quiz
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function deleteQuiz(quizId) {
+        if (confirm('Are you sure you want to delete this quiz? This action cannot be undone.')) {
+            try {
+                const response = await fetch(`/api/quizzes/${quizId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    showNotification('Quiz deleted successfully', 'success');
+                    location.reload();
+                } else {
+                    showNotification('Failed to delete quiz', 'error');
+                }
+            } catch (error) {
+                showNotification('Error deleting quiz', 'error');
+            }
+        }
+    }
+</script>
+{% endblock %}

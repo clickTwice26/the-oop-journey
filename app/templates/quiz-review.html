@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <!-- Review Header -->
+    <div class="bg-gradient-to-r from-green-600 to-blue-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Quiz Review: {{ quiz.title }}</h1>
+                {% if result %}
+                <div class="flex justify-center items-center space-x-6 text-green-100">
+                    <div class="flex items-center">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        <span>Score: {{ result.score_percentage }}%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>{{ result.correct_answers }}/{{ result.total_questions }} Correct</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>{{ result.time_spent_minutes }} min</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Summary -->
+    {% if result %}
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Performance Summary</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <div class="text-3xl font-bold text-green-600">{{ result.score_percentage }}%</div>
+                        <div class="text-sm text-green-700">Overall Score</div>
+                    </div>
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600">{{ result.correct_answers }}</div>
+                        <div class="text-sm text-blue-700">Correct Answers</div>
+                    </div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="text-3xl font-bold text-yellow-600">{{ result.total_questions - result.correct_answers }}</div>
+                        <div class="text-sm text-yellow-700">Incorrect Answers</div>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <div class="text-3xl font-bold text-purple-600">{{ result.time_spent_minutes }}</div>
+                        <div class="text-sm text-purple-700">Minutes Taken</div>
+                    </div>
+                </div>
+
+                <!-- Performance Bar -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">Performance Grade</span>
+                        <span class="text-sm text-gray-600">
+                            {% if result.score_percentage >= 90 %}A+{% elif result.score_percentage >= 80 %}A{% elif result.score_percentage >= 70 %}B{% elif result.score_percentage >= 60 %}C{% else %}F{% endif %}
+                        </span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div class="h-4 rounded-full transition-all duration-500 {{ 'bg-green-500' if result.score_percentage >= 70 else 'bg-red-500' if result.score_percentage < 50 else 'bg-yellow-500' }}" 
+                             style="width: {{ result.score_percentage }}%"></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <a href="{{ url_for('quiz.take_quiz', quiz_id=quiz.id) }}" 
+                       class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-redo mr-2"></i>Retake Quiz
+                    </a>
+                    <a href="{{ url_for('quiz.quiz_list') }}" 
+                       class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-list mr-2"></i>All Quizzes
+                    </a>
+                    <button onclick="window.print()" 
+                            class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        <i class="fas fa-print mr-2"></i>Print Review
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Questions Review -->
+    <div class="container mx-auto px-4 pb-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Detailed Review</h2>
+            
+            {% for question in quiz.questions %}
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                <!-- Question Header -->
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mr-4">
+                            Question {{ loop.index }}
+                        </span>
+                        {% if result and result.user_answers %}
+                            {% set user_answer = result.user_answers[loop.index0] %}
+                            {% if user_answer == question.correct_answer %}
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                    <i class="fas fa-check mr-1"></i>Correct
+                                </span>
+                            {% elif user_answer %}
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                                    <i class="fas fa-times mr-1"></i>Incorrect
+                                </span>
+                            {% else %}
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
+                                    <i class="fas fa-minus mr-1"></i>Skipped
+                                </span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Question Text -->
+                <h3 class="text-lg font-semibold text-gray-800 mb-6">{{ question.question_text }}</h3>
+
+                <!-- Answer Options -->
+                <div class="space-y-3 mb-6">
+                    {% set options = [
+                        ('A', question.option_a),
+                        ('B', question.option_b),
+                        ('C', question.option_c),
+                        ('D', question.option_d)
+                    ] %}
+                    
+                    {% for option_key, option_text in options %}
+                    <div class="flex items-center p-4 rounded-lg border-2 
+                        {% if result and result.user_answers %}
+                            {% set user_answer = result.user_answers[loop.index0] %}
+                            {% if option_key == question.correct_answer %}
+                                border-green-500 bg-green-50
+                            {% elif option_key == user_answer and user_answer != question.correct_answer %}
+                                border-red-500 bg-red-50
+                            {% else %}
+                                border-gray-200
+                            {% endif %}
+                        {% else %}
+                            {% if option_key == question.correct_answer %}
+                                border-green-500 bg-green-50
+                            {% else %}
+                                border-gray-200
+                            {% endif %}
+                        {% endif %}
+                    ">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center mr-4 font-medium
+                            {% if result and result.user_answers %}
+                                {% set user_answer = result.user_answers[loop.index0] %}
+                                {% if option_key == question.correct_answer %}
+                                    bg-green-500 text-white
+                                {% elif option_key == user_answer and user_answer != question.correct_answer %}
+                                    bg-red-500 text-white
+                                {% else %}
+                                    bg-gray-300 text-gray-600
+                                {% endif %}
+                            {% else %}
+                                {% if option_key == question.correct_answer %}
+                                    bg-green-500 text-white
+                                {% else %}
+                                    bg-gray-300 text-gray-600
+                                {% endif %}
+                            {% endif %}
+                        ">
+                            {{ option_key }}
+                        </div>
+                        
+                        <div class="flex-1">
+                            <span class="text-gray-700">{{ option_text }}</span>
+                            {% if option_key == question.correct_answer %}
+                                <span class="ml-3 text-green-600 font-medium">
+                                    <i class="fas fa-check-circle mr-1"></i>Correct Answer
+                                </span>
+                            {% elif result and result.user_answers %}
+                                {% set user_answer = result.user_answers[loop.index0] %}
+                                {% if option_key == user_answer and user_answer != question.correct_answer %}
+                                    <span class="ml-3 text-red-600 font-medium">
+                                        <i class="fas fa-times-circle mr-1"></i>Your Answer
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Explanation -->
+                {% if question.explanation %}
+                <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                        <i class="fas fa-lightbulb mr-2"></i>Explanation
+                    </h4>
+                    <p class="text-blue-700">{{ question.explanation }}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Study Recommendations -->
+    {% if result and result.score_percentage < 80 %}
+    <div class="container mx-auto px-4 pb-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl p-6 text-white">
+                <h3 class="text-xl font-bold mb-4">
+                    <i class="fas fa-graduation-cap mr-2"></i>Recommended Study Areas
+                </h3>
+                <p class="mb-4">Based on your performance, we recommend reviewing these concepts:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                        <h4 class="font-semibold mb-2">Learn OOP Concepts</h4>
+                        <a href="{{ url_for('main.learn') }}" 
+                           class="text-yellow-100 hover:text-white underline">
+                            Visit our interactive learning modules →
+                        </a>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                        <h4 class="font-semibold mb-2">Practice More</h4>
+                        <a href="{{ url_for('quiz.quiz_list') }}" 
+                           class="text-yellow-100 hover:text-white underline">
+                            Take more practice quizzes →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+    }
+    
+    .bg-gradient-to-r,
+    .bg-gradient-to-br {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .shadow-lg {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+}
+</style>
+{% endblock %}

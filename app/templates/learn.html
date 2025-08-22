@@ -1,0 +1,839 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <!-- Professional Hero Section -->
+    <div class="bg-gradient-to-r from-blue-700 via-purple-700 to-indigo-800 text-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto text-center">
+                <div class="mb-6">
+                    <span class="inline-block bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        Professional OOP Learning Platform
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Master Object-Oriented Programming
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed max-w-3xl mx-auto">
+                    Comprehensive, interactive lessons designed by industry experts. Learn the four pillars of OOP through hands-on practice, real-world examples, and progressive skill building.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-10">
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-xl flex items-center">
+                        <i class="fas fa-code mr-3 text-lg"></i>Interactive Coding Environment
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-xl flex items-center">
+                        <i class="fas fa-brain mr-3 text-lg"></i>AI-Powered Learning Assistant
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm px-6 py-3 rounded-xl flex items-center">
+                        <i class="fas fa-trophy mr-3 text-lg"></i>Progress Tracking & Certificates
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="showProgressModal()" class="bg-white text-blue-700 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-chart-line mr-2"></i>View My Progress
+                    </button>
+                    <button onclick="startLearningPath()" class="bg-blue-600 bg-opacity-80 text-white px-8 py-4 rounded-xl font-semibold hover:bg-opacity-100 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-play mr-2"></i>Start Learning Journey
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Statistics Dashboard -->
+    <div class="bg-white shadow-lg py-12">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800 mb-2">10,000+</div>
+                        <div class="text-gray-600">Students Enrolled</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800 mb-2">95%</div>
+                        <div class="text-gray-600">Completion Rate</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800 mb-2">4-6</div>
+                        <div class="text-gray-600">Hours to Complete</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-star text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800 mb-2">4.9/5</div>
+                        <div class="text-gray-600">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Concepts Section -->
+    <div class="container mx-auto px-6 py-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    The Four Pillars of OOP
+                </h2>
+                <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                    Master these fundamental concepts through our structured learning path. Each module builds upon the previous one, ensuring a solid foundation in object-oriented programming principles.
+                </p>
+            </div>
+
+            <!-- Concept Cards Grid -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-16">
+                <!-- Encapsulation -->
+                <div class="concept-card group bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2" data-concept="encapsulation">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-lock text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">Foundational</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">1. Encapsulation</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Learn to protect and organize your data by bundling it with methods. Master access modifiers, getters, setters, and information hiding principles.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-3">
+                            <span class="font-medium text-gray-700">Progress</span>
+                            <span class="text-orange-600 font-bold progress-percentage">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full transition-all duration-500 progress-bar" id="encapsulationProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Data Protection Principles</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access Modifiers (Public, Private, Protected)</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Getters & Setters Implementation</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-play mr-2"></i>Start Learning
+                    </button>
+                </div>
+
+                <!-- Inheritance -->
+                <div class="concept-card group bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2" data-concept="inheritance">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-sitemap text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Building Blocks</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">2. Inheritance</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Discover how classes can inherit properties and methods from parent classes. Master class hierarchies, method overriding, and the super keyword.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-3">
+                            <span class="font-medium text-gray-700">Progress</span>
+                            <span class="text-blue-600 font-bold progress-percentage">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-3 rounded-full transition-all duration-500 progress-bar" id="inheritanceProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Class Hierarchies & Relationships</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Method Overriding & Super Keyword</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Multiple & Multilevel Inheritance</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-play mr-2"></i>Start Learning
+                    </button>
+                </div>
+
+                <!-- Polymorphism -->
+                <div class="concept-card group bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2" data-concept="polymorphism">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-shapes text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">Dynamic</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">3. Polymorphism</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Master the art of "one interface, many forms." Learn method overloading, overriding, and how objects can take multiple forms at runtime.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-3">
+                            <span class="font-medium text-gray-700">Progress</span>
+                            <span class="text-green-600 font-bold progress-percentage">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-green-500 to-teal-500 h-3 rounded-full transition-all duration-500 progress-bar" id="polymorphismProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Method Overloading & Overriding</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Runtime vs Compile-time Polymorphism</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Interface-based Programming</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-4 rounded-xl font-semibold hover:from-green-600 hover:to-teal-600 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-play mr-2"></i>Start Learning
+                    </button>
+                </div>
+
+                <!-- Abstraction -->
+                <div class="concept-card group bg-white rounded-3xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2" data-concept="abstraction">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-eye-slash text-3xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">Advanced</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">4. Abstraction</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Learn to hide implementation complexity while exposing essential features. Master abstract classes, interfaces, and clean API design.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-3">
+                            <span class="font-medium text-gray-700">Progress</span>
+                            <span class="text-purple-600 font-bold progress-percentage">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-3 rounded-full transition-all duration-500 progress-bar" id="abstractionProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Abstract Classes & Methods</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Interface Design Patterns</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Information Hiding Techniques</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-4 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-600 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-play mr-2"></i>Start Learning
+                    </button>
+                </div>
+            </div>
+
+            <!-- Professional Learning Path -->
+            <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl p-10 mb-16">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Recommended Learning Path</h3>
+                <div class="flex flex-wrap justify-center items-center gap-6">
+                    <div class="learning-step flex items-center bg-white px-6 py-4 rounded-2xl shadow-lg">
+                        <span class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">1</span>
+                        <div>
+                            <div class="font-bold text-gray-800">Encapsulation</div>
+                            <div class="text-sm text-gray-600">Data Protection Foundation</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 text-2xl hidden md:block"></i>
+                    <div class="learning-step flex items-center bg-white px-6 py-4 rounded-2xl shadow-lg">
+                        <span class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">2</span>
+                        <div>
+                            <div class="font-bold text-gray-800">Inheritance</div>
+                            <div class="text-sm text-gray-600">Code Reusability</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 text-2xl hidden md:block"></i>
+                    <div class="learning-step flex items-center bg-white px-6 py-4 rounded-2xl shadow-lg">
+                        <span class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">3</span>
+                        <div>
+                            <div class="font-bold text-gray-800">Polymorphism</div>
+                            <div class="text-sm text-gray-600">Dynamic Behavior</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 text-2xl hidden md:block"></i>
+                    <div class="learning-step flex items-center bg-white px-6 py-4 rounded-2xl shadow-lg">
+                        <span class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">4</span>
+                        <div>
+                            <div class="font-bold text-gray-800">Abstraction</div>
+                            <div class="text-sm text-gray-600">Clean Architecture</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Resources Grid -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Interactive Coding Environment -->
+                <div class="resource-card bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Interactive Coding</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Practice with our built-in code editor. Run Python, Java, and C++ code directly in your browser with instant feedback and debugging tools.
+                    </p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Syntax Highlighting</span>
+                            <i class="fas fa-check text-green-500"></i>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Auto-completion</span>
+                            <i class="fas fa-check text-green-500"></i>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Error Detection</span>
+                            <i class="fas fa-check text-green-500"></i>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Multi-language Support</span>
+                            <i class="fas fa-check text-green-500"></i>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold">
+                        Try Code Editor
+                    </button>
+                </div>
+
+                <!-- AI-Powered Learning Assistant -->
+                <div class="resource-card bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">AI Learning Assistant</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Get instant help from our AI tutor. Ask questions, get explanations, and receive personalized coding suggestions 24/7.
+                    </p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">24/7 Availability</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Always On</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Concept Explanations</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">Detailed</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Code Reviews</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">Instant</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Learning Path Guidance</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">Personalized</span>
+                        </div>
+                    </div>
+                    
+                    <a href="/chat" class="w-full px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-semibold inline-block text-center">
+                        Chat with AI Tutor
+                    </a>
+                </div>
+
+                <!-- Certification & Progress -->
+                <div class="resource-card bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-certificate text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Certification & Progress</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Track your learning journey with detailed analytics. Earn certificates upon completion and showcase your OOP mastery.
+                    </p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Progress Analytics</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">Detailed</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Achievement Badges</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">Unlockable</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Completion Certificates</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Verified</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-700">Learning Streaks</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">Motivating</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showProgressModal()" class="w-full px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors font-semibold">
+                        View Certificates
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enhanced Progress Modal -->
+<div id="progressModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-8 max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-800">Learning Progress Dashboard</h3>
+            <button onclick="closeProgressModal()" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Overall Progress -->
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="text-lg font-semibold text-gray-800">Overall Progress</h4>
+                <span id="overallProgress" class="text-2xl font-bold text-blue-600">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500" id="overallProgressBar" style="width: 0%"></div>
+            </div>
+            <p class="text-sm text-gray-600">Complete all four concepts to master OOP</p>
+        </div>
+
+        <!-- Individual Concept Progress -->
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-orange-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-semibold text-orange-800">Encapsulation</h5>
+                    <span class="text-orange-600 font-bold" id="encapsulationPercent">0%</span>
+                </div>
+                <div class="w-full bg-orange-200 rounded-full h-2">
+                    <div class="bg-orange-600 h-2 rounded-full transition-all duration-500" id="encapsulationBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="bg-blue-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-semibold text-blue-800">Inheritance</h5>
+                    <span class="text-blue-600 font-bold" id="inheritancePercent">0%</span>
+                </div>
+                <div class="w-full bg-blue-200 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full transition-all duration-500" id="inheritanceBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="bg-green-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-semibold text-green-800">Polymorphism</h5>
+                    <span class="text-green-600 font-bold" id="polymorphismPercent">0%</span>
+                </div>
+                <div class="w-full bg-green-200 rounded-full h-2">
+                    <div class="bg-green-600 h-2 rounded-full transition-all duration-500" id="polymorphismBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="bg-purple-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-semibold text-purple-800">Abstraction</h5>
+                    <span class="text-purple-600 font-bold" id="abstractionPercent">0%</span>
+                </div>
+                <div class="w-full bg-purple-200 rounded-full h-2">
+                    <div class="bg-purple-600 h-2 rounded-full transition-all duration-500" id="abstractionBar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Badges -->
+        <div class="mb-6">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">Achievement Badges</h4>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="achievement-badge text-center p-3 bg-gray-100 rounded-lg" data-badge="first-lesson">
+                    <div class="text-2xl mb-1">🎯</div>
+                    <div class="text-xs text-gray-600">First Lesson</div>
+                </div>
+                <div class="achievement-badge text-center p-3 bg-gray-100 rounded-lg" data-badge="concept-master">
+                    <div class="text-2xl mb-1">🏆</div>
+                    <div class="text-xs text-gray-600">Concept Master</div>
+                </div>
+                <div class="achievement-badge text-center p-3 bg-gray-100 rounded-lg" data-badge="code-ninja">
+                    <div class="text-2xl mb-1">🥷</div>
+                    <div class="text-xs text-gray-600">Code Ninja</div>
+                </div>
+                <div class="achievement-badge text-center p-3 bg-gray-100 rounded-lg" data-badge="oop-expert">
+                    <div class="text-2xl mb-1">🎓</div>
+                    <div class="text-xs text-gray-600">OOP Expert</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Stats -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="text-center">
+                <div class="text-2xl font-bold text-blue-600" id="conceptsMastered">0</div>
+                <div class="text-sm text-gray-600">Concepts Mastered</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-green-600" id="timeSpent">0h</div>
+                <div class="text-sm text-gray-600">Time Spent</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-purple-600" id="streakDays">0</div>
+                <div class="text-sm text-gray-600">Day Streak</div>
+            </div>
+        </div>
+
+        <div class="flex gap-4">
+            <button onclick="closeProgressModal()" class="flex-1 bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors font-semibold">
+                Close
+            </button>
+            <button onclick="downloadCertificate()" class="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                <i class="fas fa-download mr-2"></i>Download Certificate
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+class ProfessionalLearningDashboard {
+    constructor() {
+        this.progress = this.loadProgress();
+        this.achievements = this.loadAchievements();
+        this.stats = this.loadStats();
+        this.updateAllDisplays();
+        this.setupEventListeners();
+        this.startLearningTimer();
+    }
+
+    loadProgress() {
+        const saved = localStorage.getItem('oopLearningProgress');
+        return saved ? JSON.parse(saved) : {
+            encapsulation: 0,
+            inheritance: 0, 
+            polymorphism: 0,
+            abstraction: 0
+        };
+    }
+
+    loadAchievements() {
+        const saved = localStorage.getItem('oopAchievements');
+        return saved ? JSON.parse(saved) : {
+            'first-lesson': false,
+            'concept-master': false,
+            'code-ninja': false,
+            'oop-expert': false
+        };
+    }
+
+    loadStats() {
+        const saved = localStorage.getItem('oopLearningStats');
+        return saved ? JSON.parse(saved) : {
+            timeSpent: 0, // in minutes
+            lastActiveDate: null,
+            streakDays: 0,
+            lessonsCompleted: 0
+        };
+    }
+
+    saveData() {
+        localStorage.setItem('oopLearningProgress', JSON.stringify(this.progress));
+        localStorage.setItem('oopAchievements', JSON.stringify(this.achievements));
+        localStorage.setItem('oopLearningStats', JSON.stringify(this.stats));
+    }
+
+    updateAllDisplays() {
+        this.updateProgressDisplay();
+        this.updateAchievementDisplay();
+        this.updateStatsDisplay();
+    }
+
+    updateProgressDisplay() {
+        const concepts = ['encapsulation', 'inheritance', 'polymorphism', 'abstraction'];
+        let totalProgress = 0;
+        let completedConcepts = 0;
+
+        concepts.forEach(concept => {
+            const percentage = this.progress[concept];
+            totalProgress += percentage;
+            if (percentage >= 100) completedConcepts++;
+
+            // Update main page progress bars
+            const mainProgressElement = document.getElementById(`${concept}Progress`);
+            if (mainProgressElement) {
+                mainProgressElement.style.width = `${percentage}%`;
+            }
+
+            // Update main page percentage text
+            const mainPercentElement = mainProgressElement?.parentElement?.querySelector('.progress-percentage');
+            if (mainPercentElement) {
+                mainPercentElement.textContent = `${percentage}%`;
+            }
+
+            // Update modal progress bars
+            const modalBarElement = document.getElementById(`${concept}Bar`);
+            const modalPercentElement = document.getElementById(`${concept}Percent`);
+            if (modalBarElement) modalBarElement.style.width = `${percentage}%`;
+            if (modalPercentElement) modalPercentElement.textContent = `${percentage}%`;
+        });
+
+        const overallPercentage = Math.round(totalProgress / concepts.length);
+        
+        // Update modal overall progress
+        const overallElement = document.getElementById('overallProgress');
+        const overallBar = document.getElementById('overallProgressBar');
+        if (overallElement) overallElement.textContent = `${overallPercentage}%`;
+        if (overallBar) overallBar.style.width = `${overallPercentage}%`;
+
+        // Update concepts mastered
+        const conceptsElement = document.getElementById('conceptsMastered');
+        if (conceptsElement) conceptsElement.textContent = completedConcepts;
+
+        // Check for achievements
+        this.checkAchievements(completedConcepts, overallPercentage);
+    }
+
+    updateAchievementDisplay() {
+        Object.keys(this.achievements).forEach(badge => {
+            const badgeElement = document.querySelector(`[data-badge="${badge}"]`);
+            if (badgeElement) {
+                if (this.achievements[badge]) {
+                    badgeElement.classList.remove('bg-gray-100');
+                    badgeElement.classList.add('bg-yellow-100', 'ring-2', 'ring-yellow-400');
+                } else {
+                    badgeElement.classList.add('bg-gray-100');
+                    badgeElement.classList.remove('bg-yellow-100', 'ring-2', 'ring-yellow-400');
+                }
+            }
+        });
+    }
+
+    updateStatsDisplay() {
+        const timeElement = document.getElementById('timeSpent');
+        const streakElement = document.getElementById('streakDays');
+        
+        if (timeElement) {
+            const hours = Math.floor(this.stats.timeSpent / 60);
+            const minutes = this.stats.timeSpent % 60;
+            timeElement.textContent = hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+        }
+        
+        if (streakElement) {
+            streakElement.textContent = this.stats.streakDays;
+        }
+    }
+
+    checkAchievements(completedConcepts, overallPercentage) {
+        // First lesson achievement
+        if (overallPercentage > 0 && !this.achievements['first-lesson']) {
+            this.achievements['first-lesson'] = true;
+            this.showAchievementNotification('First Lesson Complete! 🎯');
+        }
+
+        // Concept master achievement
+        if (completedConcepts >= 1 && !this.achievements['concept-master']) {
+            this.achievements['concept-master'] = true;
+            this.showAchievementNotification('Concept Master! 🏆');
+        }
+
+        // Code ninja achievement
+        if (this.stats.timeSpent >= 120 && !this.achievements['code-ninja']) { // 2 hours
+            this.achievements['code-ninja'] = true;
+            this.showAchievementNotification('Code Ninja Unlocked! 🥷');
+        }
+
+        // OOP expert achievement
+        if (completedConcepts >= 4 && !this.achievements['oop-expert']) {
+            this.achievements['oop-expert'] = true;
+            this.showAchievementNotification('OOP Expert Achieved! 🎓');
+        }
+    }
+
+    showAchievementNotification(message) {
+        // Create achievement notification
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-4 right-4 bg-yellow-400 text-yellow-900 px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+        notification.innerHTML = `
+            <div class="flex items-center">
+                <i class="fas fa-trophy mr-2"></i>
+                <span class="font-semibold">${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Slide in
+        setTimeout(() => {
+            notification.classList.remove('translate-x-full');
+        }, 100);
+        
+        // Slide out and remove
+        setTimeout(() => {
+            notification.classList.add('translate-x-full');
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    setupEventListeners() {
+        // Concept card clicks
+        document.querySelectorAll('.concept-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const concept = card.getAttribute('data-concept');
+                if (concept) {
+                    this.trackActivity();
+                    window.location.href = `/learn/${concept}`;
+                }
+            });
+        });
+
+        // Progress tracking for storage events
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'oopLearningProgress') {
+                this.progress = JSON.parse(e.newValue);
+                this.updateAllDisplays();
+            }
+        });
+
+        // Track page activity
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.pauseLearningTimer();
+            } else {
+                this.resumeLearningTimer();
+            }
+        });
+    }
+
+    trackActivity() {
+        const today = new Date().toDateString();
+        
+        if (this.stats.lastActiveDate !== today) {
+            if (this.stats.lastActiveDate) {
+                const lastDate = new Date(this.stats.lastActiveDate);
+                const currentDate = new Date(today);
+                const dayDiff = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+                
+                if (dayDiff === 1) {
+                    this.stats.streakDays++;
+                } else if (dayDiff > 1) {
+                    this.stats.streakDays = 1;
+                }
+            } else {
+                this.stats.streakDays = 1;
+            }
+            
+            this.stats.lastActiveDate = today;
+            this.saveData();
+        }
+    }
+
+    startLearningTimer() {
+        this.learningStartTime = Date.now();
+        this.learningInterval = setInterval(() => {
+            this.stats.timeSpent += 1; // Add 1 minute
+            this.updateStatsDisplay();
+            this.saveData();
+        }, 60000); // Every minute
+    }
+
+    pauseLearningTimer() {
+        if (this.learningInterval) {
+            clearInterval(this.learningInterval);
+        }
+    }
+
+    resumeLearningTimer() {
+        this.startLearningTimer();
+    }
+
+    // Method to update progress (to be called from individual lesson pages)
+    updateProgress(concept, percentage) {
+        this.progress[concept] = Math.max(this.progress[concept], percentage);
+        this.saveData();
+        this.updateAllDisplays();
+    }
+}
+
+// Global functions for modal and other interactions
+function showProgressModal() {
+    const modal = document.getElementById('progressModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+}
+
+function closeProgressModal() {
+    const modal = document.getElementById('progressModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+
+function startLearningPath() {
+    // Start with encapsulation as the foundational concept
+    window.location.href = '/learn/encapsulation';
+}
+
+function downloadCertificate() {
+    // Calculate overall completion
+    const dashboard = window.learningDashboard;
+    const concepts = ['encapsulation', 'inheritance', 'polymorphism', 'abstraction'];
+    const totalProgress = concepts.reduce((sum, concept) => sum + dashboard.progress[concept], 0);
+    const overallPercentage = Math.round(totalProgress / concepts.length);
+    
+    if (overallPercentage >= 100) {
+        // Generate and download certificate
+        alert('🎉 Congratulations! Your OOP Mastery Certificate is being generated...');
+        // In a real implementation, this would generate a PDF certificate
+    } else {
+        alert(`Complete all concepts to earn your certificate. Current progress: ${overallPercentage}%`);
+    }
+}
+
+// Initialize the learning dashboard
+document.addEventListener('DOMContentLoaded', () => {
+    window.learningDashboard = new ProfessionalLearningDashboard();
+});
+</script>
+{% endblock %}

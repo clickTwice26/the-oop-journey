@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <!-- Quiz Header -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ quiz.title }}</h1>
+                <div class="flex justify-center items-center space-x-6 text-blue-100">
+                    <div class="flex items-center">
+                        <i class="fas fa-question-circle mr-2"></i>
+                        <span>{{ quiz.questions|length }} Questions</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span id="quiz-timer">00:00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-trophy mr-2"></i>
+                        <span id="current-score">Score: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Progress Bar -->
+    <div class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-lg font-semibold text-gray-800">Progress</h2>
+                    <span class="text-sm text-gray-600">
+                        Question <span id="current-question">1</span> of {{ quiz.questions|length }}
+                    </span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-blue-600 h-3 rounded-full transition-all duration-300" id="progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Question Card -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8" id="question-card">
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Question <span id="question-number">1</span>
+                        </span>
+                        <div class="flex items-center space-x-4">
+                            <button id="bookmark-btn" class="text-gray-400 hover:text-yellow-500 transition-colors">
+                                <i class="far fa-bookmark text-xl"></i>
+                            </button>
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span id="question-time">0s</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-6" id="question-text">
+                        Loading question...
+                    </h2>
+                </div>
+
+                <!-- Answer Options -->
+                <div class="space-y-4" id="answer-options">
+                    <!-- Options will be dynamically loaded here -->
+                </div>
+
+                <!-- Question Navigation -->
+                <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                    <button id="prev-question" class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fas fa-chevron-left mr-2"></i>
+                        Previous
+                    </button>
+                    
+                    <div class="flex space-x-4">
+                        <button id="skip-question" class="bg-yellow-100 text-yellow-700 px-6 py-3 rounded-lg hover:bg-yellow-200 transition-colors">
+                            Skip
+                        </button>
+                        <button id="next-question" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors" disabled>
+                            Next
+                            <i class="fas fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Overview -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Question Overview</h3>
+                <div class="grid grid-cols-5 md:grid-cols-10 gap-2" id="question-overview">
+                    <!-- Question indicators will be dynamically loaded here -->
+                </div>
+                <div class="flex items-center justify-center space-x-6 mt-6 text-sm">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded mr-2"></div>
+                        <span>Answered</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-yellow-500 rounded mr-2"></div>
+                        <span>Skipped</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-blue-500 rounded mr-2"></div>
+                        <span>Current</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-gray-300 rounded mr-2"></div>
+                        <span>Not Answered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Complete Modal -->
+    <div id="quiz-complete-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🎉</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Quiz Complete!</h3>
+                <p class="text-gray-600 mb-6">Great job! You've completed the quiz.</p>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600" id="final-score">0%</div>
+                        <div class="text-sm text-green-700">Final Score</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600" id="time-taken">0:00</div>
+                        <div class="text-sm text-blue-700">Time Taken</div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <button id="review-answers" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                        Review Answers
+                    </button>
+                    <button id="retake-quiz" class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors">
+                        Retake Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class QuizApp {
+    constructor(quizData) {
+        this.quiz = quizData;
+        this.currentQuestion = 0;
+        this.userAnswers = [];
+        this.startTime = Date.now();
+        this.questionStartTime = Date.now();
+        this.score = 0;
+        this.timeSpent = 0;
+        
+        this.init();
+    }
+
+    init() {
+        this.initializeAnswers();
+        this.setupEventListeners();
+        this.startTimer();
+        this.renderQuestion();
+        this.renderQuestionOverview();
+    }
+
+    initializeAnswers() {
+        this.userAnswers = new Array(this.quiz.questions.length).fill(null);
+    }
+
+    setupEventListeners() {
+        document.getElementById('next-question').addEventListener('click', () => this.nextQuestion());
+        document.getElementById('prev-question').addEventListener('click', () => this.prevQuestion());
+        document.getElementById('skip-question').addEventListener('click', () => this.skipQuestion());
+        document.getElementById('review-answers').addEventListener('click', () => this.reviewAnswers());
+        document.getElementById('retake-quiz').addEventListener('click', () => this.retakeQuiz());
+    }
+
+    startTimer() {
+        setInterval(() => {
+            const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('quiz-timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const questionElapsed = Math.floor((Date.now() - this.questionStartTime) / 1000);
+            document.getElementById('question-time').textContent = `${questionElapsed}s`;
+        }, 1000);
+    }
+
+    renderQuestion() {
+        const question = this.quiz.questions[this.currentQuestion];
+        
+        document.getElementById('question-number').textContent = this.currentQuestion + 1;
+        document.getElementById('current-question').textContent = this.currentQuestion + 1;
+        document.getElementById('question-text').textContent = question.question_text;
+        
+        // Reset question timer
+        this.questionStartTime = Date.now();
+        
+        // Render answer options
+        const optionsContainer = document.getElementById('answer-options');
+        optionsContainer.innerHTML = '';
+        
+        const options = [
+            { key: 'A', text: question.option_a },
+            { key: 'B', text: question.option_b },
+            { key: 'C', text: question.option_c },
+            { key: 'D', text: question.option_d }
+        ];
+        
+        options.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = `option-card p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-all duration-200 ${
+                this.userAnswers[this.currentQuestion] === option.key ? 'border-blue-500 bg-blue-50' : ''
+            }`;
+            optionDiv.innerHTML = `
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center mr-4 ${
+                        this.userAnswers[this.currentQuestion] === option.key ? 'border-blue-500 bg-blue-500 text-white' : ''
+                    }">
+                        ${option.key}
+                    </div>
+                    <span class="text-gray-700">${option.text}</span>
+                </div>
+            `;
+            
+            optionDiv.addEventListener('click', () => this.selectAnswer(option.key));
+            optionsContainer.appendChild(optionDiv);
+        });
+        
+        // Update navigation buttons
+        document.getElementById('prev-question').disabled = this.currentQuestion === 0;
+        document.getElementById('next-question').disabled = this.userAnswers[this.currentQuestion] === null;
+        
+        if (this.currentQuestion === this.quiz.questions.length - 1) {
+            document.getElementById('next-question').innerHTML = 'Finish <i class="fas fa-check ml-2"></i>';
+        } else {
+            document.getElementById('next-question').innerHTML = 'Next <i class="fas fa-chevron-right ml-2"></i>';
+        }
+        
+        // Update progress
+        const progress = ((this.currentQuestion + 1) / this.quiz.questions.length) * 100;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+    }
+
+    renderQuestionOverview() {
+        const overviewContainer = document.getElementById('question-overview');
+        overviewContainer.innerHTML = '';
+        
+        this.quiz.questions.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = `w-8 h-8 rounded cursor-pointer flex items-center justify-center text-sm font-medium transition-all duration-200`;
+            
+            if (index === this.currentQuestion) {
+                indicator.className += ' bg-blue-500 text-white';
+            } else if (this.userAnswers[index] !== null) {
+                indicator.className += ' bg-green-500 text-white';
+            } else {
+                indicator.className += ' bg-gray-300 text-gray-600';
+            }
+            
+            indicator.textContent = index + 1;
+            indicator.addEventListener('click', () => this.goToQuestion(index));
+            overviewContainer.appendChild(indicator);
+        });
+    }
+
+    selectAnswer(answer) {
+        this.userAnswers[this.currentQuestion] = answer;
+        document.getElementById('next-question').disabled = false;
+        this.renderQuestion();
+        this.renderQuestionOverview();
+        this.updateScore();
+    }
+
+    skipQuestion() {
+        if (this.currentQuestion < this.quiz.questions.length - 1) {
+            this.currentQuestion++;
+            this.renderQuestion();
+            this.renderQuestionOverview();
+        }
+    }
+
+    nextQuestion() {
+        if (this.currentQuestion < this.quiz.questions.length - 1) {
+            this.currentQuestion++;
+            this.renderQuestion();
+            this.renderQuestionOverview();
+        } else {
+            this.completeQuiz();
+        }
+    }
+
+    prevQuestion() {
+        if (this.currentQuestion > 0) {
+            this.currentQuestion--;
+            this.renderQuestion();
+            this.renderQuestionOverview();
+        }
+    }
+
+    goToQuestion(index) {
+        this.currentQuestion = index;
+        this.renderQuestion();
+        this.renderQuestionOverview();
+    }
+
+    updateScore() {
+        let correct = 0;
+        this.userAnswers.forEach((answer, index) => {
+            if (answer && answer === this.quiz.questions[index].correct_answer) {
+                correct++;
+            }
+        });
+        this.score = Math.round((correct / this.quiz.questions.length) * 100);
+        document.getElementById('current-score').textContent = `Score: ${this.score}%`;
+    }
+
+    completeQuiz() {
+        this.timeSpent = Math.floor((Date.now() - this.startTime) / 1000);
+        this.updateScore();
+        
+        // Show completion modal
+        document.getElementById('final-score').textContent = `${this.score}%`;
+        const minutes = Math.floor(this.timeSpent / 60);
+        const seconds = this.timeSpent % 60;
+        document.getElementById('time-taken').textContent = 
+            `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('quiz-complete-modal').classList.remove('hidden');
+        document.getElementById('quiz-complete-modal').classList.add('flex');
+        
+        // Submit results
+        this.submitResults();
+    }
+
+    submitResults() {
+        const results = {
+            quizId: this.quiz.id,
+            scorePercentage: this.score,
+            correctAnswers: this.userAnswers.filter((answer, index) => 
+                answer === this.quiz.questions[index].correct_answer
+            ).length,
+            totalQuestions: this.quiz.questions.length,
+            timeSpentMinutes: Math.round(this.timeSpent / 60),
+            userAnswers: this.userAnswers
+        };
+        
+        fetch(`/api/quizzes/${this.quiz.id}/submit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(results)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Quiz results submitted:', data);
+        })
+        .catch(error => {
+            console.error('Error submitting quiz:', error);
+        });
+    }
+
+    reviewAnswers() {
+        window.location.href = `/quiz/review?quizId=${this.quiz.id}`;
+    }
+
+    retakeQuiz() {
+        location.reload();
+    }
+}
+
+// Initialize quiz when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const quizData = {{ quiz.to_dict() | tojson }};
+    new QuizApp(quizData);
+});
+</script>
+{% endblock %}

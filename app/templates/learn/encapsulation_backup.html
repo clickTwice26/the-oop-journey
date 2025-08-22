@@ -1,0 +1,716 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
+    <!-- Professional Hero Section -->
+    <div class="bg-gradient-to-r from-orange-600 via-red-600 to-pink-700 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Navigation Breadcrumb -->
+                <nav class="flex items-center space-x-2 text-sm mb-8 opacity-90">
+                    <a href="/learn" class="hover:text-orange-200 transition-colors">
+                        <i class="fas fa-home mr-1"></i>Learn
+                    </a>
+                    <span>→</span>
+                    <span class="text-orange-200">Encapsulation</span>
+                </nav>
+
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-lock text-4xl"></i>
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Master Encapsulation
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-orange-100 leading-relaxed max-w-3xl mx-auto">
+                        The foundation of secure and maintainable code. Learn to protect your data and create robust class interfaces.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-8">
+                        <span class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-shield-alt mr-2"></i>Data Protection
+                        </span>
+                        <span class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-key mr-2"></i>Access Control
+                        </span>
+                        <span class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                            <i class="fas fa-code mr-2"></i>Clean Interfaces
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-lg py-6">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Learning Progress</h2>
+                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Foundational Concept
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <div class="text-right">
+                            <div class="text-sm text-gray-600">Estimated Time</div>
+                            <div class="font-semibold text-gray-800">45 minutes</div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-64 bg-gray-200 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full progress-bar transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <span class="text-sm text-gray-600 progress-text font-medium">0% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- Enhanced Table of Contents -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Learning Roadmap</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Follow this structured path to master encapsulation concepts and best practices
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="learning-section group p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl hover:from-blue-100 hover:to-blue-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="fundamentals">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-brain text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-blue-800 text-lg mb-2">Fundamentals</h4>
+                            <p class="text-sm text-blue-600 mb-4">Core concepts and principles</p>
+                            <div class="flex items-center justify-center text-xs text-blue-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>10 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-section group p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl hover:from-green-100 hover:to-green-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="access-modifiers">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-green-800 text-lg mb-2">Access Modifiers</h4>
+                            <p class="text-sm text-green-600 mb-4">Public, Private, Protected</p>
+                            <div class="flex items-center justify-center text-xs text-green-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>15 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-section group p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl hover:from-purple-100 hover:to-purple-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="getters-setters">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-exchange-alt text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-purple-800 text-lg mb-2">Getters & Setters</h4>
+                            <p class="text-sm text-purple-600 mb-4">Controlled access methods</p>
+                            <div class="flex items-center justify-center text-xs text-purple-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>12 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-section group p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl hover:from-orange-100 hover:to-orange-200 transition-all duration-300 cursor-pointer transform hover:scale-105" data-section="practice">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-code text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-orange-800 text-lg mb-2">Practice</h4>
+                            <p class="text-sm text-orange-600 mb-4">Hands-on coding exercises</p>
+                            <div class="flex items-center justify-center text-xs text-orange-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                <span>8 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Fundamentals -->
+            <div id="fundamentals" class="learning-content">
+                <div class="bg-white rounded-2xl shadow-xl p-10 mb-12">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-3xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-blue-800 mb-4">Understanding Encapsulation</h3>
+                        <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                            The cornerstone of object-oriented programming that keeps your data safe and your code organized
+                        </p>
+                    </div>
+                    
+                    <!-- Definition Section -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-8">
+                        <h4 class="text-2xl font-bold text-blue-800 mb-6">What is Encapsulation?</h4>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                    Encapsulation is like a protective capsule around your data. It's the practice of bundling data (attributes) and methods (functions) together in a single unit called a class, while restricting direct access to some of the object's components.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-shield-alt text-green-500 text-xl mr-4 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 mb-1">Data Protection</h5>
+                                            <p class="text-gray-600">Prevents unauthorized access and modification</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-cogs text-blue-500 text-xl mr-4 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 mb-1">Controlled Interface</h5>
+                                            <p class="text-gray-600">Provides specific methods to interact with data</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-puzzle-piece text-purple-500 text-xl mr-4 mt-1"></i>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-800 mb-1">Modularity</h5>
+                                            <p class="text-gray-600">Creates self-contained, reusable components</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-lg">
+                                <h5 class="font-bold text-gray-800 mb-4">Real-World Analogy</h5>
+                                <div class="text-center mb-4">
+                                    <div class="text-6xl mb-2">🏦</div>
+                                    <h6 class="font-semibold text-gray-800">Bank Account</h6>
+                                </div>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Private Data:</span>
+                                        <span class="font-medium">Balance, PIN</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Public Interface:</span>
+                                        <span class="font-medium">Deposit, Withdraw</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-600">Protection:</span>
+                                        <span class="font-medium">Authentication</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefits Section -->
+                    <div class="mb-8">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-6">Key Benefits</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="benefit-card bg-green-50 border border-green-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-lock text-2xl"></i>
+                                </div>
+                                <h5 class="font-bold text-green-800 mb-2">Security</h5>
+                                <p class="text-green-700 text-sm">Protects sensitive data from unauthorized access and modification</p>
+                            </div>
+                            <div class="benefit-card bg-blue-50 border border-blue-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-tools text-2xl"></i>
+                                </div>
+                                <h5 class="font-bold text-blue-800 mb-2">Maintainability</h5>
+                                <p class="text-blue-700 text-sm">Makes code easier to update and modify without breaking functionality</p>
+                            </div>
+                            <div class="benefit-card bg-purple-50 border border-purple-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-purple-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-recycle text-2xl"></i>
+                                </div>
+                                <h5 class="font-bold text-purple-800 mb-2">Reusability</h5>
+                                <p class="text-purple-700 text-sm">Creates modular components that can be used in different contexts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="next-section bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:scale-105 shadow-lg" data-next="access-modifiers">
+                            Continue to Access Modifiers →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Access Modifiers -->
+            <div id="access-modifiers" class="learning-content hidden">
+                <div class="bg-white rounded-2xl shadow-xl p-10 mb-12">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-3xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-green-800 mb-4">Access Modifiers</h3>
+                        <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                            Control who can access your class members with these powerful keywords
+                        </p>
+                    </div>
+                    
+                    <!-- Language Tabs -->
+                    <div class="mb-8">
+                        <div class="flex flex-wrap justify-center space-x-2 border-b border-gray-200 pb-4">
+                            <button class="language-tab px-6 py-3 border-b-2 border-green-500 text-green-600 font-semibold rounded-t-lg bg-green-50" data-lang="python">Python</button>
+                            <button class="language-tab px-6 py-3 text-gray-600 hover:text-green-600 rounded-t-lg hover:bg-gray-50 transition-colors" data-lang="java">Java</button>
+                            <button class="language-tab px-6 py-3 text-gray-600 hover:text-green-600 rounded-t-lg hover:bg-gray-50 transition-colors" data-lang="cpp">C++</button>
+                            <button class="language-tab px-6 py-3 text-gray-600 hover:text-green-600 rounded-t-lg hover:bg-gray-50 transition-colors" data-lang="csharp">C#</button>
+                        </div>
+                    </div>
+
+                    <!-- Access Modifiers Explanation -->
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="access-modifier-card bg-green-50 border border-green-200 rounded-xl p-6">
+                            <div class="text-center mb-4">
+                                <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-globe text-lg"></i>
+                                </div>
+                                <h5 class="font-bold text-green-800 text-lg">Public</h5>
+                            </div>
+                            <p class="text-green-700 text-sm mb-4 text-center">Accessible from anywhere</p>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span>Same Class</span>
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Subclass</span>
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Other Classes</span>
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="access-modifier-card bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                            <div class="text-center mb-4">
+                                <div class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-users text-lg"></i>
+                                </div>
+                                <h5 class="font-bold text-yellow-800 text-lg">Protected</h5>
+                            </div>
+                            <p class="text-yellow-700 text-sm mb-4 text-center">Accessible in inheritance</p>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span>Same Class</span>
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Subclass</span>
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Other Classes</span>
+                                    <i class="fas fa-times text-red-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="access-modifier-card bg-red-50 border border-red-200 rounded-xl p-6">
+                            <div class="text-center mb-4">
+                                <div class="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-lock text-lg"></i>
+                                </div>
+                                <h5 class="font-bold text-red-800 text-lg">Private</h5>
+                            </div>
+                            <p class="text-red-700 text-sm mb-4 text-center">Accessible only within class</p>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span>Same Class</span>
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Subclass</span>
+                                    <i class="fas fa-times text-red-500"></i>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span>Other Classes</span>
+                                    <i class="fas fa-times text-red-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Code Examples -->
+                    <div class="language-content" data-lang="python">
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-lg font-semibold text-white">Python Access Modifiers</h5>
+                                <div class="flex space-x-2">
+                                    <button class="copy-code-btn bg-gray-700 text-white px-3 py-1 rounded text-sm hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <pre class="text-green-400 text-sm leading-relaxed overflow-x-auto"><code>class BankAccount:
+    def __init__(self, account_number, initial_balance):
+        self.account_number = account_number    # Public attribute
+        self._balance = initial_balance         # Protected attribute (convention)
+        self.__pin = "1234"                    # Private attribute (name mangling)
+    
+    # Public method - accessible from anywhere
+    def get_account_info(self):
+        return f"Account: {self.account_number}"
+    
+    # Protected method - intended for subclasses
+    def _validate_transaction(self, amount):
+        return amount > 0 and amount <= self._balance
+    
+    # Private method - only accessible within this class
+    def __encrypt_pin(self, pin):
+        return f"encrypted_{pin}"
+    
+    # Public interface for balance access
+    def get_balance(self):
+        return self._balance
+    
+    def deposit(self, amount):
+        if self._validate_transaction(amount):
+            self._balance += amount
+            return True
+        return False
+
+# Usage example
+account = BankAccount("123456", 1000)
+
+# Public access - works fine
+print(account.get_account_info())  # "Account: 123456"
+print(account.account_number)      # "123456"
+
+# Protected access - works but not recommended
+print(account._balance)            # 1000
+
+# Private access - this will cause an AttributeError
+# print(account.__pin)             # AttributeError!</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="language-content hidden" data-lang="java">
+                        <div class="bg-gray-900 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-lg font-semibold text-white">Java Access Modifiers</h5>
+                                <div class="flex space-x-2">
+                                    <button class="copy-code-btn bg-gray-700 text-white px-3 py-1 rounded text-sm hover:bg-gray-600 transition-colors">
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                </div>
+                            </div>
+                            <pre class="text-green-400 text-sm leading-relaxed overflow-x-auto"><code>public class BankAccount {
+    public String accountNumber;        // Public - accessible everywhere
+    protected double balance;           // Protected - accessible in package and subclasses
+    private String pin;                 // Private - only within this class
+    
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+        this.pin = "1234";
+    }
+    
+    // Public method - accessible from anywhere
+    public String getAccountInfo() {
+        return "Account: " + accountNumber;
+    }
+    
+    // Protected method - accessible in subclasses
+    protected boolean validateTransaction(double amount) {
+        return amount > 0 && amount <= balance;
+    }
+    
+    // Private method - only within this class
+    private String encryptPin(String pin) {
+        return "encrypted_" + pin;
+    }
+    
+    // Public getter for private data
+    public double getBalance() {
+        return balance;
+    }
+    
+    public boolean deposit(double amount) {
+        if (validateTransaction(amount)) {
+            balance += amount;
+            return true;
+        }
+        return false;
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Demo -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 mb-8">
+                        <h5 class="text-xl font-semibold text-green-800 mb-4">
+                            <i class="fas fa-play-circle mr-2"></i>Interactive Access Demo
+                        </h5>
+                        <p class="text-gray-700 mb-4">Try accessing different class members to see encapsulation in action:</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <textarea id="access-demo-code" class="w-full h-40 p-4 border rounded-lg font-mono text-sm bg-white" placeholder="Try accessing class members...">account = BankAccount("12345", 1000)
+
+# Try these:
+print(account.get_balance())      # Public method ✓
+print(account._balance)           # Protected attribute
+print(account.__pin)              # Private attribute</textarea>
+                                <button id="run-access-demo" class="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-play mr-2"></i>Run Demo
+                                </button>
+                            </div>
+                            <div>
+                                <div id="access-demo-output" class="w-full h-40 p-4 bg-gray-900 text-green-400 rounded-lg font-mono text-sm overflow-y-auto">
+                                    <div class="text-gray-500">Output will appear here...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="next-section bg-gradient-to-r from-green-500 to-teal-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg" data-next="getters-setters">
+                            Continue to Getters & Setters →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue with other sections... -->
+            <!-- Section 3: Getters & Setters -->
+            <div id="getters-setters" class="learning-content hidden">
+                <!-- Content for getters and setters section -->
+                <div class="bg-white rounded-2xl shadow-xl p-10 mb-12">
+                    <div class="text-center">
+                        <button class="next-section bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-700 transition-all transform hover:scale-105 shadow-lg" data-next="practice">
+                            Continue to Practice →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Practice -->
+            <div id="practice" class="learning-content hidden">
+                <!-- Practice section content -->
+                <div class="bg-white rounded-2xl shadow-xl p-10 mb-12">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🎉</div>
+                        <h4 class="text-3xl font-bold text-orange-800 mb-4">Congratulations!</h4>
+                        <p class="text-gray-700 mb-6">You've mastered the fundamentals of Encapsulation!</p>
+                        <div class="space-x-4">
+                            <button onclick="takeQuiz()" class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 font-semibold">
+                                Take Assessment
+                            </button>
+                            <a href="/learn/inheritance" class="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 inline-block font-semibold">
+                                Next: Inheritance →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Enhanced Learning Management System for Encapsulation
+class EncapsulationLearning {
+    constructor() {
+        this.currentSection = 'fundamentals';
+        this.completedSections = new Set();
+        this.progress = 0;
+        this.timeSpent = 0;
+        this.startTime = Date.now();
+        this.init();
+    }
+
+    init() {
+        this.showSection('fundamentals');
+        this.setupEventListeners();
+        this.updateProgress();
+        this.startTimer();
+    }
+
+    setupEventListeners() {
+        // Section navigation
+        document.querySelectorAll('.learning-section').forEach(section => {
+            section.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = section.getAttribute('data-section');
+                this.showSection(targetSection);
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-section').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nextSection = btn.getAttribute('data-next');
+                this.completeSection(this.currentSection);
+                this.showSection(nextSection);
+            });
+        });
+
+        // Language tabs
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                this.switchLanguage(tab.getAttribute('data-lang'));
+            });
+        });
+
+        // Interactive demo
+        document.getElementById('run-access-demo')?.addEventListener('click', this.runAccessDemo);
+
+        // Copy code buttons
+        document.querySelectorAll('.copy-code-btn').forEach(btn => {
+            btn.addEventListener('click', this.copyCode);
+        });
+    }
+
+    showSection(sectionName) {
+        // Hide all sections
+        document.querySelectorAll('.learning-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        // Show target section
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            this.currentSection = sectionName;
+            
+            // Update section highlighting
+            document.querySelectorAll('.learning-section').forEach(section => {
+                section.classList.remove('ring-2', 'ring-orange-400', 'scale-105');
+                if (section.getAttribute('data-section') === sectionName) {
+                    section.classList.add('ring-2', 'ring-orange-400', 'scale-105');
+                }
+            });
+
+            // Smooth scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        
+        // Mark section as completed
+        const sectionElement = document.querySelector(`[data-section="${sectionName}"]`);
+        if (sectionElement) {
+            sectionElement.classList.add('bg-green-100', 'border-green-300');
+            const icon = sectionElement.querySelector('i');
+            if (icon) icon.classList.add('animate-pulse');
+        }
+
+        // Save progress to localStorage
+        this.saveProgress();
+    }
+
+    updateProgress() {
+        const totalSections = 4;
+        this.progress = (this.completedSections.size / totalSections) * 100;
+        
+        document.querySelector('.progress-bar').style.width = `${this.progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(this.progress)}% Complete`;
+    }
+
+    saveProgress() {
+        const progressData = {
+            encapsulation: this.progress,
+            completedSections: Array.from(this.completedSections),
+            timeSpent: this.timeSpent
+        };
+        
+        // Update main learning progress
+        const mainProgress = JSON.parse(localStorage.getItem('oopLearningProgress') || '{}');
+        mainProgress.encapsulation = this.progress;
+        localStorage.setItem('oopLearningProgress', JSON.stringify(mainProgress));
+        
+        // Save encapsulation specific progress
+        localStorage.setItem('encapsulationProgress', JSON.stringify(progressData));
+    }
+
+    switchLanguage(lang) {
+        // Update tab appearance
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.classList.remove('border-green-500', 'text-green-600', 'font-semibold', 'bg-green-50');
+            tab.classList.add('text-gray-600');
+        });
+        
+        const activeTab = document.querySelector(`[data-lang="${lang}"]`);
+        activeTab.classList.add('border-green-500', 'text-green-600', 'font-semibold', 'bg-green-50');
+
+        // Show/hide content
+        document.querySelectorAll('.language-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+        
+        const activeContent = document.querySelector(`.language-content[data-lang="${lang}"]`);
+        if (activeContent) {
+            activeContent.classList.remove('hidden');
+        }
+    }
+
+    runAccessDemo() {
+        const code = document.getElementById('access-demo-code').value;
+        const output = document.getElementById('access-demo-output');
+        
+        // Simulate code execution with educational feedback
+        let result = '';
+        
+        if (code.includes('get_balance()')) {
+            result += '✅ 1000 - Public method access successful!\n';
+        }
+        if (code.includes('._balance')) {
+            result += '⚠️ 1000 - Protected attribute accessed (not recommended)\n';
+        }
+        if (code.includes('.__pin')) {
+            result += '❌ AttributeError: \'BankAccount\' object has no attribute \'__pin\'\n';
+            result += '💡 Private attributes are name-mangled in Python!\n';
+        }
+        
+        if (!result) {
+            result = '🎯 Try accessing account.get_balance(), account._balance, or account.__pin\n';
+        }
+        
+        output.innerHTML = `<pre class="text-green-400 whitespace-pre-wrap">${result}</pre>`;
+    }
+
+    copyCode(event) {
+        const btn = event.target.closest('.copy-code-btn');
+        const codeBlock = btn.closest('.bg-gray-900').querySelector('code');
+        
+        navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+            btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+            }, 2000);
+        });
+    }
+
+    startTimer() {
+        setInterval(() => {
+            this.timeSpent = Math.floor((Date.now() - this.startTime) / 1000 / 60); // minutes
+        }, 60000);
+    }
+}
+
+// Quiz function
+function takeQuiz() {
+    alert('🎯 Assessment feature coming soon! You\'ll be able to test your encapsulation knowledge.');
+}
+
+// Initialize the learning system
+document.addEventListener('DOMContentLoaded', () => {
+    new EncapsulationLearning();
+});
+</script>
+{% endblock %}
