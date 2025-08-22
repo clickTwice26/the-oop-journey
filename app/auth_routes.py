@@ -130,3 +130,87 @@ def profile():
         return redirect(url_for('auth.login'))
     
     return render_template('auth/profile.html', user=user)
+
+@auth_bp.route('/profile/edit', methods=['GET', 'POST'])
+def edit_profile():
+    user = get_current_user()
+    if not user:
+        flash('Please log in to edit your profile.', 'warning')
+        return redirect(url_for('auth.login'))
+    
+    if request.method == 'POST':
+        full_name = request.form.get('full_name', '').strip()
+        email = request.form.get('email', '').strip()
+        student_id = request.form.get('student_id', '').strip()
+        current_password = request.form.get('current_password', '')
+        new_password = request.form.get('new_password', '')
+        confirm_password = request.form.get('confirm_password', '')
+        
+        # Validation
+        if not full_name:
+            flash('Full name is required.', 'danger')
+            return render_template('auth/edit_profile.html', user=user)
+        
+        if not email:
+            flash('Email is required.', 'danger')
+            return render_template('auth/edit_profile.html', user=user)
+        
+        # Email validation
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_regex, email):
+            flash('Please enter a valid email address.', 'danger')
+            return render_template('auth/edit_profile.html', user=user)
+        
+        # Check if email is taken by another user
+        existing_user = User.query.filter(User.email == email, User.id != user.id).first()
+        if existing_user:
+            flash('Email is already taken by another user.', 'danger')
+            return render_template('auth/edit_profile.html', user=user)
+        
+        # Check if student_id is taken by another user
+        if student_id:
+            existing_student = User.query.filter(User.student_id == student_id, User.id != user.id).first()
+            if existing_student:
+                flash('Student ID is already taken by another user.', 'danger')
+                return render_template('auth/edit_profile.html', user=user)
+        
+        # Handle password change
+        if new_password:
+            if not current_password:
+                flash('Current password is required to change password.', 'danger')
+                return render_template('auth/edit_profile.html', user=user)
+            
+            if not user.check_password(current_password):
+                flash('Current password is incorrect.', 'danger')
+                return render_template('auth/edit_profile.html', user=user)
+            
+            if len(new_password) < 6:
+                flash('New password must be at least 6 characters long.', 'danger')
+                return render_template('auth/edit_profile.html', user=user)
+            
+            if new_password != confirm_password:
+                flash('New passwords do not match.', 'danger')
+                return render_template('auth/edit_profile.html', user=user)
+            
+            user.set_password(new_password)
+        
+        # Update user information
+        try:
+            user.full_name = full_name
+            user.email = email
+            user.student_id = student_id if student_id else None
+            
+            db.session.commit()
+            
+            # Update session data
+            session['full_name'] = user.full_name
+            
+            flash('Profile updated successfully!', 'success')
+            return redirect(url_for('auth.profile'))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred while updating your profile.', 'danger')
+            print(f"Profile update error: {str(e)}")
+    
+    return render_template('auth/edit_profile.html', user=user)

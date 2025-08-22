@@ -5,18 +5,25 @@
     <div class="bg-white shadow-xl rounded-3xl overflow-hidden">
         <!-- Profile Header -->
         <div class="bg-gradient-to-r from-primary-600 to-secondary-600 px-8 py-12">
-            <div class="flex items-center space-x-6">
-                <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-white text-3xl"></i>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white text-3xl"></i>
+                    </div>
+                    <div class="text-white">
+                        <h1 class="text-3xl font-bold">{{ user.full_name }}</h1>
+                        <p class="text-primary-100 text-lg">@{{ user.username }}</p>
+                        {% if user.student_id %}
+                        <p class="text-primary-100">Student ID: {{ user.student_id }}</p>
+                        {% endif %}
+                        <p class="text-primary-100 text-sm">Member since {{ user.created_at.strftime('%B %Y') }}</p>
+                    </div>
                 </div>
-                <div class="text-white">
-                    <h1 class="text-3xl font-bold">{{ user.full_name }}</h1>
-                    <p class="text-primary-100 text-lg">@{{ user.username }}</p>
-                    {% if user.student_id %}
-                    <p class="text-primary-100">Student ID: {{ user.student_id }}</p>
-                    {% endif %}
-                    <p class="text-primary-100 text-sm">Member since {{ user.created_at.strftime('%B %Y') }}</p>
-                </div>
+                <a href="{{ url_for('auth.edit_profile') }}" 
+                   class="px-6 py-3 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all duration-300 font-semibold">
+                    <i class="fas fa-edit mr-2"></i>
+                    Edit Profile
+                </a>
             </div>
         </div>
         

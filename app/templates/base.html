@@ -72,6 +72,9 @@
                         <i class="fas fa-robot mr-2"></i>AI Chat
                     </a>
                     {% endif %}
+                    <a href="{{ url_for('main.users_showcase') }}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">
+                        <i class="fas fa-users mr-2"></i>Community
+                    </a>
                     <a href="{{ url_for('main.upcoming_features') }}" class="text-purple-600 hover:text-purple-700 transition-colors font-medium">
                         <i class="fas fa-rocket mr-2"></i>Coming Soon
                     </a>
@@ -130,6 +133,7 @@
                 <a href="{{ url_for('auth.login') }}" class="block text-gray-600 hover:text-primary-600 py-2">Login</a>
                 <a href="{{ url_for('auth.register') }}" class="block text-primary-600 font-medium py-2">Sign Up</a>
                 {% endif %}
+                <a href="{{ url_for('main.users_showcase') }}" class="block text-gray-600 hover:text-primary-600 py-2">Community</a>
                 <a href="{{ url_for('main.upcoming_features') }}" class="block text-purple-600 hover:text-purple-700 py-2">Coming Soon</a>
             </div>
         </div>

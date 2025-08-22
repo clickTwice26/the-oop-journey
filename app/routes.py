@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, current_app, session
+from flask import Blueprint, render_template, request, jsonify, current_app, session, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from app.models import Quiz, Question, QuizResult, Message, Conversation, Assessment, AssessmentResult, User, db
 from app.services.quiz_generation_service import QuizGenerationService
@@ -25,6 +25,33 @@ def allowed_file(filename):
 @main_bp.route('/')
 def index():
     return render_template('index.html', title='OOP Journey - AI-Powered Learning')
+
+@main_bp.route('/users-showcase')
+def users_showcase():
+    """Public showcase of all registered users"""
+    try:
+        users = User.query.order_by(User.created_at.desc()).all()
+        current_date = datetime.now()
+        
+        # Calculate stats for each user
+        user_stats = []
+        for user in users:
+            quiz_count = Quiz.query.filter_by(user_id=user.id).count()
+            quiz_results = QuizResult.query.filter_by(user_id=user.id).all()
+            total_quizzes_taken = len(quiz_results)
+            avg_score = sum(result.score for result in quiz_results) / len(quiz_results) if quiz_results else 0
+            
+            user_stats.append({
+                'user': user,
+                'quiz_count': quiz_count,
+                'total_quizzes_taken': total_quizzes_taken,
+                'avg_score': round(avg_score, 1)
+            })
+        
+        return render_template('users_showcase.html', user_stats=user_stats, current_date=current_date)
+    except Exception as e:
+        flash(f'Error loading users showcase: {str(e)}', 'error')
+        return redirect(url_for('main.index'))
 
 @main_bp.route('/dashboard')
 @login_required

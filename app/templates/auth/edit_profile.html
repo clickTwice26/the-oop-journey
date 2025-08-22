@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white shadow-xl rounded-3xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary-600 to-secondary-600 px-8 py-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-white">Edit Profile</h1>
+                    <p class="text-primary-100">Update your account information</p>
+                </div>
+                <a href="{{ url_for('auth.profile') }}" class="px-4 py-2 bg-white bg-opacity-20 text-white rounded-lg hover:bg-opacity-30 transition-all">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Profile
+                </a>
+            </div>
+        </div>
+        
+        <!-- Form Content -->
+        <div class="px-8 py-8">
+            <form method="POST" class="space-y-6">
+                <!-- Personal Information Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Personal Information</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="full_name" class="block text-sm font-medium text-gray-700 mb-2">
+                                Full Name *
+                            </label>
+                            <input type="text" id="full_name" name="full_name" required 
+                                   value="{{ user.full_name }}"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                Email Address *
+                            </label>
+                            <input type="email" id="email" name="email" required 
+                                   value="{{ user.email }}"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                                Username
+                            </label>
+                            <input type="text" id="username" name="username" disabled 
+                                   value="{{ user.username }}"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500">
+                            <p class="mt-1 text-xs text-gray-500">Username cannot be changed</p>
+                        </div>
+                        
+                        <div>
+                            <label for="student_id" class="block text-sm font-medium text-gray-700 mb-2">
+                                Student ID (Optional)
+                            </label>
+                            <input type="text" id="student_id" name="student_id" 
+                                   value="{{ user.student_id or '' }}"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                   placeholder="Enter your student ID">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Password Change Section -->
+                <div class="border-t pt-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Change Password (Optional)</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="current_password" class="block text-sm font-medium text-gray-700 mb-2">
+                                Current Password
+                            </label>
+                            <input type="password" id="current_password" name="current_password"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                   placeholder="Enter current password to change">
+                            <p class="mt-1 text-xs text-gray-500">Only required if you want to change your password</p>
+                        </div>
+                        
+                        <div>
+                            <label for="new_password" class="block text-sm font-medium text-gray-700 mb-2">
+                                New Password
+                            </label>
+                            <input type="password" id="new_password" name="new_password"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                   placeholder="Enter new password">
+                            <p class="mt-1 text-xs text-gray-500">At least 6 characters</p>
+                        </div>
+                        
+                        <div>
+                            <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">
+                                Confirm New Password
+                            </label>
+                            <input type="password" id="confirm_password" name="confirm_password"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                   placeholder="Confirm new password">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="border-t pt-6 flex gap-4">
+                    <button type="submit" 
+                            class="px-8 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-lg font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all duration-300">
+                        <i class="fas fa-save mr-2"></i>
+                        Save Changes
+                    </button>
+                    
+                    <a href="{{ url_for('auth.profile') }}" 
+                       class="px-8 py-3 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600 transition-all duration-300">
+                        <i class="fas fa-times mr-2"></i>
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Password confirmation validation
+    document.getElementById('confirm_password').addEventListener('input', function() {
+        const newPassword = document.getElementById('new_password').value;
+        const confirmPassword = this.value;
+        
+        if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+            this.setCustomValidity('Passwords do not match');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+    
+    // New password validation
+    document.getElementById('new_password').addEventListener('input', function() {
+        const password = this.value;
+        const confirmPassword = document.getElementById('confirm_password');
+        
+        if (password.length > 0 && password.length < 6) {
+            this.setCustomValidity('Password must be at least 6 characters long');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        // Re-validate confirm password
+        if (confirmPassword.value && password !== confirmPassword.value) {
+            confirmPassword.setCustomValidity('Passwords do not match');
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
+    });
+</script>
+{% endblock %}

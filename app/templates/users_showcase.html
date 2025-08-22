@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Users Showcase - OOP Journey{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    .user-card {
+        transition: all 0.3s ease;
+    }
+    .user-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .stat-badge {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .achievement-badge {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .performance-badge {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-primary-600 to-secondary-600 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                <i class="fas fa-users mr-3"></i>
+                OOP Journey Community
+            </h1>
+            <p class="text-xl text-primary-100 max-w-3xl mx-auto">
+                Meet our amazing learners who are mastering Object-Oriented Programming concepts through AI-powered quizzes and interactive learning.
+            </p>
+            <div class="mt-8 bg-white bg-opacity-20 rounded-lg inline-block p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ user_stats|length }}</div>
+                        <div class="text-primary-100">Total Learners</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ user_stats|sum(attribute='quiz_count') }}</div>
+                        <div class="text-primary-100">Quizzes Created</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">{{ user_stats|sum(attribute='total_quizzes_taken') }}</div>
+                        <div class="text-primary-100">Quizzes Completed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users Grid -->
+    <div class="container mx-auto px-6 py-12">
+        {% if user_stats %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for stat in user_stats %}
+            <div class="user-card bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- User Header -->
+                <div class="bg-gradient-to-r from-primary-500 to-secondary-500 p-6 text-center">
+                    <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">{{ stat.user.full_name }}</h3>
+                    <p class="text-primary-100">@{{ stat.user.username }}</p>
+                    {% if stat.user.student_id %}
+                    <p class="text-primary-100 text-sm">ID: {{ stat.user.student_id }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- User Stats -->
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <!-- Member Since -->
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-calendar-alt mr-3 text-primary-500"></i>
+                            <span class="text-sm">Member since {{ stat.user.created_at.strftime('%b %Y') }}</span>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Quizzes Created -->
+                            <div class="stat-badge text-white p-3 rounded-lg text-center">
+                                <div class="text-2xl font-bold">{{ stat.quiz_count }}</div>
+                                <div class="text-xs opacity-90">Quizzes Created</div>
+                            </div>
+
+                            <!-- Quizzes Taken -->
+                            <div class="achievement-badge text-white p-3 rounded-lg text-center">
+                                <div class="text-2xl font-bold">{{ stat.total_quizzes_taken }}</div>
+                                <div class="text-xs opacity-90">Quizzes Taken</div>
+                            </div>
+                        </div>
+
+                        <!-- Average Score -->
+                        {% if stat.avg_score > 0 %}
+                        <div class="performance-badge text-white p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold">{{ stat.avg_score }}%</div>
+                            <div class="text-xs opacity-90">Average Score</div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Performance Badges -->
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            {% if stat.quiz_count >= 5 %}
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
+                                <i class="fas fa-trophy mr-1"></i>Quiz Creator
+                            </span>
+                            {% endif %}
+                            {% if stat.total_quizzes_taken >= 10 %}
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                                <i class="fas fa-medal mr-1"></i>Active Learner
+                            </span>
+                            {% endif %}
+                            {% if stat.avg_score >= 80 %}
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
+                                <i class="fas fa-star mr-1"></i>High Achiever
+                            </span>
+                            {% endif %}
+                            {% if stat.user.created_at.month == current_date.month and stat.user.created_at.year == current_date.year %}
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                                <i class="fas fa-sparkles mr-1"></i>New Member
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+            <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <i class="fas fa-users text-gray-400 text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-600 mb-4">No Users Yet</h3>
+            <p class="text-gray-500 mb-8">Be the first to join our OOP learning community!</p>
+            <a href="{{ url_for('auth.register') }}" class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-300">
+                <i class="fas fa-user-plus mr-2"></i>
+                Join Now
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-gray-50 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Start Your OOP Journey?</h2>
+            <p class="text-xl text-gray-600 mb-8">Join our community and master Object-Oriented Programming with AI-powered learning tools.</p>
+            <div class="space-x-4">
+                <a href="{{ url_for('auth.register') }}" class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors duration-300 inline-block">
+                    <i class="fas fa-rocket mr-2"></i>
+                    Get Started
+                </a>
+                <a href="{{ url_for('main.index') }}" class="bg-gray-200 text-gray-800 px-8 py-3 rounded-lg hover:bg-gray-300 transition-colors duration-300 inline-block">
+                    <i class="fas fa-home mr-2"></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Add some interactivity
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate cards on scroll
+    const cards = document.querySelectorAll('.user-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+});
+</script>
+{% endblock %}
