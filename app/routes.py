@@ -31,19 +31,19 @@ def learn():
 
 @main_bp.route('/learn/inheritance')
 def learn_inheritance():
-    return render_template('learn/inheritance.html', title='Master Inheritance - OOP Concepts')
+    return render_template('learn/inheritance_java.html', title='Master Inheritance - OOP Concepts')
 
 @main_bp.route('/learn/polymorphism')
 def learn_polymorphism():
-    return render_template('learn/polymorphism.html', title='Master Polymorphism - OOP Concepts')
+    return render_template('learn/polymorphism_java.html', title='Master Polymorphism - OOP Concepts')
 
 @main_bp.route('/learn/abstraction')
 def learn_abstraction():
-    return render_template('learn/abstraction.html', title='Master Abstraction - OOP Concepts')
+    return render_template('learn/abstraction_java.html', title='Master Abstraction - OOP Concepts')
 
 @main_bp.route('/learn/encapsulation')
 def learn_encapsulation():
-    return render_template('learn/encapsulation.html', title='Master Encapsulation - OOP Concepts')
+    return render_template('learn/encapsulation_java.html', title='Master Encapsulation - OOP Concepts')
 
 @main_bp.route('/learn/encapsulation/assessment')
 def assess_encapsulation():
@@ -458,6 +458,32 @@ def generate_assessment(concept):
         
     except Exception as e:
         current_app.logger.error(f"Error generating assessment: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/assessments/evaluate', methods=['POST'])
+def evaluate_assessment():
+    """Evaluate assessment answers"""
+    try:
+        data = request.get_json()
+        assessment_id = data.get('assessment_id')
+        user_answers = data.get('answers', {})
+        
+        # Generate user session if not exists
+        if 'user_session' not in session:
+            session['user_session'] = str(uuid.uuid4())
+        
+        assessment_service = AssessmentService()
+        result = assessment_service.evaluate_assessment(
+            assessment_id, user_answers, session['user_session']
+        )
+        
+        if 'error' in result:
+            return jsonify(result), 400
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        current_app.logger.error(f"Error evaluating assessment: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/assessments/<int:assessment_id>/submit', methods=['POST'])

@@ -1,0 +1,615 @@
+{% extends "base.html" %}
+
+{% block title %}Encapsulation - OOP Learning{% endblock %}
+
+{% block head %}
+<style>
+.progress-bar { transition: width 0.5s ease; }
+.code-example { font-family: 'Monaco', 'Consolas', monospace; }
+.interactive-demo { border: 2px solid #10b981; border-radius: 12px; }
+.concept-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.concept-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.section-complete { background: linear-gradient(45deg, #10b981, #059669); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🔒 Encapsulation Mastery</h1>
+            <p class="text-xl opacity-90 mb-6">Bundle data and methods, control access like a fortress</p>
+            <div class="flex justify-center space-x-3 flex-wrap">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Data Protection</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Access Control</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Information Hiding</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Progress</h2>
+                <div class="flex items-center space-x-3">
+                    <div class="w-48 bg-gray-200 rounded-full h-2">
+                        <div class="bg-emerald-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6">
+        <!-- Navigation -->
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <button class="nav-btn concept-card p-3 bg-blue-50 rounded-lg text-center" data-section="basics">
+                    <div class="text-2xl mb-1">🎯</div>
+                    <div class="text-sm font-semibold">Basics</div>
+                </button>
+                <button class="nav-btn concept-card p-3 bg-green-50 rounded-lg text-center" data-section="access">
+                    <div class="text-2xl mb-1">🔐</div>
+                    <div class="text-sm font-semibold">Access Control</div>
+                </button>
+                <button class="nav-btn concept-card p-3 bg-purple-50 rounded-lg text-center" data-section="properties">
+                    <div class="text-2xl mb-1">⚙️</div>
+                    <div class="text-sm font-semibold">Properties</div>
+                </button>
+                <button class="nav-btn concept-card p-3 bg-yellow-50 rounded-lg text-center" data-section="examples">
+                    <div class="text-2xl mb-1">💻</div>
+                    <div class="text-sm font-semibold">Examples</div>
+                </button>
+                <button class="nav-btn concept-card p-3 bg-red-50 rounded-lg text-center" data-section="assessment">
+                    <div class="text-2xl mb-1">📝</div>
+                    <div class="text-sm font-semibold">Assessment</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section 1: Basics -->
+        <div id="basics" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-emerald-800 mb-4">🎯 What is Encapsulation?</h3>
+                
+                <!-- Bank Account Demo -->
+                <div class="bg-gradient-to-r from-emerald-100 to-green-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">🏦 Interactive Bank Account Demo</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="interactive-demo bg-white p-4 rounded-lg">
+                            <h5 class="font-semibold mb-3">💳 Public Interface</h5>
+                            <div class="text-center mb-3">
+                                <div class="bg-gray-100 p-2 rounded">Balance: $<span id="balance-display">****</span></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="demo-btn bg-blue-500 text-white py-2 px-3 rounded text-sm" data-action="check">Check Balance</button>
+                                <button class="demo-btn bg-green-500 text-white py-2 px-3 rounded text-sm" data-action="deposit">Deposit $100</button>
+                                <button class="demo-btn bg-red-500 text-white py-2 px-3 rounded text-sm" data-action="withdraw">Withdraw $50</button>
+                                <button class="demo-btn bg-purple-500 text-white py-2 px-3 rounded text-sm" data-action="transfer">Transfer $25</button>
+                            </div>
+                            <div id="demo-message" class="mt-3 p-2 bg-blue-50 rounded text-sm text-center">Select an operation</div>
+                        </div>
+                        
+                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg">
+                            <h5 class="font-semibold text-white mb-3">🔒 Private Internal State</h5>
+                            <div id="internal-state" class="text-xs space-y-1">
+                                <div>💰 Private Balance: $1000.00</div>
+                                <div>🆔 Account: ****-1234</div>
+                                <div>🔐 Security: High</div>
+                                <div>📊 Transactions: 47</div>
+                                <div>⚠️ Daily Limit: $500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Definition -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-emerald-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-emerald-800 mb-2">📖 Definition</h4>
+                        <p class="text-sm text-gray-700 mb-3">Encapsulation bundles data and methods while restricting direct access to internal components.</p>
+                        <div class="bg-white p-3 rounded border">
+                            <strong class="text-emerald-800">Two Pillars:</strong>
+                            <ul class="text-sm mt-1 space-y-1">
+                                <li>🎁 <strong>Bundling:</strong> Data + Methods together</li>
+                                <li>🔒 <strong>Hiding:</strong> Restrict direct access</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">🎯 Benefits</h4>
+                        <ul class="space-y-1 text-sm">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">🛡️</span>Data Protection</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✅</span>Data Validation</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">🔧</span>Easier Maintenance</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">🎛️</span>Controlled Access</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">🐛</span>Reduced Bugs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700" data-next="access">Next: Access Control →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Access Control -->
+        <div id="access" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-emerald-800 mb-4">🔐 Access Control Levels</h3>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <div class="access-level bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-800 mb-2">🔒 Private</h4>
+                        <p class="text-sm text-gray-700 mb-2">Only accessible within the same class</p>
+                        <div class="code-example bg-gray-900 text-red-400 p-2 rounded text-xs">
+                            <div>class Account:</div>
+                            <div>&nbsp;&nbsp;def __init__(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.__balance = 0  # Private</div>
+                        </div>
+                    </div>
+                    
+                    <div class="access-level bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-semibold text-yellow-800 mb-2">🔓 Protected</h4>
+                        <p class="text-sm text-gray-700 mb-2">Accessible within class and subclasses</p>
+                        <div class="code-example bg-gray-900 text-yellow-400 p-2 rounded text-xs">
+                            <div>class Account:</div>
+                            <div>&nbsp;&nbsp;def __init__(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self._balance = 0  # Protected</div>
+                        </div>
+                    </div>
+                    
+                    <div class="access-level bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-800 mb-2">🌐 Public</h4>
+                        <p class="text-sm text-gray-700 mb-2">Accessible from anywhere</p>
+                        <div class="code-example bg-gray-900 text-green-400 p-2 rounded text-xs">
+                            <div>class Account:</div>
+                            <div>&nbsp;&nbsp;def __init__(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.account_id = 123  # Public</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700" data-next="properties">Next: Properties →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Properties -->
+        <div id="properties" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-emerald-800 mb-4">⚙️ Getters & Setters</h3>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">❌ Without Encapsulation</h4>
+                        <div class="code-example bg-gray-900 text-red-400 p-3 rounded text-sm">
+                            <div>class Account:</div>
+                            <div>&nbsp;&nbsp;def __init__(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.balance = 1000</div>
+                            <div></div>
+                            <div># Direct access - dangerous!</div>
+                            <div>account.balance = -500  # 😱</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">✅ With Encapsulation</h4>
+                        <div class="code-example bg-gray-900 text-green-400 p-3 rounded text-sm">
+                            <div>class Account:</div>
+                            <div>&nbsp;&nbsp;def __init__(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.__balance = 1000</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;def get_balance(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return self.__balance</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;def deposit(self, amount):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;if amount > 0:</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__balance += amount</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700" data-next="examples">Next: Examples →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Examples -->
+        <div id="examples" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-emerald-800 mb-4">💻 Real-World Examples</h3>
+                
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">🚗 Car Class Example</h4>
+                        <div class="code-example bg-gray-900 text-blue-400 p-3 rounded text-sm">
+                            <div>class Car:</div>
+                            <div>&nbsp;&nbsp;def __init__(self, make, model):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.__engine_running = False  # Private</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.__fuel_level = 100  # Private</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.make = make  # Public</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.model = model  # Public</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;def start_engine(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;if self.__fuel_level > 0:</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__engine_running = True</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Engine started!"</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "No fuel!"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700" data-next="assessment">Take Assessment →</button>
+            </div>
+        </div>
+
+        <!-- Assessment Section -->
+        <div id="assessment" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-emerald-800 mb-4">📝 Encapsulation Assessment</h3>
+                
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h4 class="text-lg font-semibold">Test Your Knowledge</h4>
+                        <p class="text-gray-600">Complete this assessment to evaluate your understanding of Encapsulation</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="assessment-option bg-green-50 p-4 rounded-lg cursor-pointer" data-difficulty="easy">
+                            <div class="text-2xl mb-2">🟢</div>
+                            <h5 class="font-semibold">Easy</h5>
+                            <p class="text-sm text-gray-600">5 basic questions</p>
+                        </div>
+                        <div class="assessment-option bg-yellow-50 p-4 rounded-lg cursor-pointer" data-difficulty="medium">
+                            <div class="text-2xl mb-2">🟡</div>
+                            <h5 class="font-semibold">Medium</h5>
+                            <p class="text-sm text-gray-600">7 moderate questions</p>
+                        </div>
+                        <div class="assessment-option bg-red-50 p-4 rounded-lg cursor-pointer" data-difficulty="hard">
+                            <div class="text-2xl mb-2">🔴</div>
+                            <h5 class="font-semibold">Hard</h5>
+                            <p class="text-sm text-gray-600">10 challenging questions</p>
+                        </div>
+                    </div>
+                    
+                    <button id="start-assessment" class="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 disabled:opacity-50" disabled>
+                        Start Assessment
+                    </button>
+                </div>
+                
+                <!-- Assessment Questions (Hidden initially) -->
+                <div id="assessment-questions" class="hidden mt-6">
+                    <div id="question-container"></div>
+                    <div class="flex justify-between mt-4">
+                        <button id="prev-question" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Previous</button>
+                        <span id="question-counter" class="text-gray-600"></span>
+                        <button id="next-question" class="bg-emerald-600 text-white px-4 py-2 rounded-lg">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Results (Hidden initially) -->
+                <div id="assessment-results" class="hidden mt-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4" id="results-emoji">🎉</div>
+                        <h4 class="text-xl font-bold mb-2" id="results-title">Assessment Complete!</h4>
+                        <div class="text-3xl font-bold text-emerald-600 mb-4" id="results-score">85%</div>
+                        <div id="ai-feedback" class="bg-blue-50 p-4 rounded-lg text-left"></div>
+                        <div class="mt-4">
+                            <button id="retake-assessment" class="bg-emerald-600 text-white px-6 py-2 rounded-lg mr-2">Retake Assessment</button>
+                            <a href="/learn" class="bg-gray-500 text-white px-6 py-2 rounded-lg">Back to Learning</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class EncapsulationLearning {
+    constructor() {
+        this.currentSection = 'basics';
+        this.completedSections = new Set();
+        this.progress = 0;
+        this.bankAccount = { balance: 1000, transactions: 47, dailyLimit: 500 };
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        this.init();
+    }
+
+    init() {
+        this.showSection('basics');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.getAttribute('data-section');
+                this.showSection(section);
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nextSection = btn.getAttribute('data-next');
+                this.completeSection(this.currentSection);
+                this.showSection(nextSection);
+            });
+        });
+
+        // Bank demo
+        document.querySelectorAll('.demo-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.handleBankAction(btn.getAttribute('data-action')));
+        });
+
+        // Assessment
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.addEventListener('click', () => this.selectDifficulty(option.getAttribute('data-difficulty')));
+        });
+
+        document.getElementById('start-assessment').addEventListener('click', () => this.startAssessment());
+        document.getElementById('prev-question').addEventListener('click', () => this.previousQuestion());
+        document.getElementById('next-question').addEventListener('click', () => this.nextQuestion());
+        document.getElementById('retake-assessment').addEventListener('click', () => this.retakeAssessment());
+    }
+
+    showSection(sectionName) {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionName).classList.remove('hidden');
+        this.currentSection = sectionName;
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('section-complete'));
+        document.querySelector(`[data-section="${sectionName}"]`).classList.add('ring-2', 'ring-emerald-500');
+        
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        const btn = document.querySelector(`[data-section="${sectionName}"]`);
+        if (btn) {
+            btn.classList.add('section-complete');
+            btn.querySelector('.text-2xl').textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const totalSections = 5;
+        this.progress = (this.completedSections.size / totalSections) * 100;
+        document.querySelector('.progress-bar').style.width = `${this.progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(this.progress)}% Complete`;
+    }
+
+    handleBankAction(action) {
+        const messageEl = document.getElementById('demo-message');
+        const balanceEl = document.getElementById('balance-display');
+        
+        switch(action) {
+            case 'check':
+                balanceEl.textContent = this.bankAccount.balance.toFixed(2);
+                messageEl.textContent = '✅ Balance inquiry successful.';
+                messageEl.className = 'mt-3 p-2 bg-blue-50 rounded text-sm text-center';
+                break;
+            case 'deposit':
+                this.bankAccount.balance += 100;
+                this.bankAccount.transactions++;
+                balanceEl.textContent = this.bankAccount.balance.toFixed(2);
+                messageEl.textContent = '✅ Successfully deposited $100.00';
+                messageEl.className = 'mt-3 p-2 bg-green-50 rounded text-sm text-center';
+                break;
+            case 'withdraw':
+                if (this.bankAccount.balance >= 50) {
+                    this.bankAccount.balance -= 50;
+                    this.bankAccount.transactions++;
+                    balanceEl.textContent = this.bankAccount.balance.toFixed(2);
+                    messageEl.textContent = '✅ Successfully withdrew $50.00';
+                    messageEl.className = 'mt-3 p-2 bg-green-50 rounded text-sm text-center';
+                } else {
+                    messageEl.textContent = '❌ Insufficient funds.';
+                    messageEl.className = 'mt-3 p-2 bg-red-50 rounded text-sm text-center';
+                }
+                break;
+            case 'transfer':
+                if (this.bankAccount.balance >= 25) {
+                    this.bankAccount.balance -= 25;
+                    this.bankAccount.transactions++;
+                    balanceEl.textContent = this.bankAccount.balance.toFixed(2);
+                    messageEl.textContent = '✅ Successfully transferred $25.00';
+                    messageEl.className = 'mt-3 p-2 bg-green-50 rounded text-sm text-center';
+                } else {
+                    messageEl.textContent = '❌ Insufficient funds.';
+                    messageEl.className = 'mt-3 p-2 bg-red-50 rounded text-sm text-center';
+                }
+                break;
+        }
+        
+        document.getElementById('internal-state').innerHTML = `
+            <div>💰 Private Balance: $${this.bankAccount.balance.toFixed(2)}</div>
+            <div>🆔 Account: ****-1234</div>
+            <div>🔐 Security: High</div>
+            <div>📊 Transactions: ${this.bankAccount.transactions}</div>
+            <div>⚠️ Daily Limit: $${this.bankAccount.dailyLimit}</div>
+        `;
+    }
+
+    selectDifficulty(difficulty) {
+        this.assessment.difficulty = difficulty;
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-emerald-500');
+        });
+        document.querySelector(`[data-difficulty="${difficulty}"]`).classList.add('ring-2', 'ring-emerald-500');
+        document.getElementById('start-assessment').disabled = false;
+    }
+
+    async startAssessment() {
+        try {
+            const questionCounts = { easy: 5, medium: 7, hard: 10 };
+            const response = await fetch(`/api/assessments/generate/encapsulation`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    difficulty: this.assessment.difficulty,
+                    question_count: questionCounts[this.assessment.difficulty]
+                })
+            });
+
+            const data = await response.json();
+            this.assessment.questions = data.questions;
+            this.assessment.currentQuestion = 0;
+            this.assessment.answers = {};
+
+            document.querySelector('.text-center').classList.add('hidden');
+            document.getElementById('assessment-questions').classList.remove('hidden');
+            this.showQuestion();
+        } catch (error) {
+            console.error('Error starting assessment:', error);
+            alert('Failed to start assessment. Please try again.');
+        }
+    }
+
+    showQuestion() {
+        const question = this.assessment.questions[this.assessment.currentQuestion];
+        const container = document.getElementById('question-container');
+        
+        container.innerHTML = `
+            <div class="mb-4">
+                <h4 class="text-lg font-semibold mb-3">Question ${this.assessment.currentQuestion + 1}</h4>
+                <p class="text-gray-800 mb-4">${question.question}</p>
+                <div class="space-y-2">
+                    ${Object.entries(question.options).map(([key, value]) => `
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
+                            <input type="radio" name="question-${question.id}" value="${key}" class="mr-3" 
+                                ${this.assessment.answers[question.id] === key ? 'checked' : ''}>
+                            <span>${key}. ${value}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        // Update counter
+        document.getElementById('question-counter').textContent = 
+            `${this.assessment.currentQuestion + 1} of ${this.assessment.questions.length}`;
+
+        // Update navigation buttons
+        document.getElementById('prev-question').disabled = this.assessment.currentQuestion === 0;
+        document.getElementById('next-question').textContent = 
+            this.assessment.currentQuestion === this.assessment.questions.length - 1 ? 'Submit' : 'Next';
+
+        // Save answer on selection
+        container.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                this.assessment.answers[question.id] = radio.value;
+            });
+        });
+    }
+
+    previousQuestion() {
+        if (this.assessment.currentQuestion > 0) {
+            this.assessment.currentQuestion--;
+            this.showQuestion();
+        }
+    }
+
+    nextQuestion() {
+        if (this.assessment.currentQuestion < this.assessment.questions.length - 1) {
+            this.assessment.currentQuestion++;
+            this.showQuestion();
+        } else {
+            this.submitAssessment();
+        }
+    }
+
+    async submitAssessment() {
+        try {
+            const response = await fetch(`/api/assessments/evaluate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    assessment_id: this.assessment.questions[0].assessment_id,
+                    answers: this.assessment.answers
+                })
+            });
+
+            const results = await response.json();
+            this.showResults(results);
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+            alert('Failed to submit assessment. Please try again.');
+        }
+    }
+
+    showResults(results) {
+        document.getElementById('assessment-questions').classList.add('hidden');
+        document.getElementById('assessment-results').classList.remove('hidden');
+
+        const score = results.score_percentage;
+        document.getElementById('results-score').textContent = `${Math.round(score)}%`;
+
+        let emoji = '🎉';
+        let title = 'Excellent Work!';
+        if (score < 50) {
+            emoji = '📚';
+            title = 'Keep Learning!';
+        } else if (score < 70) {
+            emoji = '👍';
+            title = 'Good Job!';
+        } else if (score < 90) {
+            emoji = '🌟';
+            title = 'Great Work!';
+        }
+
+        document.getElementById('results-emoji').textContent = emoji;
+        document.getElementById('results-title').textContent = title;
+
+        // Show AI feedback
+        const feedbackEl = document.getElementById('ai-feedback');
+        if (results.ai_feedback) {
+            feedbackEl.innerHTML = `
+                <h5 class="font-semibold mb-2">📋 Personalized Feedback</h5>
+                <p class="text-sm mb-2">${results.ai_feedback.overall_assessment}</p>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <strong>💪 Strengths:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.strengths.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>📈 Recommendations:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.study_recommendations.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm mt-3 font-medium text-blue-700">${results.ai_feedback.encouragement}</p>
+            `;
+        }
+
+        this.completeSection('assessment');
+    }
+
+    retakeAssessment() {
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        document.getElementById('assessment-results').classList.add('hidden');
+        document.querySelector('.text-center').classList.remove('hidden');
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-emerald-500');
+        });
+        document.getElementById('start-assessment').disabled = true;
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    new EncapsulationLearning();
+});
+</script>
+{% endblock %}

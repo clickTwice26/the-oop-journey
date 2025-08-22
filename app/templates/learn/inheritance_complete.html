@@ -1,0 +1,678 @@
+{% extends "base.html" %}
+
+{% block title %}Inheritance - OOP Learning{% endblock %}
+
+{% block head %}
+<style>
+.family-tree { font-family: 'Monaco', 'Consolas', monospace; }
+.inheritance-demo { border: 2px solid #3b82f6; border-radius: 12px; }
+.class-box { transition: all 0.3s ease; }
+.class-box:hover { transform: scale(1.05); }
+.hierarchy-line { stroke: #3b82f6; stroke-width: 2; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🧬 Inheritance Mastery</h1>
+            <p class="text-xl opacity-90 mb-6">Build powerful relationships between classes</p>
+            <div class="flex justify-center space-x-3 flex-wrap">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Code Reuse</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Hierarchies</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Specialization</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Progress</h2>
+                <div class="flex items-center space-x-3">
+                    <div class="w-48 bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6">
+        <!-- Navigation -->
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <button class="nav-btn p-3 bg-blue-50 rounded-lg text-center" data-section="basics">
+                    <div class="text-2xl mb-1">🎯</div>
+                    <div class="text-sm font-semibold">Basics</div>
+                </button>
+                <button class="nav-btn p-3 bg-green-50 rounded-lg text-center" data-section="hierarchy">
+                    <div class="text-2xl mb-1">🌳</div>
+                    <div class="text-sm font-semibold">Hierarchy</div>
+                </button>
+                <button class="nav-btn p-3 bg-purple-50 rounded-lg text-center" data-section="overriding">
+                    <div class="text-2xl mb-1">🔄</div>
+                    <div class="text-sm font-semibold">Overriding</div>
+                </button>
+                <button class="nav-btn p-3 bg-yellow-50 rounded-lg text-center" data-section="examples">
+                    <div class="text-2xl mb-1">💻</div>
+                    <div class="text-sm font-semibold">Examples</div>
+                </button>
+                <button class="nav-btn p-3 bg-red-50 rounded-lg text-center" data-section="assessment">
+                    <div class="text-2xl mb-1">📝</div>
+                    <div class="text-sm font-semibold">Assessment</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section 1: Basics -->
+        <div id="basics" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">🎯 What is Inheritance?</h3>
+                
+                <!-- Family Tree Analogy -->
+                <div class="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">👨‍👩‍👧‍👦 Family Tree Analogy</h4>
+                    <div class="inheritance-demo bg-white p-4 rounded-lg">
+                        <div class="text-center family-tree">
+                            <!-- Grandparent -->
+                            <div class="mb-4">
+                                <div class="class-box inline-block bg-purple-100 p-3 rounded-lg border-2 border-purple-300">
+                                    <div class="font-bold text-purple-800">👴 Grandparent</div>
+                                    <div class="text-sm text-purple-600">• DNA</div>
+                                    <div class="text-sm text-purple-600">• Family Name</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Parents -->
+                            <div class="flex justify-center space-x-8 mb-4">
+                                <div class="class-box bg-blue-100 p-3 rounded-lg border-2 border-blue-300">
+                                    <div class="font-bold text-blue-800">👨 Father</div>
+                                    <div class="text-sm text-blue-600">• Inherited: DNA, Name</div>
+                                    <div class="text-sm text-blue-600">• Added: Beard</div>
+                                </div>
+                                <div class="class-box bg-pink-100 p-3 rounded-lg border-2 border-pink-300">
+                                    <div class="font-bold text-pink-800">👩 Mother</div>
+                                    <div class="text-sm text-pink-600">• Inherited: DNA, Name</div>
+                                    <div class="text-sm text-pink-600">• Added: Caring</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Children -->
+                            <div class="flex justify-center space-x-4">
+                                <div class="class-box bg-green-100 p-3 rounded-lg border-2 border-green-300">
+                                    <div class="font-bold text-green-800">👧 Daughter</div>
+                                    <div class="text-sm text-green-600">• From Dad: DNA, Name</div>
+                                    <div class="text-sm text-green-600">• From Mom: Caring</div>
+                                    <div class="text-sm text-green-600">• Added: Creativity</div>
+                                </div>
+                                <div class="class-box bg-orange-100 p-3 rounded-lg border-2 border-orange-300">
+                                    <div class="font-bold text-orange-800">👦 Son</div>
+                                    <div class="text-sm text-orange-600">• From Dad: DNA, Beard</div>
+                                    <div class="text-sm text-orange-600">• From Mom: Caring</div>
+                                    <div class="text-sm text-orange-600">• Added: Sports</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-blue-50 rounded text-sm text-center">
+                            💡 <strong>Key Insight:</strong> Children inherit traits from parents but can add their own unique characteristics!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Definition -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">📖 Definition</h4>
+                        <p class="text-sm text-gray-700 mb-3">Inheritance allows a class to acquire properties and methods from another class, promoting code reuse and establishing relationships.</p>
+                        <div class="bg-white p-3 rounded border">
+                            <strong class="text-blue-800">Key Terms:</strong>
+                            <ul class="text-sm mt-1 space-y-1">
+                                <li>🏠 <strong>Parent/Base:</strong> The class being inherited from</li>
+                                <li>👶 <strong>Child/Derived:</strong> The class that inherits</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-indigo-800 mb-2">🎯 Benefits</h4>
+                        <ul class="space-y-1 text-sm">
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2">♻️</span>Code Reusability</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2">🏗️</span>Hierarchical Organization</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2">🔧</span>Easy Maintenance</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2">📈</span>Extensibility</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2">🎯</span>Specialization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" data-next="hierarchy">Next: Class Hierarchy →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Hierarchy -->
+        <div id="hierarchy" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">🌳 Class Hierarchies</h3>
+                
+                <!-- Interactive Animal Hierarchy -->
+                <div class="bg-gradient-to-r from-green-100 to-blue-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">🐾 Interactive Animal Kingdom</h4>
+                    <div class="inheritance-demo bg-white p-4 rounded-lg">
+                        <div class="animal-hierarchy text-center">
+                            <!-- Base Animal Class -->
+                            <div class="mb-4">
+                                <div class="class-box inline-block bg-gray-100 p-4 rounded-lg border-2 border-gray-300 cursor-pointer" data-class="animal">
+                                    <div class="font-bold text-gray-800">🐾 Animal</div>
+                                    <div class="text-sm text-gray-600">• name, age</div>
+                                    <div class="text-sm text-gray-600">• eat(), sleep()</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mammal and Bird -->
+                            <div class="flex justify-center space-x-8 mb-4">
+                                <div class="class-box bg-brown-100 p-3 rounded-lg border-2 border-yellow-400 cursor-pointer" data-class="mammal">
+                                    <div class="font-bold text-yellow-800">🐺 Mammal</div>
+                                    <div class="text-sm text-yellow-600">• Inherits: Animal</div>
+                                    <div class="text-sm text-yellow-600">• Added: give_birth()</div>
+                                </div>
+                                <div class="class-box bg-sky-100 p-3 rounded-lg border-2 border-sky-400 cursor-pointer" data-class="bird">
+                                    <div class="font-bold text-sky-800">🐦 Bird</div>
+                                    <div class="text-sm text-sky-600">• Inherits: Animal</div>
+                                    <div class="text-sm text-sky-600">• Added: fly(), lay_eggs()</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Specific Animals -->
+                            <div class="flex justify-center space-x-4">
+                                <div class="class-box bg-orange-100 p-3 rounded-lg border-2 border-orange-400 cursor-pointer" data-class="dog">
+                                    <div class="font-bold text-orange-800">🐕 Dog</div>
+                                    <div class="text-sm text-orange-600">• Inherits: Mammal</div>
+                                    <div class="text-sm text-orange-600">• Added: bark()</div>
+                                </div>
+                                <div class="class-box bg-purple-100 p-3 rounded-lg border-2 border-purple-400 cursor-pointer" data-class="cat">
+                                    <div class="font-bold text-purple-800">🐱 Cat</div>
+                                    <div class="text-sm text-purple-600">• Inherits: Mammal</div>
+                                    <div class="text-sm text-purple-600">• Added: meow()</div>
+                                </div>
+                                <div class="class-box bg-red-100 p-3 rounded-lg border-2 border-red-400 cursor-pointer" data-class="eagle">
+                                    <div class="font-bold text-red-800">🦅 Eagle</div>
+                                    <div class="text-sm text-red-600">• Inherits: Bird</div>
+                                    <div class="text-sm text-red-600">• Added: hunt()</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="class-details" class="mt-4 p-3 bg-blue-50 rounded text-sm">
+                            Click on any class to see its complete method list!
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" data-next="overriding">Next: Method Overriding →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Method Overriding -->
+        <div id="overriding" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">🔄 Method Overriding</h3>
+                
+                <!-- Interactive Override Demo -->
+                <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">🎭 Shape Sound Demo</h4>
+                    <div class="inheritance-demo bg-white p-4 rounded-lg">
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div class="override-demo text-center">
+                                <div class="class-box bg-blue-100 p-3 rounded-lg border-2 border-blue-300 mb-3">
+                                    <div class="font-bold text-blue-800">🔊 Animal</div>
+                                    <div class="text-sm text-blue-600">make_sound(): "Some sound"</div>
+                                </div>
+                                <button class="demo-sound-btn bg-blue-500 text-white px-4 py-2 rounded" data-animal="base">
+                                    Make Animal Sound
+                                </button>
+                            </div>
+                            
+                            <div class="override-demo text-center">
+                                <div class="class-box bg-orange-100 p-3 rounded-lg border-2 border-orange-300 mb-3">
+                                    <div class="font-bold text-orange-800">🐕 Dog</div>
+                                    <div class="text-sm text-orange-600">make_sound(): "Woof!"</div>
+                                    <div class="text-xs text-orange-500">Overrides Animal</div>
+                                </div>
+                                <button class="demo-sound-btn bg-orange-500 text-white px-4 py-2 rounded" data-animal="dog">
+                                    Make Dog Sound
+                                </button>
+                            </div>
+                            
+                            <div class="override-demo text-center">
+                                <div class="class-box bg-purple-100 p-3 rounded-lg border-2 border-purple-300 mb-3">
+                                    <div class="font-bold text-purple-800">🐱 Cat</div>
+                                    <div class="text-sm text-purple-600">make_sound(): "Meow!"</div>
+                                    <div class="text-xs text-purple-500">Overrides Animal</div>
+                                </div>
+                                <button class="demo-sound-btn bg-purple-500 text-white px-4 py-2 rounded" data-animal="cat">
+                                    Make Cat Sound
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="sound-output" class="text-center p-3 bg-gray-100 rounded">
+                            Click any button to hear the animal sound!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Example -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-2">📄 Base Class</h4>
+                        <div class="bg-gray-900 text-green-400 p-3 rounded text-sm font-mono">
+                            <div>class Animal:</div>
+                            <div>&nbsp;&nbsp;def make_sound(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Some generic sound"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-orange-800 mb-2">🔄 Override in Child</h4>
+                        <div class="bg-gray-900 text-orange-400 p-3 rounded text-sm font-mono">
+                            <div>class Dog(Animal):</div>
+                            <div>&nbsp;&nbsp;def make_sound(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Woof! Woof!"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" data-next="examples">Next: Examples →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Examples -->
+        <div id="examples" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">💻 Real-World Examples</h3>
+                
+                <div class="space-y-4">
+                    <!-- Vehicle Hierarchy -->
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">🚗 Vehicle Hierarchy</h4>
+                        <div class="bg-gray-900 text-blue-400 p-3 rounded text-sm font-mono">
+                            <div>class Vehicle:</div>
+                            <div>&nbsp;&nbsp;def __init__(self, brand, model):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.brand = brand</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.model = model</div>
+                            <div>&nbsp;&nbsp;def start_engine(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Engine started"</div>
+                            <div></div>
+                            <div>class Car(Vehicle):</div>
+                            <div>&nbsp;&nbsp;def __init__(self, brand, model, doors):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(brand, model)</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.doors = doors</div>
+                            <div>&nbsp;&nbsp;def open_trunk(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Trunk opened"</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Employee Hierarchy -->
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">👥 Employee System</h4>
+                        <div class="bg-gray-900 text-green-400 p-3 rounded text-sm font-mono">
+                            <div>class Employee:</div>
+                            <div>&nbsp;&nbsp;def __init__(self, name, salary):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.name = name</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.salary = salary</div>
+                            <div>&nbsp;&nbsp;def work(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"{self.name} is working"</div>
+                            <div></div>
+                            <div>class Manager(Employee):</div>
+                            <div>&nbsp;&nbsp;def __init__(self, name, salary, team_size):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(name, salary)</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;self.team_size = team_size</div>
+                            <div>&nbsp;&nbsp;def manage_team(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Managing {self.team_size} people"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" data-next="assessment">Take Assessment →</button>
+            </div>
+        </div>
+
+        <!-- Assessment Section -->
+        <div id="assessment" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">📝 Inheritance Assessment</h3>
+                
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h4 class="text-lg font-semibold">Test Your Knowledge</h4>
+                        <p class="text-gray-600">Complete this assessment to evaluate your understanding of Inheritance</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="assessment-option bg-green-50 p-4 rounded-lg cursor-pointer" data-difficulty="easy">
+                            <div class="text-2xl mb-2">🟢</div>
+                            <h5 class="font-semibold">Easy</h5>
+                            <p class="text-sm text-gray-600">5 basic questions</p>
+                        </div>
+                        <div class="assessment-option bg-yellow-50 p-4 rounded-lg cursor-pointer" data-difficulty="medium">
+                            <div class="text-2xl mb-2">🟡</div>
+                            <h5 class="font-semibold">Medium</h5>
+                            <p class="text-sm text-gray-600">7 moderate questions</p>
+                        </div>
+                        <div class="assessment-option bg-red-50 p-4 rounded-lg cursor-pointer" data-difficulty="hard">
+                            <div class="text-2xl mb-2">🔴</div>
+                            <h5 class="font-semibold">Hard</h5>
+                            <p class="text-sm text-gray-600">10 challenging questions</p>
+                        </div>
+                    </div>
+                    
+                    <button id="start-assessment" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50" disabled>
+                        Start Assessment
+                    </button>
+                </div>
+                
+                <!-- Assessment Questions & Results (Hidden initially) -->
+                <div id="assessment-questions" class="hidden mt-6">
+                    <div id="question-container"></div>
+                    <div class="flex justify-between mt-4">
+                        <button id="prev-question" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Previous</button>
+                        <span id="question-counter" class="text-gray-600"></span>
+                        <button id="next-question" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Next</button>
+                    </div>
+                </div>
+                
+                <div id="assessment-results" class="hidden mt-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4" id="results-emoji">🎉</div>
+                        <h4 class="text-xl font-bold mb-2" id="results-title">Assessment Complete!</h4>
+                        <div class="text-3xl font-bold text-blue-600 mb-4" id="results-score">85%</div>
+                        <div id="ai-feedback" class="bg-blue-50 p-4 rounded-lg text-left"></div>
+                        <div class="mt-4">
+                            <button id="retake-assessment" class="bg-blue-600 text-white px-6 py-2 rounded-lg mr-2">Retake</button>
+                            <a href="/learn" class="bg-gray-500 text-white px-6 py-2 rounded-lg">Back to Learning</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class InheritanceLearning {
+    constructor() {
+        this.currentSection = 'basics';
+        this.completedSections = new Set();
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        this.init();
+    }
+
+    init() {
+        this.showSection('basics');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.showSection(btn.getAttribute('data-section'));
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.completeSection(this.currentSection);
+                this.showSection(btn.getAttribute('data-next'));
+            });
+        });
+
+        // Class hierarchy demo
+        document.querySelectorAll('[data-class]').forEach(el => {
+            el.addEventListener('click', () => this.showClassDetails(el.getAttribute('data-class')));
+        });
+
+        // Sound demo
+        document.querySelectorAll('.demo-sound-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.makeAnimalSound(btn.getAttribute('data-animal')));
+        });
+
+        // Assessment
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.addEventListener('click', () => this.selectDifficulty(option.getAttribute('data-difficulty')));
+        });
+
+        document.getElementById('start-assessment').addEventListener('click', () => this.startAssessment());
+        document.getElementById('prev-question').addEventListener('click', () => this.previousQuestion());
+        document.getElementById('next-question').addEventListener('click', () => this.nextQuestion());
+        document.getElementById('retake-assessment').addEventListener('click', () => this.retakeAssessment());
+    }
+
+    showSection(sectionName) {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionName).classList.remove('hidden');
+        this.currentSection = sectionName;
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('ring-2', 'ring-blue-500'));
+        document.querySelector(`[data-section="${sectionName}"]`).classList.add('ring-2', 'ring-blue-500');
+        
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        const btn = document.querySelector(`[data-section="${sectionName}"]`);
+        if (btn) {
+            btn.classList.add('bg-green-200');
+            btn.querySelector('.text-2xl').textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const progress = (this.completedSections.size / 5) * 100;
+        document.querySelector('.progress-bar').style.width = `${progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(progress)}% Complete`;
+    }
+
+    showClassDetails(className) {
+        const details = {
+            animal: 'Animal class has: name, age, eat(), sleep(). Base class for all animals.',
+            mammal: 'Mammal inherits from Animal and adds: give_birth(). All mammals share these traits.',
+            bird: 'Bird inherits from Animal and adds: fly(), lay_eggs(). All birds can fly and lay eggs.',
+            dog: 'Dog inherits from Mammal (which inherits from Animal) and adds: bark(). Gets all animal and mammal methods plus its own.',
+            cat: 'Cat inherits from Mammal and adds: meow(). Has purr() method that mammals don\'t have.',
+            eagle: 'Eagle inherits from Bird and adds: hunt(). Can fly like all birds but also has hunting capabilities.'
+        };
+
+        document.getElementById('class-details').innerHTML = `
+            <strong>🔍 ${className.charAt(0).toUpperCase() + className.slice(1)} Details:</strong> ${details[className]}
+        `;
+    }
+
+    makeAnimalSound(animal) {
+        const sounds = {
+            base: '🔊 "Some generic animal sound"',
+            dog: '🐕 "Woof! Woof!"',
+            cat: '🐱 "Meow! Meow!"'
+        };
+
+        const output = document.getElementById('sound-output');
+        output.innerHTML = sounds[animal];
+        output.className = 'text-center p-3 bg-yellow-100 rounded text-lg font-semibold';
+        
+        setTimeout(() => {
+            output.className = 'text-center p-3 bg-gray-100 rounded';
+        }, 2000);
+    }
+
+    selectDifficulty(difficulty) {
+        this.assessment.difficulty = difficulty;
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-blue-500');
+        });
+        document.querySelector(`[data-difficulty="${difficulty}"]`).classList.add('ring-2', 'ring-blue-500');
+        document.getElementById('start-assessment').disabled = false;
+    }
+
+    async startAssessment() {
+        try {
+            const questionCounts = { easy: 5, medium: 7, hard: 10 };
+            const response = await fetch(`/api/assessments/generate/inheritance`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    difficulty: this.assessment.difficulty,
+                    question_count: questionCounts[this.assessment.difficulty]
+                })
+            });
+
+            const data = await response.json();
+            this.assessment.questions = data.questions;
+            this.assessment.currentQuestion = 0;
+            this.assessment.answers = {};
+
+            document.querySelector('.text-center').classList.add('hidden');
+            document.getElementById('assessment-questions').classList.remove('hidden');
+            this.showQuestion();
+        } catch (error) {
+            console.error('Error starting assessment:', error);
+            alert('Failed to start assessment. Please try again.');
+        }
+    }
+
+    showQuestion() {
+        const question = this.assessment.questions[this.assessment.currentQuestion];
+        const container = document.getElementById('question-container');
+        
+        container.innerHTML = `
+            <div class="mb-4">
+                <h4 class="text-lg font-semibold mb-3">Question ${this.assessment.currentQuestion + 1}</h4>
+                <p class="text-gray-800 mb-4">${question.question}</p>
+                <div class="space-y-2">
+                    ${Object.entries(question.options).map(([key, value]) => `
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
+                            <input type="radio" name="question-${question.id}" value="${key}" class="mr-3" 
+                                ${this.assessment.answers[question.id] === key ? 'checked' : ''}>
+                            <span>${key}. ${value}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('question-counter').textContent = 
+            `${this.assessment.currentQuestion + 1} of ${this.assessment.questions.length}`;
+
+        document.getElementById('prev-question').disabled = this.assessment.currentQuestion === 0;
+        document.getElementById('next-question').textContent = 
+            this.assessment.currentQuestion === this.assessment.questions.length - 1 ? 'Submit' : 'Next';
+
+        container.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                this.assessment.answers[question.id] = radio.value;
+            });
+        });
+    }
+
+    previousQuestion() {
+        if (this.assessment.currentQuestion > 0) {
+            this.assessment.currentQuestion--;
+            this.showQuestion();
+        }
+    }
+
+    nextQuestion() {
+        if (this.assessment.currentQuestion < this.assessment.questions.length - 1) {
+            this.assessment.currentQuestion++;
+            this.showQuestion();
+        } else {
+            this.submitAssessment();
+        }
+    }
+
+    async submitAssessment() {
+        try {
+            const response = await fetch(`/api/assessments/evaluate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    assessment_id: this.assessment.questions[0].assessment_id,
+                    answers: this.assessment.answers
+                })
+            });
+
+            const results = await response.json();
+            this.showResults(results);
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+            alert('Failed to submit assessment. Please try again.');
+        }
+    }
+
+    showResults(results) {
+        document.getElementById('assessment-questions').classList.add('hidden');
+        document.getElementById('assessment-results').classList.remove('hidden');
+
+        const score = results.score_percentage;
+        document.getElementById('results-score').textContent = `${Math.round(score)}%`;
+
+        let emoji = '🎉', title = 'Excellent Work!';
+        if (score < 50) { emoji = '📚'; title = 'Keep Learning!'; }
+        else if (score < 70) { emoji = '👍'; title = 'Good Job!'; }
+        else if (score < 90) { emoji = '🌟'; title = 'Great Work!'; }
+
+        document.getElementById('results-emoji').textContent = emoji;
+        document.getElementById('results-title').textContent = title;
+
+        const feedbackEl = document.getElementById('ai-feedback');
+        if (results.ai_feedback) {
+            feedbackEl.innerHTML = `
+                <h5 class="font-semibold mb-2">📋 Personalized Feedback</h5>
+                <p class="text-sm mb-2">${results.ai_feedback.overall_assessment}</p>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <strong>💪 Strengths:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.strengths.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>📈 Recommendations:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.study_recommendations.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm mt-3 font-medium text-blue-700">${results.ai_feedback.encouragement}</p>
+            `;
+        }
+
+        this.completeSection('assessment');
+    }
+
+    retakeAssessment() {
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        document.getElementById('assessment-results').classList.add('hidden');
+        document.querySelector('.text-center').classList.remove('hidden');
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-blue-500');
+        });
+        document.getElementById('start-assessment').disabled = true;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new InheritanceLearning();
+});
+</script>
+{% endblock %}

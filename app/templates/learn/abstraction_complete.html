@@ -1,0 +1,758 @@
+{% extends "base.html" %}
+
+{% block title %}Abstraction - OOP Learning{% endblock %}
+
+{% block head %}
+<style>
+.interface-demo { border: 2px solid #f59e0b; border-radius: 12px; }
+.abstract-layer { opacity: 0.8; transition: opacity 0.3s ease; }
+.abstract-layer:hover { opacity: 1; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-amber-600 to-orange-700 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🎨 Abstraction Mastery</h1>
+            <p class="text-xl opacity-90 mb-6">Hide complexity, expose simplicity</p>
+            <div class="flex justify-center space-x-3 flex-wrap">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Essential Features</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Hide Complexity</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Simple Interface</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Progress</h2>
+                <div class="flex items-center space-x-3">
+                    <div class="w-48 bg-gray-200 rounded-full h-2">
+                        <div class="bg-amber-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6">
+        <!-- Navigation -->
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <button class="nav-btn p-3 bg-amber-50 rounded-lg text-center" data-section="basics">
+                    <div class="text-2xl mb-1">🎯</div>
+                    <div class="text-sm font-semibold">Basics</div>
+                </button>
+                <button class="nav-btn p-3 bg-orange-50 rounded-lg text-center" data-section="layers">
+                    <div class="text-2xl mb-1">🏗️</div>
+                    <div class="text-sm font-semibold">Layers</div>
+                </button>
+                <button class="nav-btn p-3 bg-yellow-50 rounded-lg text-center" data-section="interfaces">
+                    <div class="text-2xl mb-1">🔌</div>
+                    <div class="text-sm font-semibold">Interfaces</div>
+                </button>
+                <button class="nav-btn p-3 bg-red-50 rounded-lg text-center" data-section="examples">
+                    <div class="text-2xl mb-1">💻</div>
+                    <div class="text-sm font-semibold">Examples</div>
+                </button>
+                <button class="nav-btn p-3 bg-green-50 rounded-lg text-center" data-section="assessment">
+                    <div class="text-2xl mb-1">📝</div>
+                    <div class="text-sm font-semibold">Assessment</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section 1: Basics -->
+        <div id="basics" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-amber-800 mb-4">🎯 What is Abstraction?</h3>
+                
+                <!-- Car Dashboard Analogy -->
+                <div class="bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">🚗 Car Dashboard Analogy</h4>
+                    <div class="interface-demo bg-white p-4 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Simple Interface -->
+                            <div class="text-center">
+                                <h5 class="font-semibold text-amber-800 mb-3">🎛️ What You See (Abstract Interface)</h5>
+                                <div class="bg-gray-800 p-4 rounded-lg text-white">
+                                    <div class="grid grid-cols-3 gap-3 mb-4">
+                                        <button class="car-control bg-red-500 p-3 rounded" data-action="start">🔑 Start</button>
+                                        <button class="car-control bg-green-500 p-3 rounded" data-action="accelerate">⚡ Gas</button>
+                                        <button class="car-control bg-blue-500 p-3 rounded" data-action="brake">🛑 Brake</button>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div class="bg-yellow-500 p-2 rounded text-center text-black">🌡️ Temp</div>
+                                        <div class="bg-purple-500 p-2 rounded text-center">⛽ Fuel</div>
+                                        <div class="bg-indigo-500 p-2 rounded text-center">🏃 Speed</div>
+                                    </div>
+                                </div>
+                                <div id="car-feedback" class="mt-3 p-2 bg-amber-50 rounded text-sm">
+                                    Simple, intuitive controls hide complex engineering!
+                                </div>
+                            </div>
+                            
+                            <!-- Complex Reality -->
+                            <div class="text-center">
+                                <h5 class="font-semibold text-orange-800 mb-3">⚙️ What's Hidden (Complex Implementation)</h5>
+                                <div class="bg-gray-900 p-4 rounded-lg text-green-400 text-xs">
+                                    <div class="hidden-complexity">
+                                        <div>🔧 Engine Management System</div>
+                                        <div>⚡ Electronic Control Units (30+)</div>
+                                        <div>🔥 Combustion Chamber Control</div>
+                                        <div>🌊 Fuel Injection Timing</div>
+                                        <div>🔄 Transmission Control</div>
+                                        <div>🛡️ ABS Brake System</div>
+                                        <div>🌡️ Cooling System Management</div>
+                                        <div>📡 Sensor Data Processing</div>
+                                        <div>🔋 Battery Management</div>
+                                        <div>💨 Air Flow Regulation</div>
+                                        <div>⚙️ Valve Timing Control</div>
+                                        <div>🎯 Emissions Control</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 p-2 bg-orange-50 rounded text-sm">
+                                    Thousands of components working in harmony!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Definition -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-amber-800 mb-2">📖 Definition</h4>
+                        <p class="text-sm text-gray-700 mb-3">Abstraction hides complex implementation details while exposing only essential features through a simplified interface.</p>
+                        <div class="bg-white p-3 rounded border">
+                            <strong class="text-amber-800">Core Principle:</strong>
+                            <ul class="text-sm mt-1 space-y-1">
+                                <li>✨ <strong>Show:</strong> What users need</li>
+                                <li>🔒 <strong>Hide:</strong> How it works</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-orange-800 mb-2">🎯 Benefits</h4>
+                        <ul class="space-y-1 text-sm">
+                            <li class="flex items-center"><span class="text-orange-500 mr-2">🎯</span>Reduced Complexity</li>
+                            <li class="flex items-center"><span class="text-orange-500 mr-2">🚀</span>Increased Usability</li>
+                            <li class="flex items-center"><span class="text-orange-500 mr-2">🔧</span>Easier Maintenance</li>
+                            <li class="flex items-center"><span class="text-orange-500 mr-2">🛡️</span>Implementation Hiding</li>
+                            <li class="flex items-center"><span class="text-orange-500 mr-2">📈</span>Focus on Essentials</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700" data-next="layers">Next: Abstraction Layers →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Abstraction Layers -->
+        <div id="layers" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-amber-800 mb-4">🏗️ Abstraction Layers</h3>
+                
+                <!-- Computer System Layers -->
+                <div class="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">💻 Computer System Abstraction</h4>
+                    <div class="space-y-3">
+                        <div class="abstract-layer bg-green-500 text-white p-3 rounded-lg cursor-pointer" data-layer="user">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">👤 User Interface Layer</span>
+                                <span class="text-sm">What users see</span>
+                            </div>
+                        </div>
+                        <div class="abstract-layer bg-blue-500 text-white p-3 rounded-lg cursor-pointer" data-layer="application">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">🎮 Application Layer</span>
+                                <span class="text-sm">Programs & software</span>
+                            </div>
+                        </div>
+                        <div class="abstract-layer bg-purple-500 text-white p-3 rounded-lg cursor-pointer" data-layer="os">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">🖥️ Operating System</span>
+                                <span class="text-sm">Windows, macOS, Linux</span>
+                            </div>
+                        </div>
+                        <div class="abstract-layer bg-red-500 text-white p-3 rounded-lg cursor-pointer" data-layer="hardware">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">⚙️ Hardware Layer</span>
+                                <span class="text-sm">CPU, RAM, Storage</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="layer-details" class="mt-4 p-3 bg-white rounded">
+                        Click on any layer to see how abstraction works at that level!
+                    </div>
+                </div>
+
+                <button class="next-btn bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700" data-next="interfaces">Next: Interfaces →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Interfaces -->
+        <div id="interfaces" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-amber-800 mb-4">🔌 Abstract Classes & Interfaces</h3>
+                
+                <!-- Remote Control Demo -->
+                <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">📺 Universal Remote Control</h4>
+                    <div class="interface-demo bg-white p-4 rounded-lg">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <!-- Remote Interface -->
+                            <div class="text-center">
+                                <div class="bg-gray-800 p-4 rounded-lg text-white mb-3">
+                                    <h5 class="font-semibold mb-3">🎮 Universal Remote</h5>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button class="remote-btn bg-red-500 p-2 rounded" data-action="power">⚡ Power</button>
+                                        <button class="remote-btn bg-blue-500 p-2 rounded" data-action="volume">🔊 Vol+</button>
+                                        <button class="remote-btn bg-green-500 p-2 rounded" data-action="channel">📺 Ch+</button>
+                                        <button class="remote-btn bg-purple-500 p-2 rounded" data-action="menu">📋 Menu</button>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-600">Same interface for all devices</div>
+                            </div>
+                            
+                            <!-- Different Devices -->
+                            <div class="space-y-3">
+                                <div class="device bg-blue-50 p-3 rounded border-2 border-blue-300" data-device="tv">
+                                    <div class="font-semibold text-blue-800">📺 Smart TV</div>
+                                    <div class="text-sm text-blue-600">Implements: Remote interface</div>
+                                </div>
+                                <div class="device bg-green-50 p-3 rounded border-2 border-green-300" data-device="stereo">
+                                    <div class="font-semibold text-green-800">🎵 Stereo</div>
+                                    <div class="text-sm text-green-600">Implements: Remote interface</div>
+                                </div>
+                                <div class="device bg-purple-50 p-3 rounded border-2 border-purple-300" data-device="ac">
+                                    <div class="font-semibold text-purple-800">❄️ Air Conditioner</div>
+                                    <div class="text-sm text-purple-600">Implements: Remote interface</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Response Area -->
+                            <div id="device-response" class="bg-gray-100 p-4 rounded-lg">
+                                <div class="text-center text-gray-600">
+                                    Select a device and press remote buttons to see abstraction in action!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Example -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-yellow-800 mb-2">📜 Abstract Class</h4>
+                        <div class="bg-gray-900 text-yellow-400 p-3 rounded text-sm font-mono">
+                            <div>from abc import ABC, abstractmethod</div>
+                            <div></div>
+                            <div>class Device(ABC):</div>
+                            <div>&nbsp;&nbsp;@abstractmethod</div>
+                            <div>&nbsp;&nbsp;def power_on(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;@abstractmethod</div>
+                            <div>&nbsp;&nbsp;def volume_up(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">🔧 Implementation</h4>
+                        <div class="bg-gray-900 text-green-400 p-3 rounded text-sm font-mono">
+                            <div>class Television(Device):</div>
+                            <div>&nbsp;&nbsp;def power_on(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "TV turning on..."</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;def volume_up(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "TV volume increased"</div>
+                            <div></div>
+                            <div>class Stereo(Device):</div>
+                            <div>&nbsp;&nbsp;def power_on(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Stereo powering up..."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700" data-next="examples">Next: Real Examples →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Examples -->
+        <div id="examples" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-amber-800 mb-4">💻 Real-World Examples</h3>
+                
+                <div class="space-y-4">
+                    <!-- Database Abstraction -->
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-amber-800 mb-2">🗄️ Database Abstraction Layer</h4>
+                        <div class="bg-gray-900 text-amber-400 p-3 rounded text-sm font-mono">
+                            <div>from abc import ABC, abstractmethod</div>
+                            <div></div>
+                            <div>class Database(ABC):</div>
+                            <div>&nbsp;&nbsp;@abstractmethod</div>
+                            <div>&nbsp;&nbsp;def connect(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;@abstractmethod</div>
+                            <div>&nbsp;&nbsp;def execute_query(self, query):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>class MySQL(Database):</div>
+                            <div>&nbsp;&nbsp;def connect(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Connected to MySQL"</div>
+                            <div></div>
+                            <div>class PostgreSQL(Database):</div>
+                            <div>&nbsp;&nbsp;def connect(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Connected to PostgreSQL"</div>
+                        </div>
+                    </div>
+                    
+                    <!-- File System Abstraction -->
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-orange-800 mb-2">📁 File System Abstraction</h4>
+                        <div class="bg-gray-900 text-orange-400 p-3 rounded text-sm font-mono">
+                            <div>class FileSystem(ABC):</div>
+                            <div>&nbsp;&nbsp;@abstractmethod</div>
+                            <div>&nbsp;&nbsp;def read_file(self, path):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;@abstractmethod</div>
+                            <div>&nbsp;&nbsp;def write_file(self, path, data):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>class LocalFileSystem(FileSystem):</div>
+                            <div>&nbsp;&nbsp;def read_file(self, path):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;with open(path, 'r') as f:</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return f.read()</div>
+                            <div></div>
+                            <div>class CloudFileSystem(FileSystem):</div>
+                            <div>&nbsp;&nbsp;def read_file(self, path):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return self.download_from_cloud(path)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700" data-next="assessment">Take Assessment →</button>
+            </div>
+        </div>
+
+        <!-- Assessment Section -->
+        <div id="assessment" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-amber-800 mb-4">📝 Abstraction Assessment</h3>
+                
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h4 class="text-lg font-semibold">Test Your Knowledge</h4>
+                        <p class="text-gray-600">Complete this assessment to evaluate your understanding of Abstraction</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="assessment-option bg-green-50 p-4 rounded-lg cursor-pointer" data-difficulty="easy">
+                            <div class="text-2xl mb-2">🟢</div>
+                            <h5 class="font-semibold">Easy</h5>
+                            <p class="text-sm text-gray-600">5 basic questions</p>
+                        </div>
+                        <div class="assessment-option bg-yellow-50 p-4 rounded-lg cursor-pointer" data-difficulty="medium">
+                            <div class="text-2xl mb-2">🟡</div>
+                            <h5 class="font-semibold">Medium</h5>
+                            <p class="text-sm text-gray-600">7 moderate questions</p>
+                        </div>
+                        <div class="assessment-option bg-red-50 p-4 rounded-lg cursor-pointer" data-difficulty="hard">
+                            <div class="text-2xl mb-2">🔴</div>
+                            <h5 class="font-semibold">Hard</h5>
+                            <p class="text-sm text-gray-600">10 challenging questions</p>
+                        </div>
+                    </div>
+                    
+                    <button id="start-assessment" class="bg-amber-600 text-white px-8 py-3 rounded-lg hover:bg-amber-700 disabled:opacity-50" disabled>
+                        Start Assessment
+                    </button>
+                </div>
+                
+                <div id="assessment-questions" class="hidden mt-6">
+                    <div id="question-container"></div>
+                    <div class="flex justify-between mt-4">
+                        <button id="prev-question" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Previous</button>
+                        <span id="question-counter" class="text-gray-600"></span>
+                        <button id="next-question" class="bg-amber-600 text-white px-4 py-2 rounded-lg">Next</button>
+                    </div>
+                </div>
+                
+                <div id="assessment-results" class="hidden mt-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4" id="results-emoji">🎉</div>
+                        <h4 class="text-xl font-bold mb-2" id="results-title">Assessment Complete!</h4>
+                        <div class="text-3xl font-bold text-amber-600 mb-4" id="results-score">85%</div>
+                        <div id="ai-feedback" class="bg-amber-50 p-4 rounded-lg text-left"></div>
+                        <div class="mt-4">
+                            <button id="retake-assessment" class="bg-amber-600 text-white px-6 py-2 rounded-lg mr-2">Retake</button>
+                            <a href="/learn" class="bg-gray-500 text-white px-6 py-2 rounded-lg">Back to Learning</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class AbstractionLearning {
+    constructor() {
+        this.currentSection = 'basics';
+        this.completedSections = new Set();
+        this.selectedDevice = null;
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        this.init();
+    }
+
+    init() {
+        this.showSection('basics');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.showSection(btn.getAttribute('data-section'));
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.completeSection(this.currentSection);
+                this.showSection(btn.getAttribute('data-next'));
+            });
+        });
+
+        // Car controls
+        document.querySelectorAll('.car-control').forEach(btn => {
+            btn.addEventListener('click', () => this.handleCarAction(btn.getAttribute('data-action')));
+        });
+
+        // Abstraction layers
+        document.querySelectorAll('.abstract-layer').forEach(layer => {
+            layer.addEventListener('click', () => this.showLayerDetails(layer.getAttribute('data-layer')));
+        });
+
+        // Device selection
+        document.querySelectorAll('.device').forEach(device => {
+            device.addEventListener('click', () => this.selectDevice(device.getAttribute('data-device')));
+        });
+
+        // Remote controls
+        document.querySelectorAll('.remote-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.handleRemoteAction(btn.getAttribute('data-action')));
+        });
+
+        // Assessment
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.addEventListener('click', () => this.selectDifficulty(option.getAttribute('data-difficulty')));
+        });
+
+        document.getElementById('start-assessment').addEventListener('click', () => this.startAssessment());
+        document.getElementById('prev-question').addEventListener('click', () => this.previousQuestion());
+        document.getElementById('next-question').addEventListener('click', () => this.nextQuestion());
+        document.getElementById('retake-assessment').addEventListener('click', () => this.retakeAssessment());
+    }
+
+    showSection(sectionName) {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionName).classList.remove('hidden');
+        this.currentSection = sectionName;
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('ring-2', 'ring-amber-500'));
+        document.querySelector(`[data-section="${sectionName}"]`).classList.add('ring-2', 'ring-amber-500');
+        
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        const btn = document.querySelector(`[data-section="${sectionName}"]`);
+        if (btn) {
+            btn.classList.add('bg-green-200');
+            btn.querySelector('.text-2xl').textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const progress = (this.completedSections.size / 5) * 100;
+        document.querySelector('.progress-bar').style.width = `${progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(progress)}% Complete`;
+    }
+
+    handleCarAction(action) {
+        const feedback = document.getElementById('car-feedback');
+        const actions = {
+            start: '🔑 Engine started! (Complex ignition system activated)',
+            accelerate: '⚡ Accelerating! (Fuel injection & transmission working)',
+            brake: '🛑 Braking! (ABS system & brake pads engaged)'
+        };
+
+        feedback.innerHTML = actions[action] || 'Car responding to your command!';
+        feedback.className = 'mt-3 p-2 bg-green-100 rounded text-sm font-semibold';
+        
+        setTimeout(() => {
+            feedback.className = 'mt-3 p-2 bg-amber-50 rounded text-sm';
+            feedback.innerHTML = 'Simple, intuitive controls hide complex engineering!';
+        }, 3000);
+    }
+
+    showLayerDetails(layer) {
+        const details = {
+            user: 'User Interface: Icons, menus, buttons. You click, it responds. Hides all technical complexity.',
+            application: 'Applications: Programs like browsers, games, editors. They use OS services without knowing hardware details.',
+            os: 'Operating System: Manages hardware, provides services to applications. Abstracts hardware complexity.',
+            hardware: 'Hardware: Physical components like CPU, RAM, storage. The actual computing happens here.'
+        };
+
+        document.getElementById('layer-details').innerHTML = `
+            <strong>🔍 ${layer.charAt(0).toUpperCase() + layer.slice(1)} Layer:</strong> ${details[layer]}
+        `;
+
+        // Highlight selected layer
+        document.querySelectorAll('.abstract-layer').forEach(l => l.classList.remove('ring-2', 'ring-yellow-500'));
+        document.querySelector(`[data-layer="${layer}"]`).classList.add('ring-2', 'ring-yellow-500');
+    }
+
+    selectDevice(deviceType) {
+        this.selectedDevice = deviceType;
+        
+        // Update device selection UI
+        document.querySelectorAll('.device').forEach(d => d.classList.remove('ring-2', 'ring-yellow-500'));
+        document.querySelector(`[data-device="${deviceType}"]`).classList.add('ring-2', 'ring-yellow-500');
+        
+        const response = document.getElementById('device-response');
+        response.innerHTML = `
+            <div class="text-center">
+                <div class="text-lg font-semibold mb-2">${deviceType.charAt(0).toUpperCase() + deviceType.slice(1)} Selected</div>
+                <div class="text-sm text-gray-600">Now use the remote control!</div>
+            </div>
+        `;
+    }
+
+    handleRemoteAction(action) {
+        if (!this.selectedDevice) {
+            const response = document.getElementById('device-response');
+            response.innerHTML = `
+                <div class="text-center text-red-600">
+                    <div class="font-semibold">⚠️ No Device Selected</div>
+                    <div class="text-sm">Please select a device first!</div>
+                </div>
+            `;
+            return;
+        }
+
+        const deviceResponses = {
+            tv: {
+                power: '📺 Smart TV: Turning on... Loading smart interface',
+                volume: '📺 Smart TV: Volume increased to level 15',
+                channel: '📺 Smart TV: Changed to Discovery Channel',
+                menu: '📺 Smart TV: Displaying smart TV menu'
+            },
+            stereo: {
+                power: '🎵 Stereo: Powering up... Ready to play music',
+                volume: '🎵 Stereo: Audio level boosted',
+                channel: '🎵 Stereo: Switching to FM 101.5',
+                menu: '🎵 Stereo: Showing equalizer settings'
+            },
+            ac: {
+                power: '❄️ AC: Starting cooling system...',
+                volume: '❄️ AC: Fan speed increased',
+                channel: '❄️ AC: Mode changed to cooling',
+                menu: '❄️ AC: Temperature settings menu'
+            }
+        };
+
+        const response = document.getElementById('device-response');
+        response.innerHTML = `
+            <div class="text-center">
+                <div class="font-semibold mb-2">${deviceResponses[this.selectedDevice][action]}</div>
+                <div class="text-sm text-green-600">✅ Same remote interface, different implementations!</div>
+            </div>
+        `;
+        response.className = 'bg-green-100 p-4 rounded-lg border-2 border-green-400';
+        
+        setTimeout(() => {
+            response.className = 'bg-gray-100 p-4 rounded-lg';
+        }, 3000);
+    }
+
+    selectDifficulty(difficulty) {
+        this.assessment.difficulty = difficulty;
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-amber-500');
+        });
+        document.querySelector(`[data-difficulty="${difficulty}"]`).classList.add('ring-2', 'ring-amber-500');
+        document.getElementById('start-assessment').disabled = false;
+    }
+
+    async startAssessment() {
+        try {
+            const questionCounts = { easy: 5, medium: 7, hard: 10 };
+            const response = await fetch(`/api/assessments/generate/abstraction`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    difficulty: this.assessment.difficulty,
+                    question_count: questionCounts[this.assessment.difficulty]
+                })
+            });
+
+            const data = await response.json();
+            this.assessment.questions = data.questions;
+            this.assessment.currentQuestion = 0;
+            this.assessment.answers = {};
+
+            document.querySelector('.text-center').classList.add('hidden');
+            document.getElementById('assessment-questions').classList.remove('hidden');
+            this.showQuestion();
+        } catch (error) {
+            console.error('Error starting assessment:', error);
+            alert('Failed to start assessment. Please try again.');
+        }
+    }
+
+    showQuestion() {
+        const question = this.assessment.questions[this.assessment.currentQuestion];
+        const container = document.getElementById('question-container');
+        
+        container.innerHTML = `
+            <div class="mb-4">
+                <h4 class="text-lg font-semibold mb-3">Question ${this.assessment.currentQuestion + 1}</h4>
+                <p class="text-gray-800 mb-4">${question.question}</p>
+                <div class="space-y-2">
+                    ${Object.entries(question.options).map(([key, value]) => `
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
+                            <input type="radio" name="question-${question.id}" value="${key}" class="mr-3" 
+                                ${this.assessment.answers[question.id] === key ? 'checked' : ''}>
+                            <span>${key}. ${value}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('question-counter').textContent = 
+            `${this.assessment.currentQuestion + 1} of ${this.assessment.questions.length}`;
+
+        document.getElementById('prev-question').disabled = this.assessment.currentQuestion === 0;
+        document.getElementById('next-question').textContent = 
+            this.assessment.currentQuestion === this.assessment.questions.length - 1 ? 'Submit' : 'Next';
+
+        container.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                this.assessment.answers[question.id] = radio.value;
+            });
+        });
+    }
+
+    previousQuestion() {
+        if (this.assessment.currentQuestion > 0) {
+            this.assessment.currentQuestion--;
+            this.showQuestion();
+        }
+    }
+
+    nextQuestion() {
+        if (this.assessment.currentQuestion < this.assessment.questions.length - 1) {
+            this.assessment.currentQuestion++;
+            this.showQuestion();
+        } else {
+            this.submitAssessment();
+        }
+    }
+
+    async submitAssessment() {
+        try {
+            const response = await fetch(`/api/assessments/evaluate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    assessment_id: this.assessment.questions[0].assessment_id,
+                    answers: this.assessment.answers
+                })
+            });
+
+            const results = await response.json();
+            this.showResults(results);
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+            alert('Failed to submit assessment. Please try again.');
+        }
+    }
+
+    showResults(results) {
+        document.getElementById('assessment-questions').classList.add('hidden');
+        document.getElementById('assessment-results').classList.remove('hidden');
+
+        const score = results.score_percentage;
+        document.getElementById('results-score').textContent = `${Math.round(score)}%`;
+
+        let emoji = '🎉', title = 'Excellent Work!';
+        if (score < 50) { emoji = '📚'; title = 'Keep Learning!'; }
+        else if (score < 70) { emoji = '👍'; title = 'Good Job!'; }
+        else if (score < 90) { emoji = '🌟'; title = 'Great Work!'; }
+
+        document.getElementById('results-emoji').textContent = emoji;
+        document.getElementById('results-title').textContent = title;
+
+        const feedbackEl = document.getElementById('ai-feedback');
+        if (results.ai_feedback) {
+            feedbackEl.innerHTML = `
+                <h5 class="font-semibold mb-2">📋 Personalized Feedback</h5>
+                <p class="text-sm mb-2">${results.ai_feedback.overall_assessment}</p>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <strong>💪 Strengths:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.strengths.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>📈 Recommendations:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.study_recommendations.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm mt-3 font-medium text-amber-700">${results.ai_feedback.encouragement}</p>
+            `;
+        }
+
+        this.completeSection('assessment');
+    }
+
+    retakeAssessment() {
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        document.getElementById('assessment-results').classList.add('hidden');
+        document.querySelector('.text-center').classList.remove('hidden');
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-amber-500');
+        });
+        document.getElementById('start-assessment').disabled = true;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new AbstractionLearning();
+});
+</script>
+{% endblock %}

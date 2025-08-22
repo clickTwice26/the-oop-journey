@@ -369,7 +369,7 @@ class AssessmentManager {
         document.getElementById('results-container').classList.remove('hidden');
 
         // Update score display
-        const score = Math.round(result.score);
+        const score = Math.round(result.score_percentage || result.score || 0);
         document.getElementById('score-text').textContent = `${score}%`;
         
         // Color code the score circle
@@ -393,28 +393,41 @@ class AssessmentManager {
         document.getElementById('score-message').textContent = message;
 
         // Display AI feedback
-        this.renderFeedback(result.evaluation);
+        this.renderFeedback(result.ai_feedback || result.evaluation || {});
     }
 
-    renderFeedback(evaluation) {
+    renderFeedback(feedback) {
         const container = document.getElementById('ai-feedback');
         container.innerHTML = '';
 
-        // Overall feedback
-        if (evaluation.overall_feedback) {
+        // Handle different feedback formats
+        if (typeof feedback === 'string') {
+            container.innerHTML = `
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                        <i class="fas fa-lightbulb mr-2"></i>Assessment Feedback
+                    </h4>
+                    <p class="text-blue-700">${feedback}</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Overall assessment
+        if (feedback.overall_assessment) {
             const overallDiv = document.createElement('div');
             overallDiv.className = 'bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg';
             overallDiv.innerHTML = `
                 <h4 class="font-semibold text-blue-800 mb-2">
                     <i class="fas fa-lightbulb mr-2"></i>Overall Assessment
                 </h4>
-                <p class="text-blue-700">${evaluation.overall_feedback}</p>
+                <p class="text-blue-700">${feedback.overall_assessment}</p>
             `;
             container.appendChild(overallDiv);
         }
 
         // Strengths
-        if (evaluation.strengths && evaluation.strengths.length > 0) {
+        if (feedback.strengths && feedback.strengths.length > 0) {
             const strengthsDiv = document.createElement('div');
             strengthsDiv.className = 'bg-green-50 border-l-4 border-green-500 p-6 rounded-lg';
             strengthsDiv.innerHTML = `
@@ -422,14 +435,14 @@ class AssessmentManager {
                     <i class="fas fa-check-circle mr-2"></i>Your Strengths
                 </h4>
                 <ul class="text-green-700 space-y-1">
-                    ${evaluation.strengths.map(strength => `<li>• ${strength}</li>`).join('')}
+                    ${feedback.strengths.map(strength => `<li>• ${strength}</li>`).join('')}
                 </ul>
             `;
             container.appendChild(strengthsDiv);
         }
 
         // Areas for improvement
-        if (evaluation.areas_for_improvement && evaluation.areas_for_improvement.length > 0) {
+        if (feedback.areas_for_improvement && feedback.areas_for_improvement.length > 0) {
             const improvementDiv = document.createElement('div');
             improvementDiv.className = 'bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg';
             improvementDiv.innerHTML = `
@@ -437,25 +450,51 @@ class AssessmentManager {
                     <i class="fas fa-arrow-up mr-2"></i>Areas for Improvement
                 </h4>
                 <ul class="text-yellow-700 space-y-1">
-                    ${evaluation.areas_for_improvement.map(area => `<li>• ${area}</li>`).join('')}
+                    ${feedback.areas_for_improvement.map(area => `<li>• ${area}</li>`).join('')}
                 </ul>
             `;
             container.appendChild(improvementDiv);
         }
 
-        // Recommendations
-        if (evaluation.recommendations && evaluation.recommendations.length > 0) {
+        // Study recommendations
+        if (feedback.study_recommendations && feedback.study_recommendations.length > 0) {
             const recommendationsDiv = document.createElement('div');
             recommendationsDiv.className = 'bg-purple-50 border-l-4 border-purple-500 p-6 rounded-lg';
             recommendationsDiv.innerHTML = `
                 <h4 class="font-semibold text-purple-800 mb-3">
-                    <i class="fas fa-star mr-2"></i>Recommendations
+                    <i class="fas fa-star mr-2"></i>Study Recommendations
                 </h4>
                 <ul class="text-purple-700 space-y-1">
-                    ${evaluation.recommendations.map(rec => `<li>• ${rec}</li>`).join('')}
+                    ${feedback.study_recommendations.map(rec => `<li>• ${rec}</li>`).join('')}
                 </ul>
             `;
             container.appendChild(recommendationsDiv);
+        }
+
+        // Encouragement
+        if (feedback.encouragement) {
+            const encouragementDiv = document.createElement('div');
+            encouragementDiv.className = 'bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-lg';
+            encouragementDiv.innerHTML = `
+                <h4 class="font-semibold text-indigo-800 mb-2">
+                    <i class="fas fa-heart mr-2"></i>Keep Going!
+                </h4>
+                <p class="text-indigo-700">${feedback.encouragement}</p>
+            `;
+            container.appendChild(encouragementDiv);
+        }
+
+        // Next steps
+        if (feedback.next_steps) {
+            const nextStepsDiv = document.createElement('div');
+            nextStepsDiv.className = 'bg-gray-50 border-l-4 border-gray-500 p-6 rounded-lg';
+            nextStepsDiv.innerHTML = `
+                <h4 class="font-semibold text-gray-800 mb-2">
+                    <i class="fas fa-arrow-right mr-2"></i>Next Steps
+                </h4>
+                <p class="text-gray-700">${feedback.next_steps}</p>
+            `;
+            container.appendChild(nextStepsDiv);
         }
     }
 

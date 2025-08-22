@@ -1,0 +1,619 @@
+{% extends "base.html" %}
+
+{% block title %}Polymorphism - OOP Learning{% endblock %}
+
+{% block head %}
+<style>
+.shape-demo { transition: all 0.3s ease; }
+.shape-demo:hover { transform: scale(1.1); }
+.method-override { border-left: 4px solid #8b5cf6; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-purple-600 to-pink-700 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🎭 Polymorphism Mastery</h1>
+            <p class="text-xl opacity-90 mb-6">One interface, many implementations</p>
+            <div class="flex justify-center space-x-3 flex-wrap">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Many Forms</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Dynamic Behavior</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Flexibility</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Progress</h2>
+                <div class="flex items-center space-x-3">
+                    <div class="w-48 bg-gray-200 rounded-full h-2">
+                        <div class="bg-purple-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6">
+        <!-- Navigation -->
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <button class="nav-btn p-3 bg-purple-50 rounded-lg text-center" data-section="basics">
+                    <div class="text-2xl mb-1">🎯</div>
+                    <div class="text-sm font-semibold">Basics</div>
+                </button>
+                <button class="nav-btn p-3 bg-pink-50 rounded-lg text-center" data-section="types">
+                    <div class="text-2xl mb-1">🔄</div>
+                    <div class="text-sm font-semibold">Types</div>
+                </button>
+                <button class="nav-btn p-3 bg-indigo-50 rounded-lg text-center" data-section="shapes">
+                    <div class="text-2xl mb-1">📐</div>
+                    <div class="text-sm font-semibold">Shape Demo</div>
+                </button>
+                <button class="nav-btn p-3 bg-yellow-50 rounded-lg text-center" data-section="examples">
+                    <div class="text-2xl mb-1">💻</div>
+                    <div class="text-sm font-semibold">Examples</div>
+                </button>
+                <button class="nav-btn p-3 bg-red-50 rounded-lg text-center" data-section="assessment">
+                    <div class="text-2xl mb-1">📝</div>
+                    <div class="text-sm font-semibold">Assessment</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section 1: Basics -->
+        <div id="basics" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-purple-800 mb-4">🎯 What is Polymorphism?</h3>
+                
+                <!-- Musical Instrument Analogy -->
+                <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">🎵 Musical Instrument Orchestra</h4>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="instrument-demo text-center p-3 bg-white rounded-lg border-2 border-purple-300 cursor-pointer" data-instrument="piano">
+                            <div class="text-3xl mb-2">🎹</div>
+                            <div class="font-semibold">Piano</div>
+                            <button class="mt-2 bg-purple-500 text-white px-3 py-1 rounded text-sm play-btn" data-sound="piano">Play</button>
+                        </div>
+                        <div class="instrument-demo text-center p-3 bg-white rounded-lg border-2 border-pink-300 cursor-pointer" data-instrument="guitar">
+                            <div class="text-3xl mb-2">🎸</div>
+                            <div class="font-semibold">Guitar</div>
+                            <button class="mt-2 bg-pink-500 text-white px-3 py-1 rounded text-sm play-btn" data-sound="guitar">Play</button>
+                        </div>
+                        <div class="instrument-demo text-center p-3 bg-white rounded-lg border-2 border-blue-300 cursor-pointer" data-instrument="violin">
+                            <div class="text-3xl mb-2">🎻</div>
+                            <div class="font-semibold">Violin</div>
+                            <button class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-sm play-btn" data-sound="violin">Play</button>
+                        </div>
+                        <div class="instrument-demo text-center p-3 bg-white rounded-lg border-2 border-green-300 cursor-pointer" data-instrument="drums">
+                            <div class="text-3xl mb-2">🥁</div>
+                            <div class="font-semibold">Drums</div>
+                            <button class="mt-2 bg-green-500 text-white px-3 py-1 rounded text-sm play-btn" data-sound="drums">Play</button>
+                        </div>
+                    </div>
+                    <div id="music-output" class="mt-4 p-3 bg-gray-100 rounded text-center">
+                        All instruments can "play()" but each produces different sounds! 🎶
+                    </div>
+                </div>
+
+                <!-- Definition -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-800 mb-2">📖 Definition</h4>
+                        <p class="text-sm text-gray-700 mb-3">Polymorphism allows objects of different types to be treated as instances of the same type through a common interface.</p>
+                        <div class="bg-white p-3 rounded border">
+                            <strong class="text-purple-800">Greek Origin:</strong>
+                            <ul class="text-sm mt-1 space-y-1">
+                                <li>📝 <strong>Poly:</strong> Many</li>
+                                <li>🔄 <strong>Morph:</strong> Forms</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-pink-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-pink-800 mb-2">🎯 Benefits</h4>
+                        <ul class="space-y-1 text-sm">
+                            <li class="flex items-center"><span class="text-pink-500 mr-2">🔄</span>Code Flexibility</li>
+                            <li class="flex items-center"><span class="text-pink-500 mr-2">🔧</span>Easy Extension</li>
+                            <li class="flex items-center"><span class="text-pink-500 mr-2">📦</span>Unified Interface</li>
+                            <li class="flex items-center"><span class="text-pink-500 mr-2">🎭</span>Dynamic Behavior</li>
+                            <li class="flex items-center"><span class="text-pink-500 mr-2">🚀</span>Runtime Decisions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700" data-next="types">Next: Types of Polymorphism →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Types -->
+        <div id="types" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-purple-800 mb-4">🔄 Types of Polymorphism</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-4">
+                    <!-- Compile-time Polymorphism -->
+                    <div class="method-override bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">⚡ Compile-time (Method Overloading)</h4>
+                        <p class="text-sm text-gray-700 mb-3">Same method name, different parameters</p>
+                        <div class="bg-gray-900 text-blue-400 p-3 rounded text-sm font-mono">
+                            <div>class Calculator:</div>
+                            <div>&nbsp;&nbsp;def add(self, a, b):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return a + b</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;def add(self, a, b, c):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return a + b + c</div>
+                            <div></div>
+                            <div>&nbsp;&nbsp;def add(self, numbers):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return sum(numbers)</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Runtime Polymorphism -->
+                    <div class="method-override bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">🏃 Runtime (Method Overriding)</h4>
+                        <p class="text-sm text-gray-700 mb-3">Same method signature, different implementations</p>
+                        <div class="bg-gray-900 text-green-400 p-3 rounded text-sm font-mono">
+                            <div>class Animal:</div>
+                            <div>&nbsp;&nbsp;def make_sound(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>class Dog(Animal):</div>
+                            <div>&nbsp;&nbsp;def make_sound(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Woof!"</div>
+                            <div></div>
+                            <div>class Cat(Animal):</div>
+                            <div>&nbsp;&nbsp;def make_sound(self):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Meow!"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700" data-next="shapes">Next: Shape Demo →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Shape Demo -->
+        <div id="shapes" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-purple-800 mb-4">📐 Interactive Shape Demo</h3>
+                
+                <div class="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg p-4 mb-4">
+                    <h4 class="text-lg font-bold mb-3">🎨 Polymorphic Shapes</h4>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div class="shape-demo text-center p-4 bg-white rounded-lg border-2 border-red-300">
+                            <div class="w-16 h-16 bg-red-500 mx-auto mb-3"></div>
+                            <div class="font-semibold">Rectangle</div>
+                            <div class="text-sm text-gray-600 mb-2">Width: 4, Height: 4</div>
+                            <button class="bg-red-500 text-white px-3 py-1 rounded text-sm calc-area-btn" data-shape="rectangle">Calculate Area</button>
+                        </div>
+                        
+                        <div class="shape-demo text-center p-4 bg-white rounded-lg border-2 border-blue-300">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto mb-3"></div>
+                            <div class="font-semibold">Circle</div>
+                            <div class="text-sm text-gray-600 mb-2">Radius: 3</div>
+                            <button class="bg-blue-500 text-white px-3 py-1 rounded text-sm calc-area-btn" data-shape="circle">Calculate Area</button>
+                        </div>
+                        
+                        <div class="shape-demo text-center p-4 bg-white rounded-lg border-2 border-green-300">
+                            <div class="w-0 h-0 border-l-8 border-r-8 border-b-16 border-l-transparent border-r-transparent border-b-green-500 mx-auto mb-3"></div>
+                            <div class="font-semibold">Triangle</div>
+                            <div class="text-sm text-gray-600 mb-2">Base: 6, Height: 4</div>
+                            <button class="bg-green-500 text-white px-3 py-1 rounded text-sm calc-area-btn" data-shape="triangle">Calculate Area</button>
+                        </div>
+                    </div>
+                    
+                    <div id="area-result" class="p-3 bg-white rounded text-center">
+                        Click any shape to calculate its area using polymorphic methods!
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-yellow-50 rounded">
+                        <strong>💡 Polymorphism in Action:</strong> All shapes have a <code>calculate_area()</code> method, but each implements it differently!
+                    </div>
+                </div>
+
+                <button class="next-btn bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700" data-next="examples">Next: Real Examples →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Examples -->
+        <div id="examples" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+                <h3 class="text-2xl font-bold text-purple-800 mb-4">💻 Real-World Examples</h3>
+                
+                <div class="space-y-4">
+                    <!-- Payment System -->
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-800 mb-2">💳 Payment Processing System</h4>
+                        <div class="bg-gray-900 text-purple-400 p-3 rounded text-sm font-mono">
+                            <div>class PaymentProcessor:</div>
+                            <div>&nbsp;&nbsp;def process_payment(self, amount):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>class CreditCard(PaymentProcessor):</div>
+                            <div>&nbsp;&nbsp;def process_payment(self, amount):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Charged ${amount} to credit card"</div>
+                            <div></div>
+                            <div>class PayPal(PaymentProcessor):</div>
+                            <div>&nbsp;&nbsp;def process_payment(self, amount):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Paid ${amount} via PayPal"</div>
+                            <div></div>
+                            <div>class BankTransfer(PaymentProcessor):</div>
+                            <div>&nbsp;&nbsp;def process_payment(self, amount):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Transferred ${amount} from bank"</div>
+                        </div>
+                    </div>
+                    
+                    <!-- File Processor -->
+                    <div class="bg-pink-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-pink-800 mb-2">📁 File Processing System</h4>
+                        <div class="bg-gray-900 text-pink-400 p-3 rounded text-sm font-mono">
+                            <div>class FileProcessor:</div>
+                            <div>&nbsp;&nbsp;def process(self, file):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;pass</div>
+                            <div></div>
+                            <div>class ImageProcessor(FileProcessor):</div>
+                            <div>&nbsp;&nbsp;def process(self, file):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Resizing image: {file}"</div>
+                            <div></div>
+                            <div>class VideoProcessor(FileProcessor):</div>
+                            <div>&nbsp;&nbsp;def process(self, file):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Compressing video: {file}"</div>
+                            <div></div>
+                            <div>class DocumentProcessor(FileProcessor):</div>
+                            <div>&nbsp;&nbsp;def process(self, file):</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return f"Converting document: {file}"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700" data-next="assessment">Take Assessment →</button>
+            </div>
+        </div>
+
+        <!-- Assessment Section -->
+        <div id="assessment" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-purple-800 mb-4">📝 Polymorphism Assessment</h3>
+                
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h4 class="text-lg font-semibold">Test Your Knowledge</h4>
+                        <p class="text-gray-600">Complete this assessment to evaluate your understanding of Polymorphism</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="assessment-option bg-green-50 p-4 rounded-lg cursor-pointer" data-difficulty="easy">
+                            <div class="text-2xl mb-2">🟢</div>
+                            <h5 class="font-semibold">Easy</h5>
+                            <p class="text-sm text-gray-600">5 basic questions</p>
+                        </div>
+                        <div class="assessment-option bg-yellow-50 p-4 rounded-lg cursor-pointer" data-difficulty="medium">
+                            <div class="text-2xl mb-2">🟡</div>
+                            <h5 class="font-semibold">Medium</h5>
+                            <p class="text-sm text-gray-600">7 moderate questions</p>
+                        </div>
+                        <div class="assessment-option bg-red-50 p-4 rounded-lg cursor-pointer" data-difficulty="hard">
+                            <div class="text-2xl mb-2">🔴</div>
+                            <h5 class="font-semibold">Hard</h5>
+                            <p class="text-sm text-gray-600">10 challenging questions</p>
+                        </div>
+                    </div>
+                    
+                    <button id="start-assessment" class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 disabled:opacity-50" disabled>
+                        Start Assessment
+                    </button>
+                </div>
+                
+                <div id="assessment-questions" class="hidden mt-6">
+                    <div id="question-container"></div>
+                    <div class="flex justify-between mt-4">
+                        <button id="prev-question" class="bg-gray-500 text-white px-4 py-2 rounded-lg">Previous</button>
+                        <span id="question-counter" class="text-gray-600"></span>
+                        <button id="next-question" class="bg-purple-600 text-white px-4 py-2 rounded-lg">Next</button>
+                    </div>
+                </div>
+                
+                <div id="assessment-results" class="hidden mt-6">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4" id="results-emoji">🎉</div>
+                        <h4 class="text-xl font-bold mb-2" id="results-title">Assessment Complete!</h4>
+                        <div class="text-3xl font-bold text-purple-600 mb-4" id="results-score">85%</div>
+                        <div id="ai-feedback" class="bg-purple-50 p-4 rounded-lg text-left"></div>
+                        <div class="mt-4">
+                            <button id="retake-assessment" class="bg-purple-600 text-white px-6 py-2 rounded-lg mr-2">Retake</button>
+                            <a href="/learn" class="bg-gray-500 text-white px-6 py-2 rounded-lg">Back to Learning</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class PolymorphismLearning {
+    constructor() {
+        this.currentSection = 'basics';
+        this.completedSections = new Set();
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        this.init();
+    }
+
+    init() {
+        this.showSection('basics');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.showSection(btn.getAttribute('data-section'));
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.completeSection(this.currentSection);
+                this.showSection(btn.getAttribute('data-next'));
+            });
+        });
+
+        // Instrument demo
+        document.querySelectorAll('.play-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.playInstrument(btn.getAttribute('data-sound')));
+        });
+
+        // Shape area calculator
+        document.querySelectorAll('.calc-area-btn').forEach(btn => {
+            btn.addEventListener('click', () => this.calculateArea(btn.getAttribute('data-shape')));
+        });
+
+        // Assessment
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.addEventListener('click', () => this.selectDifficulty(option.getAttribute('data-difficulty')));
+        });
+
+        document.getElementById('start-assessment').addEventListener('click', () => this.startAssessment());
+        document.getElementById('prev-question').addEventListener('click', () => this.previousQuestion());
+        document.getElementById('next-question').addEventListener('click', () => this.nextQuestion());
+        document.getElementById('retake-assessment').addEventListener('click', () => this.retakeAssessment());
+    }
+
+    showSection(sectionName) {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionName).classList.remove('hidden');
+        this.currentSection = sectionName;
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('ring-2', 'ring-purple-500'));
+        document.querySelector(`[data-section="${sectionName}"]`).classList.add('ring-2', 'ring-purple-500');
+        
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        const btn = document.querySelector(`[data-section="${sectionName}"]`);
+        if (btn) {
+            btn.classList.add('bg-green-200');
+            btn.querySelector('.text-2xl').textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const progress = (this.completedSections.size / 5) * 100;
+        document.querySelector('.progress-bar').style.width = `${progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(progress)}% Complete`;
+    }
+
+    playInstrument(instrument) {
+        const sounds = {
+            piano: '🎹 "Beautiful piano melody ♪♫♪"',
+            guitar: '🎸 "Rocking guitar solo ♪♫♪"',
+            violin: '🎻 "Elegant violin strings ♪♫♪"',
+            drums: '🥁 "Powerful drum beats ♪♫♪"'
+        };
+
+        const output = document.getElementById('music-output');
+        output.innerHTML = `${sounds[instrument]} - Same method "play()", different sounds!`;
+        output.className = 'mt-4 p-3 bg-yellow-100 rounded text-center font-semibold';
+        
+        setTimeout(() => {
+            output.className = 'mt-4 p-3 bg-gray-100 rounded text-center';
+        }, 3000);
+    }
+
+    calculateArea(shape) {
+        const calculations = {
+            rectangle: { formula: '4 × 4', result: 16, unit: 'square units' },
+            circle: { formula: 'π × 3²', result: Math.PI * 9, unit: 'square units' },
+            triangle: { formula: '½ × 6 × 4', result: 12, unit: 'square units' }
+        };
+
+        const calc = calculations[shape];
+        const result = document.getElementById('area-result');
+        result.innerHTML = `
+            <div class="font-semibold">${shape.charAt(0).toUpperCase() + shape.slice(1)} Area Calculation</div>
+            <div class="text-sm text-gray-600">Formula: ${calc.formula}</div>
+            <div class="text-lg font-bold text-purple-600">${calc.result.toFixed(2)} ${calc.unit}</div>
+            <div class="text-xs text-green-600 mt-1">✅ Polymorphic method: calculate_area() called successfully!</div>
+        `;
+        result.className = 'p-3 bg-green-100 rounded text-center border-2 border-green-400';
+        
+        setTimeout(() => {
+            result.className = 'p-3 bg-white rounded text-center';
+        }, 4000);
+    }
+
+    selectDifficulty(difficulty) {
+        this.assessment.difficulty = difficulty;
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-purple-500');
+        });
+        document.querySelector(`[data-difficulty="${difficulty}"]`).classList.add('ring-2', 'ring-purple-500');
+        document.getElementById('start-assessment').disabled = false;
+    }
+
+    async startAssessment() {
+        try {
+            const questionCounts = { easy: 5, medium: 7, hard: 10 };
+            const response = await fetch(`/api/assessments/generate/polymorphism`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    difficulty: this.assessment.difficulty,
+                    question_count: questionCounts[this.assessment.difficulty]
+                })
+            });
+
+            const data = await response.json();
+            this.assessment.questions = data.questions;
+            this.assessment.currentQuestion = 0;
+            this.assessment.answers = {};
+
+            document.querySelector('.text-center').classList.add('hidden');
+            document.getElementById('assessment-questions').classList.remove('hidden');
+            this.showQuestion();
+        } catch (error) {
+            console.error('Error starting assessment:', error);
+            alert('Failed to start assessment. Please try again.');
+        }
+    }
+
+    showQuestion() {
+        const question = this.assessment.questions[this.assessment.currentQuestion];
+        const container = document.getElementById('question-container');
+        
+        container.innerHTML = `
+            <div class="mb-4">
+                <h4 class="text-lg font-semibold mb-3">Question ${this.assessment.currentQuestion + 1}</h4>
+                <p class="text-gray-800 mb-4">${question.question}</p>
+                <div class="space-y-2">
+                    ${Object.entries(question.options).map(([key, value]) => `
+                        <label class="flex items-center p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
+                            <input type="radio" name="question-${question.id}" value="${key}" class="mr-3" 
+                                ${this.assessment.answers[question.id] === key ? 'checked' : ''}>
+                            <span>${key}. ${value}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('question-counter').textContent = 
+            `${this.assessment.currentQuestion + 1} of ${this.assessment.questions.length}`;
+
+        document.getElementById('prev-question').disabled = this.assessment.currentQuestion === 0;
+        document.getElementById('next-question').textContent = 
+            this.assessment.currentQuestion === this.assessment.questions.length - 1 ? 'Submit' : 'Next';
+
+        container.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                this.assessment.answers[question.id] = radio.value;
+            });
+        });
+    }
+
+    previousQuestion() {
+        if (this.assessment.currentQuestion > 0) {
+            this.assessment.currentQuestion--;
+            this.showQuestion();
+        }
+    }
+
+    nextQuestion() {
+        if (this.assessment.currentQuestion < this.assessment.questions.length - 1) {
+            this.assessment.currentQuestion++;
+            this.showQuestion();
+        } else {
+            this.submitAssessment();
+        }
+    }
+
+    async submitAssessment() {
+        try {
+            const response = await fetch(`/api/assessments/evaluate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    assessment_id: this.assessment.questions[0].assessment_id,
+                    answers: this.assessment.answers
+                })
+            });
+
+            const results = await response.json();
+            this.showResults(results);
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+            alert('Failed to submit assessment. Please try again.');
+        }
+    }
+
+    showResults(results) {
+        document.getElementById('assessment-questions').classList.add('hidden');
+        document.getElementById('assessment-results').classList.remove('hidden');
+
+        const score = results.score_percentage;
+        document.getElementById('results-score').textContent = `${Math.round(score)}%`;
+
+        let emoji = '🎉', title = 'Excellent Work!';
+        if (score < 50) { emoji = '📚'; title = 'Keep Learning!'; }
+        else if (score < 70) { emoji = '👍'; title = 'Good Job!'; }
+        else if (score < 90) { emoji = '🌟'; title = 'Great Work!'; }
+
+        document.getElementById('results-emoji').textContent = emoji;
+        document.getElementById('results-title').textContent = title;
+
+        const feedbackEl = document.getElementById('ai-feedback');
+        if (results.ai_feedback) {
+            feedbackEl.innerHTML = `
+                <h5 class="font-semibold mb-2">📋 Personalized Feedback</h5>
+                <p class="text-sm mb-2">${results.ai_feedback.overall_assessment}</p>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <strong>💪 Strengths:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.strengths.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>📈 Recommendations:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            ${results.ai_feedback.study_recommendations.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-sm mt-3 font-medium text-purple-700">${results.ai_feedback.encouragement}</p>
+            `;
+        }
+
+        this.completeSection('assessment');
+    }
+
+    retakeAssessment() {
+        this.assessment = { difficulty: null, questions: [], currentQuestion: 0, answers: {} };
+        document.getElementById('assessment-results').classList.add('hidden');
+        document.querySelector('.text-center').classList.remove('hidden');
+        document.querySelectorAll('.assessment-option').forEach(option => {
+            option.classList.remove('ring-2', 'ring-purple-500');
+        });
+        document.getElementById('start-assessment').disabled = true;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new PolymorphismLearning();
+});
+</script>
+{% endblock %}

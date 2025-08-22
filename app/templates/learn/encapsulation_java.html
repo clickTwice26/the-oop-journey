@@ -1,0 +1,888 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    🔒 Master Encapsulation
+                </h1>
+                <p class="text-xl md:text-2xl opacity-90 mb-8">
+                    Bundle data and methods, control access like a fortress
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Data Protection</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Access Control</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">Information Hiding</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Learning Progress</h2>
+                <div class="flex items-center space-x-4">
+                    <div class="w-64 bg-gray-200 rounded-full h-2">
+                        <div class="bg-emerald-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="/learn" class="text-emerald-600 hover:text-emerald-800">Learn</a>
+                <span class="text-gray-400">→</span>
+                <span class="text-gray-700">Encapsulation</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🗺️ Learning Journey</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="section-nav p-4 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors cursor-pointer" data-section="concept">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <h4 class="font-semibold text-emerald-800">Concept</h4>
+                        <p class="text-sm text-emerald-600">What is Encapsulation?</p>
+                    </div>
+                </div>
+                <div class="section-nav p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors cursor-pointer" data-section="access">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🔐</div>
+                        <h4 class="font-semibold text-green-800">Access Control</h4>
+                        <p class="text-sm text-green-600">Private, Protected, Public</p>
+                    </div>
+                </div>
+                <div class="section-nav p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors cursor-pointer" data-section="properties">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">⚙️</div>
+                        <h4 class="font-semibold text-teal-800">Properties</h4>
+                        <p class="text-sm text-teal-600">Getters & Setters</p>
+                    </div>
+                </div>
+                <div class="section-nav p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition-colors cursor-pointer" data-section="assessment">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">📝</div>
+                        <h4 class="font-semibold text-cyan-800">Assessment</h4>
+                        <p class="text-sm text-cyan-600">Test Your Knowledge</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Concept -->
+        <div id="concept" class="section">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-emerald-800 mb-6">🎯 Understanding Encapsulation</h3>
+                
+                <!-- Definition -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-emerald-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-emerald-800 mb-4">📖 Definition</h4>
+                        <p class="text-gray-700 mb-4">
+                            Encapsulation is the bundling of data (attributes) and methods that operate on that data 
+                            within a single unit (class), while restricting direct access to internal components.
+                        </p>
+                        <div class="pillars bg-white p-3 rounded border">
+                            <strong class="text-emerald-800">Two Key Pillars:</strong>
+                            <ul class="text-sm mt-2 space-y-1">
+                                <li>🎁 <strong>Bundling:</strong> Data + Methods together</li>
+                                <li>🔒 <strong>Hiding:</strong> Restrict direct access</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-green-800 mb-4">🎯 Benefits</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🛡️</span>
+                                <span>Data Protection</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✅</span>
+                                <span>Data Validation</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🔧</span>
+                                <span>Easier Maintenance</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🎛️</span>
+                                <span>Controlled Access</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🐛</span>
+                                <span>Reduced Bugs</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Code Examples -->
+                <div class="code-examples">
+                    <h4 class="text-xl font-semibold text-emerald-800 mb-4">💻 Java Code Examples</h4>
+                    
+                    <div class="examples-grid grid md:grid-cols-2 gap-6">
+                        <div class="example bg-red-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-red-800 mb-2">❌ Without Encapsulation</h5>
+                            <pre class="bg-gray-900 text-red-400 p-3 rounded text-sm"><code>public class BankAccount {
+    public double balance = 1000.0;  // Direct access!
+    public String accountNumber = "12345";
+}
+
+// Anyone can modify the balance directly
+BankAccount account = new BankAccount();
+account.balance = -500.0;    // 😱 Negative balance!
+account.balance = 999999.0;  // 😱 Unlimited money!
+
+System.out.println("Balance: $" + account.balance);</code></pre>
+                            <div class="mt-2 text-sm text-red-700">
+                                <strong>Problems:</strong> No validation, no security, data corruption possible!
+                            </div>
+                        </div>
+                        
+                        <div class="example bg-green-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-green-800 mb-2">✅ With Encapsulation</h5>
+                            <pre class="bg-gray-900 text-green-400 p-3 rounded text-sm"><code>public class BankAccount {
+    private double balance = 1000.0;  // Private!
+    private String accountNumber = "12345";
+    
+    public boolean deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+    
+    public double getBalance() {
+        return balance;
+    }
+}</code></pre>
+                            <div class="mt-2 text-sm text-green-700">
+                                <strong>Benefits:</strong> Validation, security, controlled access!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button class="next-btn bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors" data-next="access">
+                        Learn Access Control →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Access Control -->
+        <div id="access" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-green-800 mb-6">🔐 Access Control Modifiers</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="access-level bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <h4 class="font-semibold text-red-800 mb-2">🔒 Private</h4>
+                        <p class="text-sm text-gray-700 mb-2">Accessible only within the same class</p>
+                        <div class="code-example bg-gray-900 text-red-400 p-2 rounded text-xs">
+                            <div>public class Account {</div>
+                            <div>&nbsp;&nbsp;private double balance;</div>
+                            <div>&nbsp;&nbsp;private String accountId;</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="access-level bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                        <h4 class="font-semibold text-yellow-800 mb-2">🔓 Protected</h4>
+                        <p class="text-sm text-gray-700 mb-2">Accessible within package and subclasses</p>
+                        <div class="code-example bg-gray-900 text-yellow-400 p-2 rounded text-xs">
+                            <div>public class Account {</div>
+                            <div>&nbsp;&nbsp;protected String bankName;</div>
+                            <div>&nbsp;&nbsp;protected int branchCode;</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="access-level bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-semibold text-green-800 mb-2">🌐 Public</h4>
+                        <p class="text-sm text-gray-700 mb-2">Accessible from anywhere</p>
+                        <div class="code-example bg-gray-900 text-green-400 p-2 rounded text-xs">
+                            <div>public class Account {</div>
+                            <div>&nbsp;&nbsp;public String getAccountInfo() {</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;return "Account Details";</div>
+                            <div>&nbsp;&nbsp;}</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Example -->
+                <div class="bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg p-6 mb-6">
+                    <h4 class="text-xl font-bold text-blue-800 mb-4">🎮 Interactive Access Control Demo</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="demo-code bg-gray-900 text-green-400 p-4 rounded-lg">
+                            <div class="mb-2 text-white font-semibold">Student.java</div>
+                            <pre class="text-sm"><code>public class Student {
+    private String name;        // Only this class
+    protected int grade;        // Package + subclasses
+    public String school;       // Everywhere
+    
+    public Student(String name, int grade) {
+        this.name = name;
+        this.grade = grade;
+        this.school = "Java Academy";
+    }
+    
+    public String getName() {
+        return name;  // Controlled access
+    }
+}</code></pre>
+                        </div>
+                        
+                        <div class="demo-controls">
+                            <div class="mb-4">
+                                <h5 class="font-semibold text-gray-800 mb-2">Try accessing from different contexts:</h5>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <button class="access-demo-btn w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" 
+                                        data-context="same-class">
+                                    Same Class Access
+                                </button>
+                                <button class="access-demo-btn w-full bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600" 
+                                        data-context="subclass">
+                                    Subclass Access
+                                </button>
+                                <button class="access-demo-btn w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" 
+                                        data-context="different-class">
+                                    Different Class Access
+                                </button>
+                            </div>
+                            
+                            <div id="access-result" class="mt-4 p-3 bg-white rounded border text-sm">
+                                Click a button to see access results!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="next-btn bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors" data-next="properties">
+                        Learn Getters & Setters →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Properties -->
+        <div id="properties" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-3xl font-bold text-teal-800 mb-6">⚙️ Getters & Setters</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-teal-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-teal-800 mb-4">🎯 Purpose</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>🔍 <strong>Getters:</strong> Safely retrieve private data</li>
+                            <li>✏️ <strong>Setters:</strong> Safely modify private data</li>
+                            <li>✅ <strong>Validation:</strong> Check data before setting</li>
+                            <li>📝 <strong>Logging:</strong> Track access and changes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="text-xl font-semibold text-blue-800 mb-4">📋 Best Practices</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>🚫 Don't expose all private fields</li>
+                            <li>✅ Validate input in setters</li>
+                            <li>🔒 Make getters return copies for objects</li>
+                            <li>📖 Use meaningful method names</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Comprehensive Example -->
+                <div class="bg-gradient-to-r from-teal-100 to-blue-100 rounded-lg p-6 mb-6">
+                    <h4 class="text-xl font-bold text-teal-800 mb-4">💻 Complete Java Example</h4>
+                    
+                    <pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm mb-4"><code>public class Student {
+    // Private fields - encapsulated data
+    private String name;
+    private int age;
+    private double gpa;
+    private String email;
+    
+    // Constructor
+    public Student(String name, int age) {
+        setName(name);  // Use setter for validation
+        setAge(age);    // Use setter for validation
+        this.gpa = 0.0;
+    }
+    
+    // Getter methods - controlled access to read data
+    public String getName() {
+        return name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public double getGpa() {
+        return gpa;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    // Setter methods - controlled access to modify data
+    public void setName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name.trim();
+        } else {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+    }
+    
+    public void setAge(int age) {
+        if (age >= 16 && age <= 100) {
+            this.age = age;
+        } else {
+            throw new IllegalArgumentException("Age must be between 16 and 100");
+        }
+    }
+    
+    public void setGpa(double gpa) {
+        if (gpa >= 0.0 && gpa <= 4.0) {
+            this.gpa = gpa;
+        } else {
+            throw new IllegalArgumentException("GPA must be between 0.0 and 4.0");
+        }
+    }
+    
+    public void setEmail(String email) {
+        if (email != null && email.contains("@")) {
+            this.email = email.toLowerCase();
+        } else {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+    }
+    
+    // Utility method
+    public String getStudentInfo() {
+        return String.format("Student: %s, Age: %d, GPA: %.2f", 
+                           name, age, gpa);
+    }
+}</code></pre>
+
+                    <!-- Interactive Demo -->
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="demo-controls bg-white p-4 rounded border">
+                            <h5 class="font-semibold mb-3">🎮 Try the Setters:</h5>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Name:</label>
+                                    <input type="text" id="student-name" class="w-full px-3 py-2 border rounded-lg" placeholder="Enter name">
+                                    <button class="test-setter mt-1 bg-blue-500 text-white px-3 py-1 rounded text-sm" data-field="name">Test</button>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Age:</label>
+                                    <input type="number" id="student-age" class="w-full px-3 py-2 border rounded-lg" placeholder="16-100">
+                                    <button class="test-setter mt-1 bg-blue-500 text-white px-3 py-1 rounded text-sm" data-field="age">Test</button>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">GPA:</label>
+                                    <input type="number" step="0.1" id="student-gpa" class="w-full px-3 py-2 border rounded-lg" placeholder="0.0-4.0">
+                                    <button class="test-setter mt-1 bg-blue-500 text-white px-3 py-1 rounded text-sm" data-field="gpa">Test</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="setter-results" class="bg-gray-900 text-green-400 p-4 rounded border">
+                            <div class="text-white font-semibold mb-2">Results:</div>
+                            <div class="text-sm">Try setting values to see validation in action!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="next-btn bg-teal-600 text-white px-8 py-3 rounded-lg hover:bg-teal-700 transition-colors" data-next="assessment">
+                        Take Assessment →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Assessment -->
+        <div id="assessment" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-3xl font-bold text-cyan-800 mb-6">📝 Encapsulation Assessment</h3>
+                
+                <div class="assessment-container">
+                    <div id="assessment-intro" class="text-center">
+                        <div class="mb-6">
+                            <div class="w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2">Ready to Test Your Knowledge?</h4>
+                            <p class="text-gray-600 mb-6">Let's see how well you understand Encapsulation concepts!</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-3 gap-4 mb-8">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <div class="text-2xl mb-2">📊</div>
+                                <div class="font-semibold text-blue-800">5 Questions</div>
+                                <div class="text-sm text-blue-600">Multiple Choice</div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <div class="text-2xl mb-2">⏱️</div>
+                                <div class="font-semibold text-green-800">10 Minutes</div>
+                                <div class="text-sm text-green-600">Take Your Time</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <div class="text-2xl mb-2">🎯</div>
+                                <div class="font-semibold text-purple-800">AI Feedback</div>
+                                <div class="text-sm text-purple-600">Personalized</div>
+                            </div>
+                        </div>
+                        
+                        <button id="start-assessment-btn" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-colors text-lg font-semibold">
+                            Start Assessment
+                        </button>
+                    </div>
+                    
+                    <div id="assessment-questions" class="hidden">
+                        <!-- Questions will be loaded here -->
+                    </div>
+                    
+                    <div id="assessment-results" class="hidden">
+                        <!-- Results will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+class EncapsulationLearning {
+    constructor() {
+        this.currentSection = 'concept';
+        this.completedSections = new Set();
+        this.progress = 0;
+        this.assessment = null;
+        this.studentDemo = {
+            name: '',
+            age: 0,
+            gpa: 0.0
+        };
+        this.init();
+    }
+
+    init() {
+        this.showSection('concept');
+        this.setupEventListeners();
+        this.updateProgress();
+    }
+
+    setupEventListeners() {
+        // Section navigation
+        document.querySelectorAll('.section-nav').forEach(nav => {
+            nav.addEventListener('click', () => {
+                const section = nav.getAttribute('data-section');
+                this.showSection(section);
+            });
+        });
+
+        // Next buttons
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nextSection = btn.getAttribute('data-next');
+                this.completeSection(this.currentSection);
+                this.showSection(nextSection);
+            });
+        });
+
+        // Access control demo
+        document.querySelectorAll('.access-demo-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.handleAccessDemo(btn.getAttribute('data-context'));
+            });
+        });
+
+        // Setter testing
+        document.querySelectorAll('.test-setter').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.testSetter(btn.getAttribute('data-field'));
+            });
+        });
+
+        // Assessment
+        document.getElementById('start-assessment-btn')?.addEventListener('click', () => {
+            this.startAssessment();
+        });
+    }
+
+    showSection(sectionName) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.add('hidden');
+        });
+
+        // Show target section
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            this.currentSection = sectionName;
+            
+            // Update navigation highlighting
+            document.querySelectorAll('.section-nav').forEach(nav => {
+                nav.classList.remove('ring-2', 'ring-emerald-500');
+                if (nav.getAttribute('data-section') === sectionName) {
+                    nav.classList.add('ring-2', 'ring-emerald-500');
+                }
+            });
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+
+    completeSection(sectionName) {
+        this.completedSections.add(sectionName);
+        this.updateProgress();
+        
+        const navElement = document.querySelector(`[data-section="${sectionName}"]`);
+        if (navElement) {
+            navElement.classList.add('bg-green-100');
+            const icon = navElement.querySelector('.text-3xl');
+            if (icon) icon.textContent = '✅';
+        }
+    }
+
+    updateProgress() {
+        const totalSections = 4;
+        this.progress = (this.completedSections.size / totalSections) * 100;
+        
+        document.querySelector('.progress-bar').style.width = `${this.progress}%`;
+        document.querySelector('.progress-text').textContent = `${Math.round(this.progress)}% Complete`;
+    }
+
+    handleAccessDemo(context) {
+        const resultEl = document.getElementById('access-result');
+        
+        const scenarios = {
+            'same-class': {
+                code: `// Inside Student class
+public void displayInfo() {
+    System.out.println(name);     // ✅ Private accessible
+    System.out.println(grade);    // ✅ Protected accessible  
+    System.out.println(school);   // ✅ Public accessible
+}`,
+                result: '✅ All fields accessible within the same class!'
+            },
+            'subclass': {
+                code: `// In GraduateStudent extends Student
+public void showGrade() {
+    // System.out.println(name);  // ❌ Private not accessible
+    System.out.println(grade);    // ✅ Protected accessible
+    System.out.println(school);   // ✅ Public accessible
+}`,
+                result: '⚠️ Protected and Public accessible, Private is not!'
+            },
+            'different-class': {
+                code: `// In Main class
+Student student = new Student("John", 85);
+// System.out.println(student.name);   // ❌ Private not accessible
+// System.out.println(student.grade);  // ❌ Protected not accessible
+System.out.println(student.school);    // ✅ Public accessible`,
+                result: '🚫 Only Public fields accessible from different class!'
+            }
+        };
+        
+        const scenario = scenarios[context];
+        resultEl.innerHTML = `
+            <div class="font-semibold mb-2">${scenario.result}</div>
+            <pre class="bg-gray-800 text-green-400 p-2 rounded text-xs">${scenario.code}</pre>
+        `;
+    }
+
+    testSetter(field) {
+        const values = {
+            name: document.getElementById('student-name').value,
+            age: parseInt(document.getElementById('student-age').value),
+            gpa: parseFloat(document.getElementById('student-gpa').value)
+        };
+        
+        const resultEl = document.getElementById('setter-results');
+        let result = '';
+        
+        try {
+            switch(field) {
+                case 'name':
+                    if (!values.name || values.name.trim() === '') {
+                        throw new Error('Name cannot be empty');
+                    }
+                    this.studentDemo.name = values.name.trim();
+                    result = `✅ Name set to: "${this.studentDemo.name}"`;
+                    break;
+                    
+                case 'age':
+                    if (values.age < 16 || values.age > 100) {
+                        throw new Error('Age must be between 16 and 100');
+                    }
+                    this.studentDemo.age = values.age;
+                    result = `✅ Age set to: ${this.studentDemo.age}`;
+                    break;
+                    
+                case 'gpa':
+                    if (values.gpa < 0.0 || values.gpa > 4.0) {
+                        throw new Error('GPA must be between 0.0 and 4.0');
+                    }
+                    this.studentDemo.gpa = values.gpa;
+                    result = `✅ GPA set to: ${this.studentDemo.gpa.toFixed(2)}`;
+                    break;
+            }
+            
+            resultEl.innerHTML = `
+                <div class="text-white font-semibold mb-2">Results:</div>
+                <div class="text-green-400">${result}</div>
+                <div class="text-gray-400 text-sm mt-2">Current Student: ${this.studentDemo.name || 'Unknown'}, Age: ${this.studentDemo.age}, GPA: ${this.studentDemo.gpa.toFixed(2)}</div>
+            `;
+            
+        } catch (error) {
+            resultEl.innerHTML = `
+                <div class="text-white font-semibold mb-2">Results:</div>
+                <div class="text-red-400">❌ ${error.message}</div>
+                <div class="text-yellow-400 text-sm mt-2">Validation prevented invalid data!</div>
+            `;
+        }
+    }
+
+    async startAssessment() {
+        document.getElementById('assessment-intro').classList.add('hidden');
+        document.getElementById('assessment-questions').classList.remove('hidden');
+        
+        try {
+            const response = await fetch('/api/assessments/generate/encapsulation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    difficulty: 'medium',
+                    question_count: 5
+                })
+            });
+            
+            this.assessment = await response.json();
+            this.renderAssessmentQuestions();
+            
+        } catch (error) {
+            console.error('Error loading assessment:', error);
+            document.getElementById('assessment-questions').innerHTML = `
+                <div class="text-center text-red-600">
+                    <p>Error loading assessment. Please try again.</p>
+                    <button onclick="location.reload()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Retry</button>
+                </div>
+            `;
+        }
+    }
+
+    renderAssessmentQuestions() {
+        const container = document.getElementById('assessment-questions');
+        
+        let html = `
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="text-xl font-semibold">Encapsulation Assessment</h4>
+                    <div class="text-sm text-gray-600">
+                        <span id="question-counter">1 of ${this.assessment.questions.length}</span>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div id="question-progress" class="bg-cyan-600 h-2 rounded-full" style="width: ${100/this.assessment.questions.length}%"></div>
+                </div>
+            </div>
+            
+            <form id="assessment-form">
+        `;
+        
+        this.assessment.questions.forEach((question, index) => {
+            html += `
+                <div class="question-card ${index === 0 ? '' : 'hidden'}" data-question="${index}">
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h5 class="font-semibold text-lg mb-4">Question ${index + 1}</h5>
+                        <p class="text-gray-800 mb-4">${question.question}</p>
+                        
+                        <div class="space-y-3">
+            `;
+            
+            Object.entries(question.options).forEach(([key, value]) => {
+                html += `
+                    <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="question_${question.id}" value="${key}" class="mr-3">
+                        <span><strong>${key}.</strong> ${value}</span>
+                    </label>
+                `;
+            });
+            
+            html += `
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button type="button" class="prev-question bg-gray-500 text-white px-4 py-2 rounded-lg ${index === 0 ? 'invisible' : ''}" data-prev="${index - 1}">
+                            ← Previous
+                        </button>
+                        
+                        ${index === this.assessment.questions.length - 1 ? 
+                            '<button type="submit" class="submit-assessment bg-green-600 text-white px-6 py-2 rounded-lg">Submit Assessment</button>' :
+                            `<button type="button" class="next-question bg-cyan-600 text-white px-4 py-2 rounded-lg" data-next="${index + 1}">Next →</button>`
+                        }
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</form>';
+        container.innerHTML = html;
+        
+        this.setupAssessmentNavigation();
+    }
+
+    setupAssessmentNavigation() {
+        let currentQuestionIndex = 0;
+        
+        // Next/Previous buttons
+        document.querySelectorAll('.next-question, .prev-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetIndex = parseInt(btn.getAttribute('data-next') || btn.getAttribute('data-prev'));
+                this.showQuestion(targetIndex);
+                currentQuestionIndex = targetIndex;
+            });
+        });
+        
+        // Form submission
+        document.getElementById('assessment-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.submitAssessment();
+        });
+    }
+
+    showQuestion(index) {
+        document.querySelectorAll('.question-card').forEach((card, i) => {
+            card.classList.toggle('hidden', i !== index);
+        });
+        
+        const total = this.assessment.questions.length;
+        document.getElementById('question-counter').textContent = `${index + 1} of ${total}`;
+        document.getElementById('question-progress').style.width = `${((index + 1) / total) * 100}%`;
+    }
+
+    async submitAssessment() {
+        const formData = new FormData(document.getElementById('assessment-form'));
+        const answers = {};
+        
+        for (const [key, value] of formData.entries()) {
+            const questionId = key.replace('question_', '');
+            answers[questionId] = value;
+        }
+        
+        try {
+            const response = await fetch(`/api/assessments/${this.assessment.id}/submit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ answers })
+            });
+            
+            const results = await response.json();
+            this.showResults(results);
+            
+        } catch (error) {
+            console.error('Error submitting assessment:', error);
+            alert('Error submitting assessment. Please try again.');
+        }
+    }
+
+    showResults(results) {
+        document.getElementById('assessment-questions').classList.add('hidden');
+        document.getElementById('assessment-results').classList.remove('hidden');
+        
+        const container = document.getElementById('assessment-results');
+        
+        const percentage = Math.round(results.score_percentage || 0);
+        const scoreColor = percentage >= 80 ? 'green' : percentage >= 60 ? 'yellow' : 'red';
+        
+        let html = `
+            <div class="text-center mb-8">
+                <div class="w-24 h-24 bg-${scoreColor}-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl font-bold text-${scoreColor}-600">${percentage}%</span>
+                </div>
+                <h4 class="text-2xl font-semibold text-gray-800 mb-2">Assessment Complete!</h4>
+                <p class="text-gray-600">You scored ${results.correct_answers} out of ${results.total_questions} questions correctly.</p>
+            </div>
+        `;
+        
+        if (results.ai_feedback) {
+            html += `
+                <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                    <h5 class="font-semibold text-blue-800 mb-3">🤖 AI Feedback</h5>
+                    <div class="space-y-3 text-gray-700">
+                        <p><strong>Overall:</strong> ${results.ai_feedback.overall_assessment}</p>
+                        <p><strong>Areas to improve:</strong> ${results.ai_feedback.areas_for_improvement?.join(', ')}</p>
+                        <p><strong>Study recommendations:</strong></p>
+                        <ul class="list-disc list-inside ml-4">
+                            ${results.ai_feedback.study_recommendations?.map(rec => `<li>${rec}</li>`).join('') || ''}
+                        </ul>
+                        <p class="text-blue-600 font-medium">${results.ai_feedback.encouragement}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += `
+            <div class="flex justify-center space-x-4">
+                <button onclick="location.reload()" class="bg-cyan-600 text-white px-6 py-2 rounded-lg hover:bg-cyan-700">
+                    Retake Assessment
+                </button>
+                <a href="/learn" class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700">
+                    Back to Learning
+                </a>
+            </div>
+        `;
+        
+        container.innerHTML = html;
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new EncapsulationLearning();
+});
+</script>
+{% endblock %}
