@@ -7,13 +7,18 @@ import os
 project_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_dir)
 
-# Import directly from app.py file
-from app import create_app
+# Import directly from app.py file using importlib
+import importlib.util
+spec = importlib.util.spec_from_file_location("main_app", "app.py")
+main_app = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(main_app)
+
 from app.models import db, User, Quiz, Question, QuizResult, Conversation, Message, Assessment, AssessmentResult
 
 def migrate_database():
     """Create/update database tables"""
-    flask_app = create_app()
+    # Create Flask app using the create_app function from main_app module
+    flask_app = main_app.create_app()
     
     with flask_app.app_context():
         try:

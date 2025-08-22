@@ -21,6 +21,7 @@ class User(db.Model):
     quiz_results = db.relationship('QuizResult', backref='user', lazy=True)
     conversations = db.relationship('Conversation', backref='user', lazy=True)
     assessment_results = db.relationship('AssessmentResult', backref='user', lazy=True)
+    quizzes = db.relationship('Quiz', backref='creator', lazy=True)
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -45,6 +46,7 @@ class Quiz(db.Model):
     description = db.Column(db.Text)
     source_file_name = db.Column(db.String(255))
     source_file_type = db.Column(db.String(50))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     

@@ -344,7 +344,7 @@ Generate the assessment now:"""
                 'questions': selected_questions
             }
 
-    def evaluate_assessment(self, assessment_id, user_answers, user_session):
+    def evaluate_assessment(self, assessment_id, user_answers, user_id):
         """Evaluate user's assessment answers"""
         try:
             # Get the assessment
@@ -386,7 +386,7 @@ Generate the assessment now:"""
             # Save result to database
             result = AssessmentResult(
                 assessment_id=assessment_id,
-                user_session=user_session,
+                user_id=user_id,
                 score_percentage=score_percentage,
                 user_answers=user_answers,
                 ai_feedback=ai_feedback
@@ -533,11 +533,10 @@ Format as JSON:
             "next_steps": f"Continue practicing {concept} concepts and take the assessment again to track improvement"
         }
 
-    def get_assessment_history(self, user_session, concept=None):
+    def get_assessment_history(self, user_id, concept=None):
         """Get user's assessment history"""
         try:
-            query = db.session.query(AssessmentResult).join(Assessment)
-            query = query.filter(AssessmentResult.user_session == user_session)
+            query = AssessmentResult.query.filter_by(user_id=user_id)
             
             if concept:
                 query = query.filter(Assessment.concept == concept)

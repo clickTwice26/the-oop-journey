@@ -67,14 +67,17 @@ def assess_encapsulation():
     return render_template('assessment.html', title='Encapsulation Assessment - OOP Concepts')
 
 @main_bp.route('/learn/inheritance/assessment')
+@login_required
 def assess_inheritance():
     return render_template('assessment.html', title='Inheritance Assessment - OOP Concepts')
 
 @main_bp.route('/learn/polymorphism/assessment')
+@login_required
 def assess_polymorphism():
     return render_template('assessment.html', title='Polymorphism Assessment - OOP Concepts')
 
 @main_bp.route('/learn/abstraction/assessment')
+@login_required
 def assess_abstraction():
     return render_template('assessment.html', title='Abstraction Assessment - OOP Concepts')
 
@@ -111,13 +114,15 @@ def quiz_generator():
 @quiz_bp.route('/list')
 @login_required
 def quiz_list():
-    quizzes = Quiz.query.order_by(Quiz.created_at.desc()).all()
+    current_user = get_current_user()
+    quizzes = Quiz.query.filter_by(user_id=current_user.id).order_by(Quiz.created_at.desc()).all()
     return render_template('quiz-list.html', title='My Quizzes', quizzes=quizzes)
 
 @quiz_bp.route('/take/<int:quiz_id>')
 @login_required
 def take_quiz(quiz_id):
-    quiz = Quiz.query.get_or_404(quiz_id)
+    current_user = get_current_user()
+    quiz = Quiz.query.filter_by(id=quiz_id, user_id=current_user.id).first_or_404()
     return render_template('quiz-view.html', title=f'Take Quiz: {quiz.title}', quiz=quiz)
 
 @quiz_bp.route('/review')
@@ -172,11 +177,13 @@ def generate_quiz():
         current_app.logger.info(f"Quiz generated successfully: {len(quiz_data['questions'])} questions")
         
         # Save to database
+        current_user = get_current_user()
         quiz = Quiz(
             title=quiz_data['title'],
             description=quiz_data.get('description', ''),
             source_file_name=filename,
-            source_file_type=file.content_type
+            source_file_type=file.content_type,
+            user_id=current_user.id
         )
         db.session.add(quiz)
         db.session.flush()  # Get the quiz ID
@@ -229,8 +236,11 @@ def submit_quiz(quiz_id):
     try:
         data = request.get_json()
         
-        # Get current user
+        # Get current user and verify quiz ownership
         current_user = get_current_user()
+        quiz = Quiz.query.filter_by(id=quiz_id, user_id=current_user.id).first()
+        if not quiz:
+            return jsonify({'error': 'Quiz not found or access denied'}), 404
         
         # Create quiz result
         result = QuizResult(
@@ -301,6 +311,7 @@ def send_chat_message():
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/chat/new', methods=['POST'])
+@login_required
 def create_new_conversation():
     try:
         chat_service = ChatService()
@@ -315,6 +326,7 @@ def create_new_conversation():
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/chat/conversation/<int:conversation_id>/rename', methods=['POST'])
+@login_required
 def rename_conversation(conversation_id):
     try:
         data = request.get_json()
@@ -464,6 +476,7 @@ def get_conversation_messages(conversation_id):
 
 # Assessment API routes
 @api_bp.route('/assessments/generate/<concept>', methods=['POST'])
+@login_required
 def generate_assessment(concept):
     """Generate assessment for a specific OOP concept"""
     try:
@@ -512,19 +525,19 @@ def evaluate_assessment():
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/assessments/<int:assessment_id>/submit', methods=['POST'])
+@login_required
 def submit_assessment(assessment_id):
     """Submit assessment answers for evaluation"""
     try:
         data = request.get_json()
         user_answers = data.get('answers', {})
         
-        # Generate user session if not exists
-        if 'user_session' not in session:
-            session['user_session'] = str(uuid.uuid4())
+        # Get current user
+        current_user = get_current_user()
         
         assessment_service = AssessmentService()
         result = assessment_service.evaluate_assessment(
-            assessment_id, user_answers, session['user_session']
+            assessment_id, user_answers, current_user.id
         )
         
         if 'error' in result:
@@ -537,26 +550,27 @@ def submit_assessment(assessment_id):
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/assessments/results/<int:result_id>')
+@login_required
 def get_assessment_result(result_id):
     """Get detailed assessment result"""
     try:
-        result = AssessmentResult.query.get_or_404(result_id)
+        current_user = get_current_user()
+        result = AssessmentResult.query.filter_by(id=result_id, user_id=current_user.id).first_or_404()
         return jsonify(result.to_dict())
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/assessments/history')
+@login_required
 def get_assessment_history():
     """Get user's assessment history"""
     try:
-        if 'user_session' not in session:
-            return jsonify([])
-        
+        current_user = get_current_user()
         concept = request.args.get('concept')  # Optional filter by concept
         
         assessment_service = AssessmentService()
-        history = assessment_service.get_assessment_history(session['user_session'], concept)
+        history = assessment_service.get_assessment_history(current_user.id, concept)
         
         return jsonify(history)
         
@@ -564,16 +578,16 @@ def get_assessment_history():
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/assessments/stats/<concept>')
+@login_required
 def get_concept_stats(concept):
     """Get statistics for a specific concept"""
     try:
-        if 'user_session' not in session:
-            return jsonify({'average_score': 0, 'attempt_count': 0})
+        current_user = get_current_user()
         
         # Get user's results for this concept
         results = db.session.query(AssessmentResult).join(Assessment).filter(
             Assessment.concept == concept,
-            AssessmentResult.user_session == session['user_session']
+            AssessmentResult.user_id == current_user.id
         ).all()
         
         if not results:
