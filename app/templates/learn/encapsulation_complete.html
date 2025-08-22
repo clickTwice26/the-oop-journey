@@ -10,6 +10,110 @@
 .concept-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .concept-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
 .section-complete { background: linear-gradient(45deg, #10b981, #059669); }
+
+/* Creative Loading Animation Styles */
+.brain-loading {
+    animation: brainPulse 2s ease-in-out infinite;
+}
+
+@keyframes brainPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    25% { 
+        transform: scale(1.1); 
+        filter: hue-rotate(90deg) brightness(1.2);
+    }
+    50% { 
+        transform: scale(1.2); 
+        filter: hue-rotate(180deg) brightness(1.4);
+    }
+    75% { 
+        transform: scale(1.1); 
+        filter: hue-rotate(270deg) brightness(1.2);
+    }
+}
+
+.loading-dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.loading-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: dotBounce 1.4s ease-in-out infinite both;
+}
+
+.loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s; }
+.loading-dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes dotBounce {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.loading-text {
+    animation: textShimmer 2s ease-in-out infinite;
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0.8) 0%, 
+        rgba(255,255,255,1) 50%, 
+        rgba(255,255,255,0.8) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes textShimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+#start-assessment.loading {
+    background: linear-gradient(45deg, #10b981, #059669, #0d9488, #10b981);
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+    cursor: not-allowed;
+    position: relative;
+    overflow: hidden;
+}
+
+#start-assessment.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.2), 
+        transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
 </style>
 {% endblock %}
 
@@ -275,8 +379,21 @@
                         </div>
                     </div>
                     
-                    <button id="start-assessment" class="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 disabled:opacity-50" disabled>
-                        Start Assessment
+                    <button id="start-assessment" class="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-all duration-300" disabled>
+                        <span class="button-text">Start Assessment</span>
+                        <span class="loading-content hidden">
+                            <div class="flex items-center justify-center space-x-2">
+                                <div class="brain-loading">
+                                    <i class="fas fa-brain text-xl animate-pulse"></i>
+                                </div>
+                                <div class="loading-dots">
+                                    <span class="loading-dot"></span>
+                                    <span class="loading-dot"></span>
+                                    <span class="loading-dot"></span>
+                                </div>
+                                <span class="loading-text">Generating Questions</span>
+                            </div>
+                        </span>
                     </button>
                 </div>
                 
@@ -449,29 +566,89 @@ class EncapsulationLearning {
     }
 
     async startAssessment() {
+        // Show loading animation
+        this.showLoadingAnimation();
+        
         try {
             const questionCounts = { easy: 5, medium: 7, hard: 10 };
-            const response = await fetch(`/api/assessments/generate/encapsulation`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    difficulty: this.assessment.difficulty,
-                    question_count: questionCounts[this.assessment.difficulty]
-                })
-            });
+            
+            // Add a minimum loading time to show the animation (2 seconds)
+            const [response] = await Promise.all([
+                fetch(`/api/assessments/generate/encapsulation`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        difficulty: this.assessment.difficulty,
+                        question_count: questionCounts[this.assessment.difficulty]
+                    })
+                }),
+                new Promise(resolve => setTimeout(resolve, 2000)) // Minimum 2s loading
+            ]);
 
             const data = await response.json();
             this.assessment.questions = data.questions;
             this.assessment.currentQuestion = 0;
             this.assessment.answers = {};
 
+            // Hide loading and show questions
+            this.hideLoadingAnimation();
             document.querySelector('.text-center').classList.add('hidden');
             document.getElementById('assessment-questions').classList.remove('hidden');
             this.showQuestion();
         } catch (error) {
             console.error('Error starting assessment:', error);
+            this.hideLoadingAnimation();
             alert('Failed to start assessment. Please try again.');
         }
+    }
+
+    showLoadingAnimation() {
+        const button = document.getElementById('start-assessment');
+        const buttonText = button.querySelector('.button-text');
+        const loadingContent = button.querySelector('.loading-content');
+        
+        // Hide button text and show loading
+        buttonText.classList.add('hidden');
+        loadingContent.classList.remove('hidden');
+        
+        // Add loading class for background animation
+        button.classList.add('loading');
+        button.disabled = true;
+        
+        // Update loading text periodically
+        const loadingTexts = [
+            'Generating Questions...',
+            'Analyzing Difficulty...',
+            'Crafting Challenges...',
+            'Preparing Assessment...',
+            'Almost Ready...'
+        ];
+        
+        let textIndex = 0;
+        const loadingTextElement = loadingContent.querySelector('.loading-text');
+        
+        this.loadingInterval = setInterval(() => {
+            textIndex = (textIndex + 1) % loadingTexts.length;
+            loadingTextElement.textContent = loadingTexts[textIndex];
+        }, 600);
+    }
+
+    hideLoadingAnimation() {
+        const button = document.getElementById('start-assessment');
+        const buttonText = button.querySelector('.button-text');
+        const loadingContent = button.querySelector('.loading-content');
+        
+        // Clear loading interval
+        if (this.loadingInterval) {
+            clearInterval(this.loadingInterval);
+        }
+        
+        // Show button text and hide loading
+        buttonText.classList.remove('hidden');
+        loadingContent.classList.add('hidden');
+        
+        // Remove loading class
+        button.classList.remove('loading');
     }
 
     showQuestion() {
