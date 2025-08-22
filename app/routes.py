@@ -29,6 +29,10 @@ def index():
 def learn():
     return render_template('learn.html', title='Learn OOP Concepts')
 
+@main_bp.route('/upcoming-features')
+def upcoming_features():
+    return render_template('upcoming-features.html', title='Upcoming Features - OOP Journey')
+
 @main_bp.route('/learn/inheritance')
 def learn_inheritance():
     return render_template('learn/inheritance_java.html', title='Master Inheritance - OOP Concepts')
