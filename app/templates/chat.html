@@ -140,32 +140,58 @@
         .mcq-options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         .mcq-option {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border: 2px solid #e5e7eb;
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 16px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            min-height: 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .mcq-option:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: transparent;
+            transition: all 0.3s ease;
         }
         
         .mcq-option:hover {
             border-color: #0ea5e9;
-            background: #f0f9ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.2);
+        }
+        
+        .mcq-option:hover:before {
+            background: #0ea5e9;
         }
         
         .mcq-option.selected {
             background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
             color: white;
             border-color: #0284c7;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+        }
+        
+        .mcq-option.selected:before {
+            background: #ffffff;
         }
         
         .mcq-option.correct {
@@ -189,56 +215,90 @@
             display: flex;
             gap: 16px;
             justify-content: center;
+            margin: 20px 0;
         }
         
         .tf-option {
-            flex: 1;
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 18px 32px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 16px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            min-height: 60px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .tf-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .tf-option:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: transparent;
+            transition: all 0.3s ease;
         }
         
-        .tf-option.true:hover, .tf-option.true.selected {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
+        .tf-option.true-option {
+            color: #059669;
+        }
+        
+        .tf-option.false-option {
+            color: #dc2626;
+        }
+        
+        .tf-option.true-option:hover {
             border-color: #059669;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(5, 150, 105, 0.25);
         }
         
-        .tf-option.false:hover, .tf-option.false.selected {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
+        .tf-option.false-option:hover {
             border-color: #dc2626;
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.25);
         }
         
-        .tf-option.correct {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .tf-option.true-option:hover:before {
+            background: #059669;
+        }
+        
+        .tf-option.false-option:hover:before {
+            background: #dc2626;
+        }
+        
+        .tf-option.selected.true-option {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
             color: white;
-            border-color: #059669;
+            border-color: #047857;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(5, 150, 105, 0.4);
         }
         
-        .tf-option.incorrect {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        .tf-option.selected.false-option {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
             color: white;
-            border-color: #dc2626;
+            border-color: #b91c1c;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.4);
         }
         
-        .tf-option.disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        
-        .explanation-message {
+        .tf-option.selected:before {
+            background: #ffffff;
+        }        .explanation-message {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border: 2px solid #f59e0b;
             border-radius: 16px;
@@ -598,9 +658,15 @@
                                 </div>
                             {% else %}
                                 <div class="message-bubble rounded-2xl px-6 py-4 ai-message" style="max-width: 95%;">
+                                    <!-- Debug info -->
+                                    <!--
+                                    Message Type: {{ message.message_type }}
+                                    Interactive Data: {{ message.interactive_data }}
+                                    -->
+                                    
                                     {% if message.message_type == 'mcq' and message.interactive_data %}
                                         <div class="markdown-content" data-raw-content="{{ message.content }}">{{ message.content }}</div>
-                                        <div class="interactive-question" data-session-id="{{ message.learning_session[0].id if message.learning_session else '' }}">
+                                        <div class="interactive-question" data-session-id="{{ message.learning_session[0].id if message.learning_session else message.id }}">
                                             <div class="question-header">
                                                 <div class="question-icon">
                                                     <i class="fas fa-question"></i>
@@ -618,7 +684,7 @@
                                         </div>
                                     {% elif message.message_type == 'true_false' and message.interactive_data %}
                                         <div class="markdown-content" data-raw-content="{{ message.content }}">{{ message.content }}</div>
-                                        <div class="interactive-question" data-session-id="{{ message.learning_session[0].id if message.learning_session else '' }}">
+                                        <div class="interactive-question" data-session-id="{{ message.learning_session[0].id if message.learning_session else message.id }}">
                                             <div class="question-header">
                                                 <div class="question-icon">
                                                     <i class="fas fa-check-double"></i>
@@ -627,10 +693,10 @@
                                             </div>
                                             <div class="question-text">{{ message.interactive_data.question }}</div>
                                             <div class="true-false-options">
-                                                <div class="tf-option true" data-option="true">
+                                                <div class="tf-option true-option" data-option="true">
                                                     <i class="fas fa-check"></i> True
                                                 </div>
-                                                <div class="tf-option false" data-option="false">
+                                                <div class="tf-option false-option" data-option="false">
                                                     <i class="fas fa-times"></i> False
                                                 </div>
                                             </div>
@@ -1011,9 +1077,18 @@
                 // Select this option
                 this.classList.add('selected');
                 
-                // Submit answer
+                // Disable all options to prevent multiple clicks
+                options.forEach(opt => opt.classList.add('disabled'));
+                
+                // Get the selected answer
                 const answer = this.dataset.option;
-                submitInteractiveAnswer(sessionId, answer, options);
+                const selectedText = this.textContent.trim();
+                
+                // Add user message showing their selection
+                addMessage(`${selectedText}`, 'user');
+                
+                // Submit answer
+                submitInteractiveAnswer(sessionId, answer, options, selectedText);
             });
         });
     }
@@ -1034,19 +1109,25 @@
                 // Select this option
                 this.classList.add('selected');
                 
-                // Submit answer
+                // Disable all options to prevent multiple clicks
+                options.forEach(opt => opt.classList.add('disabled'));
+                
+                // Get the selected answer
                 const answer = this.dataset.option;
-                submitInteractiveAnswer(sessionId, answer, options);
+                const selectedText = answer === 'true' ? 'True' : 'False';
+                
+                // Add user message showing their selection
+                addMessage(`${selectedText}`, 'user');
+                
+                // Submit answer
+                submitInteractiveAnswer(sessionId, answer, options, selectedText);
             });
         });
     }
 
     // Submit interactive answer
-    async function submitInteractiveAnswer(sessionId, answer, optionElements) {
+    async function submitInteractiveAnswer(sessionId, answer, optionElements, selectedText) {
         try {
-            // Disable all options
-            optionElements.forEach(opt => opt.classList.add('disabled'));
-            
             const response = await fetch('/api/chat/interactive/answer', {
                 method: 'POST',
                 headers: {
@@ -1089,9 +1170,7 @@
             // Re-enable options on error
             optionElements.forEach(opt => opt.classList.remove('disabled'));
         }
-    }
-
-    // Animate typing effect like ChatGPT
+    }    // Animate typing effect like ChatGPT
     function animateTyping(content, container) {
         let currentText = '';
         let index = 0;

@@ -111,7 +111,17 @@ class ChatService:
             )
             db.session.add(ai_message)
             
-            # Create interactive learning session if applicable
+            # Update conversation timestamp and title if it's the first message
+            conversation.updated_at = datetime.utcnow()
+            if len(conversation.messages) == 0:
+                # Generate a title from the first message
+                title = self._generate_conversation_title(content)
+                conversation.title = title
+            
+            # Commit to get the AI message ID
+            db.session.commit()
+            
+            # Create interactive learning session if applicable (after commit to get message ID)
             learning_session = None
             if ai_response_data.get('message_type') in ['mcq', 'true_false']:
                 learning_session = InteractiveLearningSession(
@@ -121,15 +131,7 @@ class ChatService:
                     question_data=ai_response_data['interactive_data']
                 )
                 db.session.add(learning_session)
-            
-            # Update conversation timestamp and title if it's the first message
-            conversation.updated_at = datetime.utcnow()
-            if len(conversation.messages) == 0:
-                # Generate a title from the first message
-                title = self._generate_conversation_title(content)
-                conversation.title = title
-            
-            db.session.commit()
+                db.session.commit()
             
             response = {
                 'user_message': user_message.to_dict(),
@@ -229,32 +231,35 @@ class ChatService:
 
     def _should_include_interactive(self, content, context):
         """Determine if response should include interactive elements"""
+        # For testing: Always include interactive elements
         # Include interactive elements if:
-        # 1. User is asking about OOP concepts
+        # 1. User is asking about Java OOP concepts
         # 2. We haven't had an interactive element in the last few messages
         # 3. Random chance to keep engagement
         
-        oop_keywords = [
+        java_oop_keywords = [
             'class', 'object', 'inheritance', 'polymorphism', 'encapsulation', 
             'abstraction', 'constructor', 'method', 'override', 'interface',
-            'what is', 'explain', 'how does', 'difference between'
+            'what is', 'explain', 'how does', 'difference between', 'java',
+            'extends', 'implements', 'super', 'this', 'static', 'final',
+            'abstract', 'private', 'public', 'protected', 'package'
         ]
         
         content_lower = content.lower()
-        has_oop_keywords = any(keyword in content_lower for keyword in oop_keywords)
+        has_java_oop_keywords = any(keyword in content_lower for keyword in java_oop_keywords)
         
         # Check recent messages for interactive elements
         recent_messages = context.split('\n')[-6:]  # Last 6 messages
         has_recent_interactive = any('MCQ:' in msg or 'True/False:' in msg for msg in recent_messages)
         
-        # Include interactive if asking about OOP and no recent interactive elements
-        return has_oop_keywords and not has_recent_interactive and random.random() < 0.7
+        # For testing: Always return True if Java OOP keywords are present
+        return has_java_oop_keywords and not has_recent_interactive
 
     def _generate_interactive_learning_response(self, content, context):
         """Generate response with interactive learning elements"""
         try:
-            # Decide between MCQ and True/False
-            question_type = random.choice(['mcq', 'true_false'])
+            # Prefer MCQ questions for better interaction
+            question_type = 'mcq'  # Always use MCQ for now
             
             if question_type == 'mcq':
                 return self._generate_mcq_response(content, context)
@@ -267,17 +272,25 @@ class ChatService:
 
     def _generate_mcq_response(self, content, context):
         """Generate MCQ-style response"""
-        prompt = f"""You are an expert OOP tutor. Based on the user's question: "{content}", provide a helpful response followed by a multiple choice question to test understanding.
+        prompt = f"""You are an expert Java OOP tutor. Based on the user's question: "{content}", provide a brief, concise response followed by a multiple choice question.
 
-        Format your response as follows:
-        1. First, provide a clear explanation of the concept
-        2. Then add "INTERACTIVE_MCQ:" followed by a JSON object with this structure:
+        IMPORTANT: 
+        - Focus exclusively on Java programming language
+        - Keep responses SHORT and PRECISE (2-3 sentences max)
+        - Be direct and to the point
+        - No lengthy explanations
+
+        Format your response EXACTLY as follows:
+        1. First, provide a brief explanation of the Java OOP concept (2-3 sentences only)
+        2. Then add exactly "INTERACTIVE_MCQ:" followed by a valid JSON object:
         {{
-            "question": "Your question here",
+            "question": "Your Java OOP question here",
             "options": ["A) Option 1", "B) Option 2", "C) Option 3", "D) Option 4"],
             "correct_answer": "A",
-            "topic": "relevant OOP topic"
+            "topic": "relevant Java OOP topic"
         }}
+
+        Make sure the JSON is valid and properly formatted.
 
         Context: {context}
         User question: {content}
@@ -286,19 +299,26 @@ class ChatService:
         response = self.model.generate_content(prompt)
         response_text = response.text if response else "Error generating response"
         
+        current_app.logger.info(f"MCQ Response: {response_text}")
+        
         # Parse interactive element
         if "INTERACTIVE_MCQ:" in response_text:
             parts = response_text.split("INTERACTIVE_MCQ:")
             explanation = parts[0].strip()
             
             try:
-                mcq_data = json.loads(parts[1].strip())
+                json_part = parts[1].strip()
+                current_app.logger.info(f"JSON Part: {json_part}")
+                mcq_data = json.loads(json_part)
+                current_app.logger.info(f"Parsed MCQ Data: {mcq_data}")
                 return {
                     'content': explanation,
                     'message_type': 'mcq',
                     'interactive_data': mcq_data
                 }
-            except json.JSONDecodeError:
+            except json.JSONDecodeError as e:
+                current_app.logger.error(f"JSON Parse Error: {str(e)}")
+                current_app.logger.error(f"Failed to parse: {json_part}")
                 pass
         
         return {
@@ -308,15 +328,17 @@ class ChatService:
 
     def _generate_true_false_response(self, content, context):
         """Generate True/False style response"""
-        prompt = f"""You are an expert OOP tutor. Based on the user's question: "{content}", provide a helpful response followed by a true/false question to test understanding.
+        prompt = f"""You are an expert Java OOP tutor. Based on the user's question: "{content}", provide a helpful response followed by a true/false question to test Java OOP understanding.
+
+        IMPORTANT: Focus exclusively on Java programming language. Do not mention other languages.
 
         Format your response as follows:
-        1. First, provide a clear explanation of the concept
+        1. First, provide a clear explanation of the Java OOP concept
         2. Then add "INTERACTIVE_TF:" followed by a JSON object with this structure:
         {{
-            "question": "True or False: Your statement here",
+            "question": "True or False: Your Java OOP statement here",
             "correct_answer": "true",
-            "topic": "relevant OOP topic"
+            "topic": "relevant Java OOP topic"
         }}
 
         Context: {context}
@@ -348,19 +370,25 @@ class ChatService:
 
     def _generate_standard_response(self, content, context):
         """Generate standard text response"""
-        # Prepare prompt with OOP learning context
-        system_prompt = """You are an expert Object-Oriented Programming (OOP) tutor and coding assistant. 
-        You specialize in teaching concepts like inheritance, polymorphism, encapsulation, and abstraction.
+        # Prepare prompt with Java OOP learning context
+        system_prompt = """You are an expert Java Object-Oriented Programming (OOP) tutor and coding assistant. 
+        You specialize in teaching Java OOP concepts like inheritance, polymorphism, encapsulation, and abstraction.
+        
+        IMPORTANT: 
+        - You only provide help with Java programming language
+        - Keep responses SHORT and PRECISE (3-4 sentences max)
+        - Be direct and to the point
+        - No lengthy explanations
+        - Focus exclusively on Java programming language
         
         Your responses should be:
         - Educational and encouraging
-        - Include practical examples when relevant
+        - Include brief Java examples when relevant
         - Use clear, beginner-friendly explanations
-        - Provide code examples in multiple languages when helpful
-        - Connect concepts to real-world applications
-        - Include helpful suggestions for further learning
+        - Provide concise Java code examples
+        - Connect concepts to real-world Java applications
         
-        Always be helpful, patient, and supportive of the learning journey."""
+        Always be helpful, patient, and supportive of the Java learning journey."""
         
         # Build the full prompt
         full_prompt = f"{system_prompt}\n\nConversation context:\n{context}\n\nUser message: {content}"
@@ -381,7 +409,7 @@ class ChatService:
                 else:
                     return f"❌ Incorrect. The correct answer is {question_data.get('correct_answer')}."
             
-            prompt = f"""As an OOP tutor, provide a detailed explanation for this question and answer:
+            prompt = f"""As a Java OOP tutor, provide a SHORT and PRECISE explanation for this question and answer:
 
             Question: {question_data.get('question')}
             Topic: {question_data.get('topic')}
@@ -389,13 +417,14 @@ class ChatService:
             Correct Answer: {question_data.get('correct_answer')}
             Is Correct: {is_correct}
 
+            IMPORTANT: Keep explanation SHORT (2-3 sentences max). Be direct and to the point.
+
             Provide:
             1. Whether the answer is correct or incorrect (use ✅ or ❌)
-            2. A clear explanation of why it's correct/incorrect
-            3. Additional context to help understand the concept
-            4. A suggestion for further learning if incorrect
+            2. A brief explanation of why it's correct/incorrect
+            3. One key point to remember
 
-            Keep it encouraging and educational.
+            Keep it encouraging and educational but CONCISE.
             """
             
             response = self.model.generate_content(prompt)
