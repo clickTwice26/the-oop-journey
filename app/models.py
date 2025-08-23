@@ -145,6 +145,8 @@ class Message(db.Model):
     content = db.Column(db.Text, nullable=False)
     is_user = db.Column(db.Boolean, nullable=False, default=True)
     image_url = db.Column(Text)  # For base64 images
+    message_type = db.Column(db.String(20), default='text')  # text, mcq, true_false, suggestion
+    interactive_data = db.Column(JSON)  # For storing MCQ/interactive content
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     
     def to_dict(self):
@@ -154,7 +156,39 @@ class Message(db.Model):
             'content': self.content,
             'is_user': self.is_user,
             'image_url': self.image_url,
+            'message_type': self.message_type,
+            'interactive_data': self.interactive_data,
             'timestamp': self.timestamp.isoformat()
+        }
+
+class InteractiveLearningSession(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    conversation_id = db.Column(db.Integer, db.ForeignKey('conversation.id'), nullable=False)
+    message_id = db.Column(db.Integer, db.ForeignKey('message.id'), nullable=False)
+    question_type = db.Column(db.String(20), nullable=False)  # mcq, true_false
+    question_data = db.Column(JSON, nullable=False)
+    user_answer = db.Column(db.String(100))
+    is_correct = db.Column(db.Boolean)
+    explanation = db.Column(db.Text)
+    answered_at = db.Column(db.DateTime)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Relationships
+    conversation = db.relationship('Conversation', backref='learning_sessions')
+    message = db.relationship('Message', backref='learning_session')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'conversation_id': self.conversation_id,
+            'message_id': self.message_id,
+            'question_type': self.question_type,
+            'question_data': self.question_data,
+            'user_answer': self.user_answer,
+            'is_correct': self.is_correct,
+            'explanation': self.explanation,
+            'answered_at': self.answered_at.isoformat() if self.answered_at else None,
+            'created_at': self.created_at.isoformat()
         }
 
 class Assessment(db.Model):

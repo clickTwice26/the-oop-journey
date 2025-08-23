@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, current_app, session, flash, redirect, url_for
 from werkzeug.utils import secure_filename
-from app.models import Quiz, Question, QuizResult, Message, Conversation, Assessment, AssessmentResult, User, db
+from app.models import Quiz, Question, QuizResult, Message, Conversation, Assessment, AssessmentResult, User, InteractiveLearningSession, db
 from app.services.quiz_generation_service import QuizGenerationService
 from app.services.file_processing_service import FileProcessingService
 from app.services.chat_service import ChatService
@@ -403,6 +403,27 @@ def send_message():
         
         if 'error' in result:
             return jsonify(result), 500
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/chat/interactive/answer', methods=['POST'])
+def answer_interactive_question():
+    try:
+        data = request.get_json()
+        session_id = data.get('session_id')
+        user_answer = data.get('answer')
+        
+        if not session_id or user_answer is None:
+            return jsonify({'error': 'Session ID and answer are required'}), 400
+        
+        chat_service = ChatService()
+        result = chat_service.answer_interactive_question(session_id, user_answer)
+        
+        if 'error' in result:
+            return jsonify(result), 400
         
         return jsonify(result)
         
